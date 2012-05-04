@@ -1,0 +1,58 @@
+= Open City site template
+
+Simple site template using Ruby, Sinatra and Haml with tie-ins to Heroku and Google Analytics.
+
+== Installation
+
+  git clone git@github.com:open-city/site_template.git
+  cd site_template
+  gem install bundler
+  bundle
+  unicorn
+  navigate to http://localhost:8080/
+
+== Dependencies
+
+  Ruby
+  Sinatra
+  Haml
+  Heroku
+  Google Analytics
+
+
+== Team
+
+* Chad W Pry mailto:chad.pry@opencityapps.org
+* Derek Eder mailto:derek.eder@opencityapps.org
+
+
+== More detail needed?
+
+Contact us via email!
+
+
+== Errors / Bugs
+
+If something is not behaving intuitively, it is a bug, and should be reported.
+Report it here: https://github.com/open-city/site_template/issues
+
+
+== TODOs
+
+* use Twitter Bootstrap?
+* create Sequel or Datamapper setup?
+
+
+== Note on Patches/Pull Requests
+ 
+* Fork the project.
+* Make your feature addition or bug fix.
+* Commit, do not mess with rakefile, version, or history.
+  * (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
+* Send me a pull request. Bonus points for topic branches.
+
+== Copyright
+
+Copyright (c) 2012 Chad W Pry, Derek Eder, and OpenCity. Released under the MIT License.
+
+See LICENSE for details.
