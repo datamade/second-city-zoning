@@ -1,0 +1,25 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %title A New Site
+    %meta{:charset => "utf-8"}
+    
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
+    %meta{:content => "", :name => "description"}
+    %meta{:content => "", :name => "author"}
+            
+    / Styles
+    /%link{:href => "/css/bootstrap.css", :rel => "stylesheet"}
+    
+    / HTML5 shim, for IE6-8 support of HTML5 elements
+    /[if lt IE 9]
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    
+  %body
+    .container
+      = yield
+    
+    %script{:src => "/javascripts/jquery.js"}
+    
+    - if production?
+      %script{:src => "/javascripts/analytics_lib.js"}
