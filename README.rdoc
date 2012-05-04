@@ -34,7 +34,7 @@ Contact us via email!
 == Errors / Bugs
 
 If something is not behaving intuitively, it is a bug, and should be reported.
-Report it here: https://github.com/open-city/site_template/issues
+Report it here: https://github.com/open-city/site-template/issues
 
 
 == TODOs
@@ -55,4 +55,4 @@ Report it here: https://github.com/open-city/site_template/issues
 
 Copyright (c) 2012 Chad W Pry, Derek Eder, and OpenCity. Released under the MIT License.
 
-See LICENSE for details.
+See LICENSE for details https://github.com/open-city/site-template/wiki/License
