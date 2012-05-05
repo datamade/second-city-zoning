@@ -1,1 +1,1 @@
-rvm ruby-1.9.2-p290-patched@open-city-template --create
+rvm ruby-1.9.3-p125@open-city-template --create
