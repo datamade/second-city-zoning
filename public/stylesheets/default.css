@@ -1,0 +1,33 @@
+html, body, #container {
+  height: 100%;
+}
+
+.page-header {
+  margin: 0 0 18px 0;
+}
+
+.page-header h1 {
+  padding: 20px 0 0 0;
+}
+
+.row-fluid {
+  height: 100%;
+}
+
+#template_map {
+  height: 85%;
+}
+
+#template_map img {
+  max-width: none;
+}
+
+#container {
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+#filters h2 {
+  text-transform: capitalize;
+}
+
