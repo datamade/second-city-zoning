@@ -4,21 +4,22 @@ Simple site template using Ruby, Sinatra and Haml with tie-ins to Heroku and Goo
 
 == Installation
 
-  git clone git@github.com:open-city/site_template.git
-  cd site_template
-  gem install bundler
-  bundle
-  unicorn
+  $ git clone git@github.com:open-city/site_template.git
+  $ cd site_template
+  $ gem install bundler
+  $ bundle
+  $ unicorn
   navigate to http://localhost:8080/
 
 == Dependencies
 
-  Ruby
+  Ruby 1.9.3
   Sinatra
   Haml
   Heroku
+  Twitter Bootstrap
   Google Analytics
-
+  Google Fusion Tables
 
 == Team
 
