@@ -3,7 +3,7 @@ require "sinatra/reloader"
 require "sinatra-initializers"
 require "sinatra/r18n"
 
-module OpenCityApp
+module OpenCity
   class Application < Sinatra::Base
     enable :logging, :sessions
     enable :dump_errors, :show_exceptions if development?
@@ -22,20 +22,15 @@ module OpenCityApp
     use Rack::Logger
     use Rack::Session::Cookie
 
-    helpers OpenCityApp::HtmlHelpers
+    helpers OpenCity::HtmlHelpers
 
     get "/" do
       haml :index
     end
     
-    get "/:page" do |page_name|
-      template = File.join(settings.views, page_name + ".haml")
-      if File.exists?(template)
-        @current_menu = page_name
-        haml page_name.to_sym
-      else
-        pass
-      end
+    get "/:page" do
+      @current_menu = params[:page]
+      haml params[:page].to_sym
     end
   end
 end

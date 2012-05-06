@@ -1,4 +1,4 @@
-module OpenCityApp
+module OpenCity
   module HtmlHelpers
     def include_stylesheet name, options={}
       href = "/stylesheets/#{name}.css" unless name.to_s.match(/^http/)
@@ -12,6 +12,11 @@ module OpenCityApp
 
     def include_javascript name, options={}
       href = "/javascripts/#{name}.js" unless name.to_s.match(/^http/)
+      content_tag :script, "", :type => "text/javascript", :src => (href || name)
+    end
+
+    def include_mustache name, options={}
+      href = "/mustaches/#{name}.mustache" unless name.to_s.match(/^http/)
       content_tag :script, "", :type => "text/javascript", :src => (href || name)
     end
 
@@ -30,7 +35,7 @@ module OpenCityApp
         if respond_to?(:block_is_haml?) && block_is_haml?(content)
           capture_haml(*args, &content)
         else
-          content.call(*args)
+          content
         end
       end.join if view_content[section.to_sym]
     end
@@ -40,7 +45,7 @@ module OpenCityApp
     end
 
     def view_content
-      @view_content ||= Hash.new([])
+      @view_content ||= Hash.new{|h,k| h[k]=[]}
     end
 
     def content_tag tag, value, options={}
