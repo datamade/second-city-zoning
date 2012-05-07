@@ -16,7 +16,7 @@
 
   _trackClickEventWithGA = function (category, action, label) {
 		if (typeof(_gaq) != 'undefined')
-      _gaq.push(['_setAccount', 'UA-xxxxxxxx-1']);
+      _gaq.push(['_setAccount', 'UA-31505617-1']);
 			_gaq.push(['_trackEvent', category, action, label]);
 	};
 
