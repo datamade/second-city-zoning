@@ -8,7 +8,8 @@
   :javascript
     (function() {
       var chicago_centroid = new google.maps.LatLng(41.8781136, -87.66677856445312);
-      var tableId = "1c4TAG-E7o-GJIRBUON-onVtLVft5IAr82mdqj7M"; // Open Data
+      var tableId = "1qM8c8hcQTYZIhaQBTKW-yHVaL8MtJxOoZbxMbw"; // Rahm Donors
+      //var tableId = "1c4TAG-E7o-GJIRBUON-onVtLVft5IAr82mdqj7M"; // Open Data
       //var tableId = "1ckfvaw8YaU5byquJEG6H3oEvwgrxgqKM5jnoXkU"; // Chicago Food Inspections
       //var tableId = 3805334; // Pet Friendly Hotels
       //var tableId = 2201721; // Jet Set Pets
@@ -17,7 +18,7 @@
       var layer = map.layers.create({select: "latitude", from: tableId});
       map.present();
 
-      filterPanel = new OpenCity.Template.FilterPanel(tableId, ["city", "state"], {
+      filterPanel = new OpenCity.Template.FilterPanel(tableId, ["Amount"], {
         map: map, callbackObject: "filterPanel"
       });
       filterPanel.present();

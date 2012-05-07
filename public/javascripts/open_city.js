@@ -44,7 +44,7 @@ OpenCity.Template.FilterPanel.prototype.parseFilterPanel = function(json) {
   data["column_rows"] = [];
 
   $.each(json["table"]["rows"], function(index, element) {
-    if (element[0].trim().length > 0) {
+    if (element[0].toString().trim().length > 0) {
       data["column_rows"].push({"value": element[0]});
     }
   });
