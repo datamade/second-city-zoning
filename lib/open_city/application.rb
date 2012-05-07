@@ -25,6 +25,7 @@ module OpenCity
     helpers OpenCity::HtmlHelpers
 
     get "/" do
+      response.headers["X-Frame-Options"] = 'GOFORIT'
       haml :index
     end
     
