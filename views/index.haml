@@ -1,3 +1,30 @@
-%h1 A new site
+- content_for :javascripts do
+  = include_javascript :mustache
+  = include_javascript "http://maps.google.com/maps/api/js?sensor=false" 
+  = include_javascript :fusion_library
+  = include_javascript :open_city
+  -#= include_mustache :filter
 
-%p It works!
+  :javascript
+    (function() {
+      var chicago_centroid = new google.maps.LatLng(41.8781136, -87.66677856445312);
+      var tableId = "1c4TAG-E7o-GJIRBUON-onVtLVft5IAr82mdqj7M"; // Open Data
+      //var tableId = "1ckfvaw8YaU5byquJEG6H3oEvwgrxgqKM5jnoXkU"; // Chicago Food Inspections
+      //var tableId = 3805334; // Pet Friendly Hotels
+      //var tableId = 2201721; // Jet Set Pets
+
+      map = new Fusion.Map("template_map", {center: chicago_centroid, zoom: 5, mapTypeControl: true});
+      var layer = map.layers.create({select: "latitude", from: tableId});
+      map.present();
+
+      filterPanel = new OpenCity.Template.FilterPanel(tableId, ["city", "state"], {
+        map: map, callbackObject: "filterPanel"
+      });
+      filterPanel.present();
+    })(); 
+
+.row-fluid
+  #filters.span3
+
+  #template_map.span9
+
