@@ -9,7 +9,7 @@
     (function() {
       var chicago_centroid = new google.maps.LatLng(41.8781136, -87.66677856445312);
       var tableId = "1c4TAG-E7o-GJIRBUON-onVtLVft5IAr82mdqj7M"; // Open Data
-      var filterColumns = ["State", "City"];
+      var filterColumns = ["state", "city"];
 
       map = new Fusion.Map("template_map", {center: chicago_centroid, zoom: 5, mapTypeControl: true});
       var layer = map.layers.create({select: "latitude", from: tableId});
