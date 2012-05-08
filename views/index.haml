@@ -8,7 +8,7 @@
     (function() {
       var us_centroid = new google.maps.LatLng(37.09024,-95.712891);
       var tableId = "1c4TAG-E7o-GJIRBUON-onVtLVft5IAr82mdqj7M"; // Open Data
-      var filterColumns = [{city: "checkbox"}, {state: "text"}];
+      var filterColumns = [{city: "text"}, {state: "text"}];
 
       map = new Fusion.Map("template_map", {center: us_centroid, zoom: 4, mapTypeControl: true});
       var layer = map.layers.create({select: "geometry", from: tableId});

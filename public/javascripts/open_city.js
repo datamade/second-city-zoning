@@ -16,7 +16,7 @@ OpenCity.Template.FilterControl = function(column, inputType) {
             "" : control.column + " IN (" + elementArray.join(",") + ")";
   };
   var like_clause = function(element) {
-    return ("state LIKE '" + element.val() + "%'");
+    return ("state CONTAINS IGNORING CASE '" + element.val() + "'");
   }
 
   this.sql_functions = {};
