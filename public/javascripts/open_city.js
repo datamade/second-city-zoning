@@ -6,8 +6,9 @@ OpenCity.Template.Utility = OpenCity.Template.Utility || {};
 
 OpenCity.Fusion.url = "https://www.google.com/fusiontables/api/query";
 
-OpenCity.Template.FilterControl = function(column, inputType) {
+OpenCity.Template.FilterControl = function(name, column, inputType) {
   var control    = this;
+  this.name      = name;
   this.column    = column;
   this.inputType = inputType;
 
@@ -41,7 +42,7 @@ OpenCity.Template.FilterControl.prototype.sql = function() {
   return this.sql_functions[this.inputType].call(this);
 };
 
-OpenCity.Template.FilterPanel = function(tableId, columns, options) {
+OpenCity.Template.FilterPanel = function(tableId, filter_array, options) {
   if (options["map"] == null) {throw "Map must be provided!";}
   if (options["callbackObject"] == null) {throw "Callback must be provided!";}
 
@@ -52,23 +53,24 @@ OpenCity.Template.FilterPanel = function(tableId, columns, options) {
 
   var filterPanel = this;
 
-  $.each(columns, function(index, column) {
-    var key = OpenCity.Template.Utility.keys(column)[0];
-    filterPanel.addControl(key, column[key]);
+  $.each(filter_array, function(index, column_hash) {
+    var key = OpenCity.Template.Utility.keys(column_hash)[0];
+    filterPanel.addControl(key, column_hash[key]["columns"][0], column_hash[key]["type"]);
   });
 
   this.options = $.extend({
     selector: "#filters", callbackObject: "filterPanel"
   }, options);
 };
-OpenCity.Template.FilterPanel.prototype.addControl = function(column, type) {
-  this.controls.push(new OpenCity.Template.FilterControl(column, type));
+OpenCity.Template.FilterPanel.prototype.addControl = function(name, column, type) {
+  this.controls.push(new OpenCity.Template.FilterControl(name, column, type));
 };
 OpenCity.Template.FilterPanel.prototype.parseFilterPanel = function(json) {
   var data = {options: []};
   data["column_title"] = json["table"]["cols"][0];
 
   var control = this.findControl(data["column_title"])
+  data["filter_name"] = control.name;
   var filters = $(Mustache.render(OpenCity.Template.Mustache["filter"], data));
 
   $.each(json["table"]["rows"], function(index, element) {
@@ -169,7 +171,7 @@ OpenCity.Template.Utility.keys = function(hash) {
 OpenCity.Template.Mustache = OpenCity.Template.Mustache || {};
 OpenCity.Template.Mustache["filter"] = "\
 <div class=\"filter\">\
-  <h2>{{column_title}}</h2>\
+  <h2>{{filter_name}}</h2>\
   <div class=\"control-group {{column_title}}\">\
     <div class=\"controls\">\
     </div>\
