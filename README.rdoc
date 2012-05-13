@@ -4,7 +4,7 @@ Simple site template using Ruby, Sinatra and Haml with tie-ins to Heroku and Goo
 
 == Installation
 
-  $ git clone git@github.com:open-city/site_template.git
+  $ git clone git@github.com:open-city/site-template.git
   $ cd site_template
   $ gem install bundler
   $ bundle
