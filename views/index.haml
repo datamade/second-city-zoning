@@ -1,3 +1,122 @@
 .row-fluid
-  .span12
-    %p Hello world!
+  .span3
+    .well
+      %h4
+        Address
+        <small>(<a id='findMe' href='#'>find me</a>)</small>
+
+      %input#txtSearchAddress.input-block-level{:placeholder => "Enter an address or an intersection", :type => "text"}
+      %h4
+        Basic districts
+      %ul.inputs-list.unstyled
+        %li
+          %label.checkbox.inline.zone-1
+            %input#cbZone1{:type => "checkbox"}
+            Commercial
+        %li
+          %label.checkbox.inline.zone-2
+            %input#cbZone2{:type => "checkbox"}
+            Mixed-use
+        %li
+          %label.checkbox.inline.zone-4
+            %input#cbZone4{:type => "checkbox"}
+            Residential
+        %li
+          %label.checkbox.inline.zone-3
+            %input#cbZone3{:type => "checkbox"}
+            Manufacturing
+        %li
+          %label.checkbox.inline.zone-6
+            %input#cbZone6{:type => "checkbox"}
+            Planned manufacturing
+      %h4
+        Downtown districts
+      %ul.inputs-list.unstyled
+        %li
+          %label.checkbox.inline.zone-7
+            %input#cbZone7{:type => "checkbox"}
+            Downtown mixed-use
+        %li
+          %label.checkbox.inline.zone-8
+            %input#cbZone8{:type => "checkbox"}
+            Downtown core
+        %li
+          %label.checkbox.inline.zone-9
+            %input#cbZone9{:type => "checkbox"}
+            Downtown residential
+        %li
+          %label.checkbox.inline.zone-10
+            %input#cbZone10{:type => "checkbox"}
+            Downtown service
+      %h4
+        Miscellaneous districts
+      %ul.inputs-list.unstyled
+        %li
+          %label.checkbox.inline.zone-5
+            %input#cbZone5{:type => "checkbox"}
+            Planned development
+        %li
+          %label.checkbox.inline.zone-11
+            %input#cbZone11{:type => "checkbox"}
+            Transportation
+        %li
+          %label.checkbox.inline.zone-12
+            %input#cbZone12{:type => "checkbox"}
+            Parks and open space
+      %hr/
+      %input#btnSearch.btn.btn-primary.btn-large{:type => "button", :value => "Search"}
+      %button#reset.btn Reset
+    %ul#resultList.item-list
+  .span9
+    #mapCanvas
+%footer.footer
+.span12
+  %p
+    Map and
+    %a{:href => "https://github.com/derekeder/FusionTable-Map-Template"} search template
+    by
+    %a{:href => "http://derekeder.com"} Derek Eder
+
+- content_for :javascripts do
+  = include_javascript :"jquery.address.min"
+  = include_javascript :"http://maps.google.com/maps/api/js?sensor=false"
+  = include_javascript :"http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"
+  = include_javascript :maps_lib
+
+  :javascript
+    $(window).resize(function () {
+      var h = $(window).height(),
+        offsetTop = 130; // Calculate the top offset
+    
+      $('#mapCanvas').css('height', (h - offsetTop));
+    }).resize();
+    
+    $(function() {
+      MapsLib.initialize();
+      $(':checkbox').click(function(){
+        MapsLib.doSearch();
+      });
+      
+      $('#btnSearch').click(function(){
+        MapsLib.doSearch();
+      });
+      
+      $('#findMe').click(function(){
+        MapsLib.findMe(); 
+        return false;
+      });
+      
+      $('#reset').click(function(){
+        $.address.parameter('address','');
+        MapsLib.initialize(); 
+        return false;
+      });
+      
+      $("#txtSearchAddress").keydown(function(e){
+          var key =  e.keyCode ? e.keyCode : e.which;
+          if(key == 13) {
+              $('#btnSearch').click();
+              return false;
+          }
+      });
+    });

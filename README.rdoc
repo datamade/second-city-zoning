@@ -1,6 +1,6 @@
-= Open City site template
+= Chicago Zoning
 
-Simple site template using Ruby, Sinatra and Haml with tie-ins to Heroku and Google Analytics.
+What zone is my building in?
 
 == Installation
 
@@ -23,8 +23,8 @@ Simple site template using Ruby, Sinatra and Haml with tie-ins to Heroku and Goo
 
 == Team
 
-* Chad W Pry mailto:chad.pry@opencityapps.org
 * Derek Eder mailto:derek.eder@opencityapps.org
+* Juan-Pablo Velez mailto:juan.velez@opencityapps.org
 
 
 == More detail needed?
@@ -38,12 +38,6 @@ If something is not behaving intuitively, it is a bug, and should be reported.
 Report it here: https://github.com/open-city/site-template/issues
 
 
-== TODOs
-
-* use Twitter Bootstrap?
-* create Sequel or Datamapper setup?
-
-
 == Note on Patches/Pull Requests
  
 * Fork the project.
@@ -51,9 +45,3 @@ Report it here: https://github.com/open-city/site-template/issues
 * Commit, do not mess with rakefile, version, or history.
   * (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
 * Send me a pull request. Bonus points for topic branches.
-
-== Copyright
-
-Copyright (c) 2012 Chad W Pry, Derek Eder, and OpenCity. Released under the MIT License.
-
-See LICENSE for details https://github.com/open-city/site-template/wiki/License

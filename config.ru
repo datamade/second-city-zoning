@@ -4,8 +4,7 @@ Bundler.require :default
 base = File.dirname(__FILE__)
 $:.unshift File.join(base, "lib")
 
-require "site_template"
+require "chicago_zoning"
 
 Sinatra::Base.set(:root) { base }
-run SiteTemplate::Application
-
+run ChicagoZoning::Application

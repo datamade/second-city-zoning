@@ -3,7 +3,7 @@ require "sinatra/reloader"
 require "sinatra-initializers"
 require "sinatra/r18n"
 
-module SiteTemplate
+module ChicagoZoning
   class Application < Sinatra::Base
     enable :logging, :sessions
     enable :dump_errors, :show_exceptions if development?

@@ -1,7 +1,3 @@
-#mapCanvas img {
-  max-width: none;
-}
-
 a { color: #4B58A6; }
 .well { background-color: #e8ebfb; }
 
@@ -10,3 +6,20 @@ a { color: #4B58A6; }
   color: #ffffff;
   background-color: #4B58A6;
 }
+
+#mapCanvas img {
+  max-width: none;
+}
+
+.zone-1 { color: #0000ff; font-weight: bold; }
+.zone-2 { color: #00dddd; font-weight: bold; }
+.zone-3 { color: #cccc00; font-weight: bold; }
+.zone-4 { color: #00ff00; font-weight: bold; }
+.zone-5 { color: #ff0000; font-weight: bold; }
+.zone-6 { color: #ff9900; font-weight: bold; }
+.zone-7 { color: #00cccc; font-weight: bold; }
+.zone-8 { color: #9900ff; font-weight: bold; }
+.zone-9 { color: #00ff00; font-weight: bold; }
+.zone-10 { color: #0b5394; font-weight: bold; }
+.zone-11 { color: #666666; font-weight: bold; }
+.zone-12 { color: #38761d; font-weight: bold; }

@@ -1,24 +1,32 @@
-/*------------------------------------------------------------------+
- | Utilizes event tracking in Google Analytics to track  |
- | clicks on outbound, document,  and email links.           |
- | Requires jQuery                                                             |
- +-------------------------------------------------------------------*/
+/*!
+ * Google Analytics Library
+ * https://github.com/open-city/google-analytics-lib
+ *
+ * Copyright 2012, Nick Rougeux and Derek Eder of Open City
+ * Licensed under the MIT license.
+ * https://github.com/open-city/google-analytics-lib/wiki/License
+ *
+ * Date: 5/9/2012
+ *
+ */
 
- var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-00000000-1']);
-  _gaq.push(['_trackPageview']);
+var analyticsTrackingCode = 'UA-20250560-1'; //enter your tracking code here
 
-  (function() {
-	var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', analyticsTrackingCode]);
+_gaq.push(['_trackPageview']);
 
-  _trackClickEventWithGA = function (category, action, label) {
-		if (typeof(_gaq) != 'undefined')
-      _gaq.push(['_setAccount', 'UA-00000000-1']);
-			_gaq.push(['_trackEvent', category, action, label]);
-	};
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+_trackClickEventWithGA = function (category, action, label) {
+	if (typeof(_gaq) != 'undefined')
+    _gaq.push(['_setAccount', analyticsTrackingCode]);
+		_gaq.push(['_trackEvent', category, action, label]);
+};
 
 jQuery(function () {
 
@@ -40,5 +48,9 @@ jQuery(function () {
 		if (href.match(/^mailto:/i)) {
 			_trackClickEventWithGA("Emails", "Click", href);
 		}
+    //uncomment if you want to track #hash values
+    $(window).hashchange( function(){
+      _gaq.push(['_trackPageview',location.pathname + location.search  + location.hash]);
+    });
 	});
 });

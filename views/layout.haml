@@ -1,42 +1,41 @@
 !!! 5
 %html{:lang => "en"}
   %head
-    %title Site Title
-    %meta{:charset => "utf-8"}
-
-    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
-    %meta{:content => "", :name => "description"}
-    %meta{:content => "", :name => "author"}
-            
+    %title Chicago Zoning
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %meta{:content => "", :name => "description"}/
+    %meta{:content => "", :name => "author"}/
+    
     / Styles
     = include_stylesheet :bootstrap
     = include_stylesheet "bootstrap-responsive"
     = include_stylesheet :custom
+    = include_stylesheet "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css"
     = content :stylesheets
     
     / HTML5 shim, for IE6-8 support of HTML5 elements
     /[if lt IE 9]
-      = include_javascript "http://html5shim.googlecode.com/svn/trunk/html5.js"
-
+      <script type="text/javascript" src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
   %body
     .container-fluid
       .page-header
+        %ul.nav.nav-pills.pull-right
+          %li.active
+            %a{:href => "/"} Home
+          %li
+            %a{:href => "/about"} About
+          %li
+            %a{:href => "/zones"} Zone definitions
         %h1
-          <a href='/'>Site Title</a> <small>This is a tagline</small>
-
+          %a{:href => "/"} Chicago Zoning
+          %small How is my building zoned?
+          
       = yield
-      
-    %footer.footer
-      .span12
-        %p
-          Website by 
-          %a{:href => "http://derekeder.com", :title => "Derek Eder"}
-            Derek Eder
-          &copy; 2012
     
     = include_javascript :jquery
     = include_javascript :bootstrap
     = content :javascripts
-
+    
+    = include_javascript :"jquery.ba-hashchange" if production?
     = include_javascript :"analytics_lib" if production?
-
