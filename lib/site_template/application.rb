@@ -3,7 +3,7 @@ require "sinatra/reloader"
 require "sinatra-initializers"
 require "sinatra/r18n"
 
-module OpenCity
+module SiteTemplate
   class Application < Sinatra::Base
     enable :logging, :sessions
     enable :dump_errors, :show_exceptions if development?
@@ -11,7 +11,7 @@ module OpenCity
     configure :development do
       register Sinatra::Reloader
     end
-
+    
     register Sinatra::Initializers
     register Sinatra::R18n
 
@@ -22,10 +22,9 @@ module OpenCity
     use Rack::Logger
     use Rack::Session::Cookie
 
-    helpers OpenCity::HtmlHelpers
-
+    helpers SiteTemplate::HtmlHelpers
+    
     get "/" do
-      response.headers["X-Frame-Options"] = 'GOFORIT'
       haml :index
     end
     

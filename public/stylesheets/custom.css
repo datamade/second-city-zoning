@@ -1,0 +1,12 @@
+#mapCanvas img {
+  max-width: none;
+}
+
+a { color: #4B58A6; }
+.well { background-color: #e8ebfb; }
+
+.nav-pills > .active > a,
+.nav-pills > .active > a:hover {
+  color: #ffffff;
+  background-color: #4B58A6;
+}

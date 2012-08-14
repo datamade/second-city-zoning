@@ -4,8 +4,8 @@ Bundler.require :default
 base = File.dirname(__FILE__)
 $:.unshift File.join(base, "lib")
 
-require "open_city"
+require "site_template"
 
 Sinatra::Base.set(:root) { base }
-run OpenCity::Application
+run SiteTemplate::Application
 

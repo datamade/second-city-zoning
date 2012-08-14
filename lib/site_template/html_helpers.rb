@@ -1,4 +1,4 @@
-module OpenCity
+module SiteTemplate
   module HtmlHelpers
     def include_stylesheet name, options={}
       href = "/stylesheets/#{name}.css" unless name.to_s.match(/^http/)

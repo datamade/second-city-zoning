@@ -1,31 +1,3 @@
-- content_for :javascripts do
-  = include_javascript :mustache
-  = include_javascript "http://maps.google.com/maps/api/js?sensor=false" 
-  = include_javascript :fusion_library
-  = include_javascript :open_city
-
-  :javascript
-    (function() {
-      var us_centroid = new google.maps.LatLng(37.09024,-95.712891);
-      var tableId = "1c4TAG-E7o-GJIRBUON-onVtLVft5IAr82mdqj7M"; // Open Data
-      //var tableId = "1141224"
-      var filters = [
-        {"City Search":  {columns: ["city"],  type: "text"}},
-        {"State Search": {columns: ["state"], type: "text"}}
-      ];
-
-      map = new Fusion.Map("template_map", {center: us_centroid, zoom: 4, mapTypeControl: true});
-      var layer = map.layers.create({select: "geometry", from: tableId});
-      map.present();
-
-      filterPanel = new OpenCity.Template.FilterPanel(tableId, filters, {
-        map: map, callbackObject: "filterPanel"
-      });
-      filterPanel.present();
-    })(); 
-
 .row-fluid
-  #filters.span3
-
-  #template_map.span9
-
+  .span12
+    %p Hello world!

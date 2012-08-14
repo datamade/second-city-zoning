@@ -1,9 +1,8 @@
-!!!
+!!! 5
 %html{:lang => "en"}
   %head
-    %title Open Data around the World!
-    %meta{:"http-equiv" => "Content-Type",       :content => "text/html; charset=utf-8"}
-    %meta{:"http-equiv" => "Content-Style-Type", :content => "text/css"}
+    %title Site Title
+    %meta{:charset => "utf-8"}
 
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
     %meta{:content => "", :name => "description"}
@@ -11,7 +10,8 @@
             
     / Styles
     = include_stylesheet :bootstrap
-    = include_stylesheet :default
+    = include_stylesheet "bootstrap-responsive"
+    = include_stylesheet :custom
     = content :stylesheets
     
     / HTML5 shim, for IE6-8 support of HTML5 elements
@@ -19,14 +19,23 @@
       = include_javascript "http://html5shim.googlecode.com/svn/trunk/html5.js"
 
   %body
-    #container
+    .container-fluid
       .page-header
         %h1
-          Open Data around the World!
+          <a href='/'>Site Title</a> <small>This is a tagline</small>
 
       = yield
+      
+    %footer.footer
+      .span12
+        %p
+          Website by 
+          %a{:href => "http://derekeder.com", :title => "Derek Eder"}
+            Derek Eder
+          &copy; 2012
     
     = include_javascript :jquery
+    = include_javascript :bootstrap
     = content :javascripts
 
     = include_javascript :"analytics_lib" if production?
