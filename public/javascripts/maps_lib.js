@@ -18,7 +18,7 @@ var MapsLib = MapsLib || {};
 var MapsLib = {
   
   //Setup - put your Fusion Table details here
-  fusionTableId:      "1oW3h3TD2tkM-E5K4-Ojs20t6zG3XO39Kv_lOI0g",        //the encrypted Table ID of your Fusion Table (found under File => About)
+  fusionTableId:      "1HmI6PT0q7rFbEXDfEt2VTbFyZVLZn__58AUe86E",        //the encrypted Table ID of your Fusion Table (found under File => About)
   googleApiKey:       "AIzaSyAcsnDc7_YZskPj4ep3jT_fkpB3HI_1a98",        //*NEW* API key. found at https://code.google.com/apis/console/
   locationColumn:     "geometry",     //name of the location column in your Fusion Table
   map_centroid:       new google.maps.LatLng(41.8781136, -87.66677856445312), //center that your map defaults to
