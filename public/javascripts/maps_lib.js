@@ -81,7 +81,7 @@ var MapsLib = {
         if (status == google.maps.GeocoderStatus.OK) {
           MapsLib.currentPinpoint = results[0].geometry.location;
           
-          $.address.parameter('address', MapsLib.convertToQueryString(address));
+          $.address.parameter('address', encodeURIComponent(address));
           map.setCenter(MapsLib.currentPinpoint);
           map.setZoom(16);
           
@@ -134,9 +134,11 @@ var MapsLib = {
      
     var content = "<div class='googft-info-window' style='font-family: sans-serif'>";
     content += "<span class='lead'>" + ZoningDict[zone_type - 1] + "</span>"
-    content += "<p>Zoned <a href='zones#" + MapsLib.massageSlug(zone_class) + "'>" + zone_class + "</a>"
-    if (ordinance != "") content += "<br />Ordinance: " + ordinance
-    if (ordinance_date != "0000/00/00") content += "<br />Ordinance date: " + ordinance_date
+    content += "<p>Zoned <a href='zones#" + MapsLib.createZoneSlug(zone_class) + "'>" + zone_class + "</a>"
+    if (ordinance != "" && ordinance != undefined) 
+      content += "<br />Ordinance: " + ordinance
+    if (ordinance_date != "0000/00/00" && ordinance_date != undefined) 
+      content += "<br />Ordinance date: " + ordinance_date
     content += '</p></div>';
     
     MapsLib.infoWindow.setOptions({
@@ -217,30 +219,36 @@ var MapsLib = {
     $.ajax({url: "https://www.google.com/fusiontables/api/query?sql="+sql+"&jsonCallback="+callback, dataType: "jsonp"});
   },
   
-  massageSlug: function(text) {
+  createZoneSlug: function(text) {
+    if (text == undefined) return '';
+    
     if (text.indexOf("PMD") != -1)
       return "PMD";
     if (text.indexOf("PD") != -1)
       return "PD";
-    
-    return MapsLib.convertToSlug(text);
-  },
-  
-  //converts a text in to a URL slug
-  convertToSlug: function(text) {
-    if (text == undefined) return '';
+      
   	return (text+'').replace(/ /g,'-').replace(/[^\w-]+/g,'');
   },
   
   //converts text to a formatted query string
   convertToQueryString: function(text) {
   	if (text == undefined) return '';
-  	return (text+'').replace(/\-+/g, '+').replace(/\s+/g, '+');
+  	return encodeURI(text);
   },
   
   //converts a slug or query string in to readable text
   convertToPlainString: function(text) {
     if (text == undefined) return '';
-  	return (text+'').replace(/\++/g, ' ').replace(/\-+/g, ' ');
+  	return decodeURIComponent(text);
   }
 }
+
+// Hack for fusion tables tiles not loading
+/*
+setTimeout(function() {
+  console.log("refetching map tiles");
+  $("img[src*='googleapis']").each(function(){
+    $(this).attr("src",$(this).attr("src")+"&"+(new Date()).getTime());
+  });
+},3000);
+*/

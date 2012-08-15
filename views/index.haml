@@ -7,74 +7,74 @@
 
       %input#txtSearchAddress.input-block-level{:placeholder => "Enter an address or an intersection", :type => "text"}
       %h4
-        Basic districts
+        Basic Districts
       %ul.inputs-list.unstyled
         %li
-          %label.checkbox.inline
+          %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Business (B)", :"data-content" => "Business districts are intended to accommodate retail, service and commercial uses." }
             %input#cbZone1{:type => "checkbox"}
             %span.zone-box.zone-1
-            Commercial
+            Business
         %li
-          %label.checkbox.inline
+          %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Mixed-use / Commercial (C)", :"data-content" => "Mixed-use / commercial districts are intended to accommodate retail, service and commercial uses with residential dwelling units above the ground floor." }
             %input#cbZone2{:type => "checkbox"}
             %span.zone-box.zone-2
-            Mixed-use
+            Mixed-use / Commercial
         %li
-          %label.checkbox.inline
+          %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Residential (R)", :"data-content" => "Residential districts are intended to create, maintain and promote a variety of housing opportunities for individual households and to maintain the desired physical character of the city’s existing neighborhoods. While the districts primarily accommodate residential use types, nonresidential uses that are compatible with residential neighborhoods are also allowed." }
             %input#cbZone4{:type => "checkbox"}
             %span.zone-box.zone-4
             Residential
         %li
-          %label.checkbox.inline
+          %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Manufacturing (M)", :"data-content" => "Manufacturing districts are intended to accommodate manufacturing, warehousing, wholesale and industrial uses outside the Central (Planned Manufacturing) Area." }
             %input#cbZone3{:type => "checkbox"}
             %span.zone-box.zone-3
             Manufacturing
         %li
-          %label.checkbox.inline
+          %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Planned Manufacturing District (PMD)", :"data-content" => "The planned manufacturing district zoning classification is intended to foster the city’s industrial base." }
             %input#cbZone6{:type => "checkbox"}
             %span.zone-box.zone-6
-            Planned manufacturing
+            Planned Manufacturing
       %h4
-        Downtown districts
+        Downtown Districts
       %ul.inputs-list.unstyled
         %li
-          %label.checkbox.inline
-            %input#cbZone7{:type => "checkbox"}
-            %span.zone-box.zone-7
-            Downtown mixed-use
-        %li
-          %label.checkbox.inline
+          %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Downtown Core (DC)", :"data-content" => "Downtown Core district is primarily intended to promote high-intensity office and employment growth within the downtown core." }
             %input#cbZone8{:type => "checkbox"}
             %span.zone-box.zone-8
-            Downtown core
+            Downtown Core
         %li
-          %label.checkbox.inline
+          %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Downtown Mixed-use (DX)", :"data-content" => "Downtown Mixed-Use district is primarily intended to accommodate office, commercial, public, institutional and residential development.  " }
+            %input#cbZone7{:type => "checkbox"}
+            %span.zone-box.zone-7
+            Downtown Mixed-use
+        %li
+          %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Downtown Residential (DR)", :"data-content" => "Downtown Residential district is primarily intended to accommodate residential development and small-scale commercial uses on lower floors, with residential units above." }
             %input#cbZone9{:type => "checkbox"}
             %span.zone-box.zone-9
-            Downtown residential
+            Downtown Residential
         %li
-          %label.checkbox.inline
+          %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Downtown Service (DS)", :"data-content" => "Downtown Service district is primarily intended to accommodate commercial and service uses that are essential for the livelihood of businesses and residents of the downtown area and surrounding neighborhoods." }
             %input#cbZone10{:type => "checkbox"}
             %span.zone-box.zone-10
-            Downtown service
+            Downtown Service
       %h4
-        Miscellaneous districts
+        Miscellaneous Districts
       %ul.inputs-list.unstyled
         %li
-          %label.checkbox.inline
+          %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Planned Development (PD)", :"data-content" => "The Planned Development zoning designation is required for certain projects to ensure adequate public review, encourage unified planning and development, promote economically beneficial development patterns that are compatible with the character of existing neighborhoods, allow design flexibility, and encourage the protection and conservation of the city's natural resources." }
             %input#cbZone5{:type => "checkbox"}
             %span.zone-box.zone-5
-            Planned development
+            Planned Development
         %li
-          %label.checkbox.inline
+          %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Transportation (T)", :"data-content" => "Transportation zoning district is intended to preserve, protect and enhance road, rail and other important transportation corridors and to ensure public review of proposals to convert such corridors to non-transportation use." }
             %input#cbZone11{:type => "checkbox"}
             %span.zone-box.zone-11
             Transportation
         %li
-          %label.checkbox.inline
+          %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Parks and Open Space (POS)", :"data-content" => "Parks and Open Space zoning district is intended to preserve, protect and enhance lands set aside for public open space, public parks and public beaches. The POS district is also intended to be applied to cemetery lands. Other than cemeteries, the POS district is intended to be applied exclusively to public-owned lands." }
             %input#cbZone12{:type => "checkbox"}
             %span.zone-box.zone-12
-            Parks and open space
+            Parks and Open Space
       %hr/
       %input#btnSearch.btn.btn-primary.btn-large{:type => "button", :value => "Search"}
       %button#reset.btn Reset
@@ -94,6 +94,7 @@
   = include_javascript :"http://maps.google.com/maps/api/js?sensor=false"
   = include_javascript :"http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"
   = include_javascript :maps_lib
+  = include_javascript :"bootstrap-popover"
 
   :javascript
     $(window).resize(function () {
@@ -104,6 +105,8 @@
     }).resize();
     
     $(function() {
+      $('label.checkbox.inline').popover();
+      
       MapsLib.initialize();
       $(':checkbox').click(function(){
         MapsLib.doSearch();
