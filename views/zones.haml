@@ -9,6 +9,9 @@
           %th Zone Type
           %th Zone Class
           %th Description
+          %th Floor Area Ratio
+          %th Height
+          %th Minimum Lot Area
       %tbody
         - @zones.each do |zone|
           %tr
@@ -16,3 +19,6 @@
             = "<td>#{zone[:new_code]}</td>"
             = "<td>#{decodeZoneClass(zone[:zone_type])}</td>"
             = "<td>#{zone[:description]}</td>"
+            = "<td>#{zone[:floor_area_ratio]}</td>"
+            = "<td>#{zone[:height]}</td>"
+            = "<td>#{zone[:minimum_lot_area]}</td>"
