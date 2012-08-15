@@ -18,7 +18,8 @@ var MapsLib = MapsLib || {};
 var MapsLib = {
   
   //Setup - put your Fusion Table details here
-  fusionTableId:      4871790,        //the ID of your Fusion Table (found under File => About)
+  fusionTableId:      "1oW3h3TD2tkM-E5K4-Ojs20t6zG3XO39Kv_lOI0g",        //the encrypted Table ID of your Fusion Table (found under File => About)
+  googleApiKey:       "AIzaSyAcsnDc7_YZskPj4ep3jT_fkpB3HI_1a98",        //*NEW* API key. found at https://code.google.com/apis/console/
   locationColumn:     "geometry",     //name of the location column in your Fusion Table
   map_centroid:       new google.maps.LatLng(41.8781136, -87.66677856445312), //center that your map defaults to
   locationScope:      "chicago",      //geographical area appended to all address searches
@@ -56,7 +57,7 @@ var MapsLib = {
     MapsLib.clearSearch();
     var address = $("#txtSearchAddress").val();
 
-    var searchStr = "SELECT " + MapsLib.locationColumn + " FROM " + MapsLib.fusionTableId + " WHERE " + MapsLib.locationColumn + " not equal to ''";
+    var whereClause = MapsLib.locationColumn + " not equal to ''";
     
     var searchType = "ZONE_TYPE IN (-1,";
     if ( $("#cbZone1").is(':checked')) searchType += "1,";
@@ -71,7 +72,7 @@ var MapsLib = {
     if ( $("#cbZone10").is(':checked')) searchType += "10,";
     if ( $("#cbZone11").is(':checked')) searchType += "11,";
     if ( $("#cbZone12").is(':checked')) searchType += "12,";
-    searchStr += " AND " + searchType.slice(0, searchType.length - 1) + ")";
+    whereClause += " AND " + searchType.slice(0, searchType.length - 1) + ")";
     
     if (address != "") {
       if (address.toLowerCase().indexOf(MapsLib.locationScope) == -1)
@@ -94,9 +95,9 @@ var MapsLib = {
           });
           MapsLib.drawSearchRadiusCircle(MapsLib.currentPinpoint);
           
-          searchStr += " AND ST_INTERSECTS(" + MapsLib.locationColumn + ", CIRCLE(LATLNG" + MapsLib.currentPinpoint.toString() + "," + MapsLib.searchRadius + "))";
+          whereClause += " AND ST_INTERSECTS(" + MapsLib.locationColumn + ", CIRCLE(LATLNG" + MapsLib.currentPinpoint.toString() + "," + MapsLib.searchRadius + "))";
           
-          MapsLib.submitSearch(searchStr, map, MapsLib.currentPinpoint);
+          MapsLib.submitSearch(whereClause, map, MapsLib.currentPinpoint);
         } 
         else {
           alert("We could not find your address: " + status);
@@ -104,19 +105,23 @@ var MapsLib = {
       });
     }
     else { //search without geocoding callback
-      MapsLib.submitSearch(searchStr, map);
+      MapsLib.submitSearch(whereClause, map);
     }
   },
   
-  submitSearch: function(searchStr, map, location) {
+  submitSearch: function(whereClause, map, location) {
     //get using all filters
-    MapsLib.searchrecords = new google.maps.FusionTablesLayer(MapsLib.fusionTableId, {
-      query: searchStr,
+    MapsLib.searchrecords = new google.maps.FusionTablesLayer({
+      query: {
+        from:   MapsLib.fusionTableId,
+        select: MapsLib.locationColumn,
+        where:  whereClause
+      },
       suppressInfoWindows: true
     });
     MapsLib.searchrecords.setMap(map);
     if (location) {
-      MapsLib.getInfoWindowContent(searchStr);
+      MapsLib.getInfoWindowContent(whereClause);
     }
     
     //override default info window
@@ -150,13 +155,13 @@ var MapsLib = {
     MapsLib.infoWindow.open(map);
   },
   
-  getInfoWindowContent: function(searchStr) {
-    searchStr = searchStr.replace("SELECT " + MapsLib.locationColumn + " ","SELECT ZONE_TYPE, ZONE_CLASS, ORDINANCE_, ORDINANCE1 ");
-    MapsLib.query(searchStr,"MapsLib.setInfoWindowContent");
+  getInfoWindowContent: function(whereClause) {
+    var selectColumns = "ZONE_TYPE, ZONE_CLASS, ORDINANCE_, ORDINANCE1";
+    MapsLib.query(selectColumns, whereClause,"MapsLib.setInfoWindowContent");
   },
   
   setInfoWindowContent: function(json) { 
-    var data = json["table"]["rows"];
+    var data = json["rows"];
     MapsLib.openFtInfoWindow(MapsLib.currentPinpoint, data[0][0], data[0][1])
   },
   
@@ -214,9 +219,14 @@ var MapsLib = {
       MapsLib.searchRadiusCircle = new google.maps.Circle(circleOptions);
   },
   
-  query: function(sql, callback) {
-    var sql = encodeURIComponent(sql);
-    $.ajax({url: "https://www.google.com/fusiontables/api/query?sql="+sql+"&jsonCallback="+callback, dataType: "jsonp"});
+  query: function(selectColumns, whereClause, callback) {
+    var queryStr = [];
+    queryStr.push("SELECT " + selectColumns);
+    queryStr.push(" FROM " + MapsLib.fusionTableId);
+    queryStr.push(" WHERE " + whereClause);
+  
+    var sql = encodeURIComponent(queryStr.join(" "));
+    $.ajax({url: "https://www.googleapis.com/fusiontables/v1/query?sql="+sql+"&callback="+callback+"&key="+MapsLib.googleApiKey, dataType: "jsonp"});
   },
   
   createZoneSlug: function(text) {
