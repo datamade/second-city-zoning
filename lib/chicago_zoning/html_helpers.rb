@@ -74,9 +74,9 @@ module SiteTemplate
     end
     
     def decodeZoneClass zone_class
-      zoningDict = ["Commercial", "Mixed-use", "Manufacturing", "Residential", "Planned development",
-                  "Planned manufacturing", "Downtown mixed-use", "Downtown core", "Downtown residential", "Downtown service",
-                  "Transportation","Parks and open space"]
+      zoningDict = ["Business", "Commercial / Mixed-use", "Manufacturing", "Residential", "Planned Development",
+                  "Planned Manufacturing District", "Downtown Mixed-use", "Downtown Core", "Downtown Residential", "Downtown Service",
+                  "Transportation","Parks and Open Space"]
       
       zoningDict[zone_class.to_i - 1]
     end
