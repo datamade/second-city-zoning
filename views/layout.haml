@@ -21,11 +21,11 @@
     .container-fluid
       .page-header
         %ul.nav.nav-pills.pull-right
-          %li.active
+          %li{:class => current_menu_class("home")}
             %a{:href => "/"} Home
-          %li
+          %li{:class => current_menu_class("about")}
             %a{:href => "/about"} About
-          %li
+          %li{:class => current_menu_class("zones")}
             %a{:href => "/zones"} Zone definitions
         %h1
           %a{:href => "/"} Chicago Zoning

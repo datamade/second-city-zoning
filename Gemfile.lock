@@ -4,6 +4,9 @@ GEM
     addressable (2.2.6)
     backports (2.3.0)
     eventmachine (0.12.10)
+    fusion_tables (0.3.1)
+      gdata_19 (>= 1.1.2)
+    gdata_19 (1.1.5)
     haml (3.1.4)
     heroku (2.18.1)
       launchy (>= 0.3.2)
@@ -52,6 +55,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  fusion_tables
   haml
   heroku
   sinatra

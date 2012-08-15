@@ -64,5 +64,21 @@ module SiteTemplate
 
       element
     end
+    
+    def current_menu
+      @current_menu
+    end
+    
+    def current_menu_class(menu_name)
+      return "active" if current_menu == menu_name
+    end
+    
+    def decodeZoneClass zone_class
+      zoningDict = ["Commercial", "Mixed-use", "Manufacturing", "Residential", "Planned development",
+                  "Planned manufacturing", "Downtown mixed-use", "Downtown core", "Downtown residential", "Downtown service",
+                  "Transportation","Parks and open space"]
+      
+      zoningDict[zone_class.to_i - 1]
+    end
   end
 end

@@ -25,7 +25,14 @@ module ChicagoZoning
     helpers SiteTemplate::HtmlHelpers
     
     get "/" do
+      @current_menu = "home"
       haml :index
+    end
+    
+    get "/zones" do 
+      @current_menu = "zones"
+      @zones = FT.execute("SELECT * FROM 4895941;")
+      haml :zones
     end
     
     get "/:page" do

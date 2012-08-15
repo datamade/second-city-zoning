@@ -1,3 +1,18 @@
 .row-fluid
   .span9
     %h2 Zone definitions
+    
+    %table.table.table-bordered
+      %thead
+        %tr
+          %th
+          %th Zone Type
+          %th Zone Class
+          %th Description
+      %tbody
+        - @zones.each do |zone|
+          %tr
+            = "<td id='#{zone[:new_code].gsub(/\s+/,'-')}' class='zone-#{zone[:zone_type]}'></td>"
+            = "<td>#{zone[:new_code]}</td>"
+            = "<td>#{decodeZoneClass(zone[:zone_type])}</td>"
+            = "<td>#{zone[:description]}</td>"

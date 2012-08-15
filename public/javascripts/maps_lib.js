@@ -123,19 +123,21 @@ var MapsLib = {
     google.maps.event.addListener(MapsLib.searchrecords, 'click', 
       function(e) { 
         if (MapsLib.infoWindow) MapsLib.infoWindow.close();
-        MapsLib.openFtInfoWindow(e.latLng, e.row['ZONE_TYPE'].value, e.row['ZONE_CLASS'].value);
+        MapsLib.openFtInfoWindow(e.latLng, e.row['ZONE_TYPE'].value, e.row['ZONE_CLASS'].value, e.row['ORDINANCE_'].value, e.row['ORDINANCE1'].value);
       }
     ); 
   },
 
-  openFtInfoWindow: function(position, zone_type, zone_class) {
+  openFtInfoWindow: function(position, zone_type, zone_class, ordinance, ordinance_date) {
     // Set up and create the infowindow
     if (!MapsLib.infoWindow) MapsLib.infoWindow = new google.maps.InfoWindow({});
      
     var content = "<div class='googft-info-window' style='font-family: sans-serif'>";
     content += "<span class='lead'>" + ZoningDict[zone_type - 1] + "</span>"
-    content += "<p>Zoned " + zone_class + "</p>"
-    content += '</div>';
+    content += "<p>Zoned <a href='zones#" + MapsLib.massageSlug(zone_class) + "'>" + zone_class + "</a>"
+    if (ordinance != "") content += "<br />Ordinance: " + ordinance
+    if (ordinance_date != "0000/00/00") content += "<br />Ordinance date: " + ordinance_date
+    content += '</p></div>';
     
     MapsLib.infoWindow.setOptions({
       content: content,
@@ -147,7 +149,7 @@ var MapsLib = {
   },
   
   getInfoWindowContent: function(searchStr) {
-    searchStr = searchStr.replace("SELECT " + MapsLib.locationColumn + " ","SELECT ZONE_TYPE, ZONE_CLASS ");
+    searchStr = searchStr.replace("SELECT " + MapsLib.locationColumn + " ","SELECT ZONE_TYPE, ZONE_CLASS, ORDINANCE_, ORDINANCE1 ");
     MapsLib.query(searchStr,"MapsLib.setInfoWindowContent");
   },
   
@@ -213,6 +215,21 @@ var MapsLib = {
   query: function(sql, callback) {
     var sql = encodeURIComponent(sql);
     $.ajax({url: "https://www.google.com/fusiontables/api/query?sql="+sql+"&jsonCallback="+callback, dataType: "jsonp"});
+  },
+  
+  massageSlug: function(text) {
+    if (text.indexOf("PMD") != -1)
+      return "PMD";
+    if (text.indexOf("PD") != -1)
+      return "PD";
+    
+    return MapsLib.convertToSlug(text);
+  },
+  
+  //converts a text in to a URL slug
+  convertToSlug: function(text) {
+    if (text == undefined) return '';
+  	return (text+'').replace(/ /g,'-').replace(/[^\w-]+/g,'');
   },
   
   //converts text to a formatted query string
