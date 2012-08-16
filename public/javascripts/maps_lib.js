@@ -10,8 +10,8 @@
  * 
  */
  
-var ZoningDict = ["Business", "Commercial / Mixed-use", "Manufacturing", "Residential", "Planned Development",
-                  "Planned Manufacturing District", "Downtown Mixed-use", "Downtown Core", "Downtown Residential", "Downtown Service",
+var ZoningDict = ["Business", "Commercial / Mixed-Use", "Manufacturing", "Residential", "Planned Development",
+                  "Planned Manufacturing District", "Downtown Mixed-Use", "Downtown Core", "Downtown Residential", "Downtown Service",
                   "Transportation","Parks and Open Space"];
 
 var MapsLib = MapsLib || {};

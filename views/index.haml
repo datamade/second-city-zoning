@@ -1,13 +1,19 @@
 .row-fluid
   .span3
     .well
-      %h4
-        Address
+      %h3
+        Find address
         <small>(<a id='findMe' href='#'>find me</a>)</small>
 
       %input#txtSearchAddress.input-block-level{:placeholder => "Enter an address or an intersection", :type => "text"}
-      %h4
-        Basic Districts
+      
+      %input#btnSearch.btn.btn-primary{:type => "button", :value => "Search"}
+      %button#reset.btn Reset
+      
+    .well
+      %h3
+        Filter by zoning type
+        <small>(<a href='/zones'>huh?</a>)</small>
       %ul.inputs-list.unstyled
         %li
           %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Business (B)", :"data-content" => "Business districts are intended to accommodate retail, service and commercial uses." }
@@ -15,10 +21,10 @@
             %span.zone-box.zone-1
             Business
         %li
-          %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Mixed-use / Commercial (C)", :"data-content" => "Mixed-use / commercial districts are intended to accommodate retail, service and commercial uses with residential dwelling units above the ground floor." }
+          %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Mixed-Use / Commercial (C)", :"data-content" => "Mixed-Use / commercial districts are intended to accommodate retail, service and commercial uses with residential dwelling units above the ground floor." }
             %input#cbZone2{:type => "checkbox"}
             %span.zone-box.zone-2
-            Mixed-use / Commercial
+            Mixed-Use / Commercial
         %li
           %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Residential (R)", :"data-content" => "Residential districts are intended to create, maintain and promote a variety of housing opportunities for individual households and to maintain the desired physical character of the city’s existing neighborhoods. While the districts primarily accommodate residential use types, nonresidential uses that are compatible with residential neighborhoods are also allowed." }
             %input#cbZone4{:type => "checkbox"}
@@ -29,11 +35,7 @@
             %input#cbZone3{:type => "checkbox"}
             %span.zone-box.zone-3
             Manufacturing
-        %li
-          %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Planned Manufacturing District (PMD)", :"data-content" => "The planned manufacturing district zoning classification is intended to foster the city’s industrial base." }
-            %input#cbZone6{:type => "checkbox"}
-            %span.zone-box.zone-6
-            Planned Manufacturing
+
       %h4
         Downtown Districts
       %ul.inputs-list.unstyled
@@ -43,7 +45,7 @@
             %span.zone-box.zone-8
             Downtown Core
         %li
-          %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Downtown Mixed-use (DX)", :"data-content" => "Downtown Mixed-Use district is primarily intended to accommodate office, commercial, public, institutional and residential development.  " }
+          %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Downtown Mixed-Use (DX)", :"data-content" => "Downtown Mixed-Use district is primarily intended to accommodate office, commercial, public, institutional and residential development.  " }
             %input#cbZone7{:type => "checkbox"}
             %span.zone-box.zone-7
             Downtown Mixed-use
@@ -66,28 +68,29 @@
             %span.zone-box.zone-5
             Planned Development
         %li
-          %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Transportation (T)", :"data-content" => "Transportation zoning district is intended to preserve, protect and enhance road, rail and other important transportation corridors and to ensure public review of proposals to convert such corridors to non-transportation use." }
+          %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Planned Manufacturing District (PMD)", :"data-content" => "The planned manufacturing district zoning classification is intended to foster the city’s industrial base." }
+            %input#cbZone6{:type => "checkbox"}
+            %span.zone-box.zone-6
+            Planned Manufacturing
+        %li
+          %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Transportation (T)", :"data-content" => "Transportation zoning district is intended to preserve, protect and enhance road, rail and other important transportation corridors" }
             %input#cbZone11{:type => "checkbox"}
             %span.zone-box.zone-11
             Transportation
         %li
-          %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Parks and Open Space (POS)", :"data-content" => "Parks and Open Space zoning district is intended to preserve, protect and enhance lands set aside for public open space, public parks and public beaches. The POS district is also intended to be applied to cemetery lands. Other than cemeteries, the POS district is intended to be applied exclusively to public-owned lands." }
+          %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Parks and Open Space (POS)", :"data-content" => "Parks and Open Space zoning district is intended to preserve, protect and enhance lands set aside for public open space, public parks and public beaches." }
             %input#cbZone12{:type => "checkbox"}
             %span.zone-box.zone-12
             Parks and Open Space
-      %hr/
-      %input#btnSearch.btn.btn-primary.btn-large{:type => "button", :value => "Search"}
-      %button#reset.btn Reset
-    %ul#resultList.item-list
+
   .span9
     #mapCanvas
-%footer.footer
-.span12
-  %p
-    Map and
-    %a{:href => "https://github.com/derekeder/FusionTable-Map-Template"} search template
-    by
-    %a{:href => "http://derekeder.com"} Derek Eder
+
+    %p.pull-right
+      Map and
+      %a{:href => "https://github.com/derekeder/FusionTable-Map-Template"} search template
+      by
+      %a{:href => "http://derekeder.com"} Derek Eder
 
 - content_for :javascripts do
   = include_javascript :"jquery.address.min"
