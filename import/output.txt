@@ -1,0 +1,69 @@
+B1-1,Under new zoning code, allows business and residential above ground floor. Maximum height 38 feet, construction density no more than 3,750 square feet per average city lot (25x125 feet)
+B1-1.5,Under new zoning code, allows business and residential above ground floor. Maximum height 38 feet, construction density no more than 4,687.5 square feet per average city lot (25x125 feet)
+B1-2,Under new zoning code, allows business and residential above ground floor. Maximum height 47-50 feet, construction density no more than 6,875 feet per average city lot (25x125 feet)
+B1-3,Under new zoning code, allows business and residential above ground floor. Maximum height 50-65 feet, construction density no more than 9,375 square feet per average city lot (25x125 feet)
+B1-5,Under new zoning code, allows business and residential. Maximum height 50-80 feet, construction density no more than 16,125 square feet per average city lot (25x125 feet)
+B2,
+B2-1,Under new zoning code, allows business and residential. Maximum height 38 feet, construction density no more than 3,750 square feet per average city lot (25x125 feet)
+B2-1.5,Under new zoning code, allows business and residential. Maximum height 38 feet, construction density no more than 4,687.5 square feet per average city lot (25x125 feet)
+B2-2,Under new zoning code, allows business and residential. Maximum height 47-50 feet, construction density no more than 6,875 feet per average city lot (25x125 feet)
+B2-3,Under new zoning code, allows business and residential. Maximum height 50-65 feet, construction density no more than 9,375 square feet per average city lot (25x125 feet)
+B2-5,Under new zoning code, allows business and residential. Maximum height 50-80 feet, construction density no more than 16,125 square feet per average city lot (25x125 feet)
+B3-1,Under new zoning code, allows business and residential. Maximum height 38 feet, construction density no more than 3,750 square feet per average city lot (25x125 feet)
+B3-1.5,Under new zoning code, allows business and residential. Maximum height 38 feet, construction density no more than 4,687.5 square feet per average city lot (25x125 feet)
+B3-2,Under new zoning code, allows business and residential. Maximum height 47-50 feet, construction density no more than 6,875 feet per average city lot (25x125 feet)
+B3-3,Under new zoning code, allows business and residential. Maximum height 50-65 feet, construction density no more than 9,375 square feet per average city lot (25x125 feet)
+B3-5,Under new zoning code, allows business and residential. Maximum height 50-80 feet, construction density no more than 16,125 square feet per average city lot (25x125 feet)
+C1-1,Under new zoning code, allows business and residential above ground floor. Maximum height 38 feet, construction density no more than 3,750 square feet per average city lot (25x125 feet)
+C1-1.5,Under new zoning code, allows business and residential above ground floor. Maximum height 38 feet, construction density no more than 4,687.5 square feet per average city lot (25x125 feet)
+C1-2,Under new zoning code, allows business and residential above ground floor. Maximum height 45-50 feet, construction density no more than 6,875 feet per average city lot (25x125 feet)
+C1-3,Under new zoning code, allows business and residential above ground floor. Maximum height 50-65 feet, construction density no more than 9,375 square feet per average city lot (25x125 feet)
+C1-5,Under new zoning code, allows business and residential. Maximum height 50-80 feet, construction density no more than 16,125 square feet per average city lot (25x125 feet)
+C2-1,Under new zoning code, allows business and residential above ground floor. Maximum height 38 feet, construction density no more than 3,750 square feet per average city lot (25x125 feet)
+C2-2,Under new zoning code, allows business and residential above ground floor. Maximum height 45-50 feet, construction density no more than 6,875 feet per average city lot (25x125 feet)
+C2-3,Under new zoning code, allows business and residential above ground floor. Maximum height 50-65 feet, construction density no more than 9,375 square feet per average city lot (25x125 feet)
+C2-5,Under new zoning code, allows business and residential. Maximum height 50-80 feet, construction density no more than 16,125 square feet per average city lot (25x125 feet)
+C3-1,Under new zoning code, allows business and manufacturing (no residential). Maximum height 38 feet, construction density no more than 3,750 square feet per average city lot (25x125 feet)
+C3-2,Under new zoning code, allows business and manufacturing (no residential). Maximum height 45-50 feet, construction density no more than 6,875 feet per average city lot (25x125 feet)
+C3-3,Under new zoning code, allows business and manufacturing (no residential). Maximum height 50-65 feet, construction density no more than 9,375 square feet per average city lot (25x125 feet)
+C3-5,Under new zoning code, allows business and manufacturing (no residential). Maximum height 50-80 feet, construction density no more than 16,125 square feet per average city lot (25x125 feet)
+C3-7,A commercial district
+DC-12,A downtown district
+DC-16,A downtown district
+DR-10,A downtown district
+DR-3,A downtown district
+DR-5,A downtown district
+DR-7,A downtown district
+DS-3,A downtown district
+DS-5,A downtown district
+DX-12,A downtown district (see zoning code at www.cityofchicago.org for details)
+DX-16,A downtown district (see zoning code at www.cityofchicago.org for details)
+DX-3,A downtown district (see zoning code at www.cityofchicago.org for details)
+DX-5,A downtown district (see zoning code at www.cityofchicago.org for details)
+DX-7,A downtown district (see zoning code at www.cityofchicago.org for details)
+M1-1,Manufacturing use
+M1-2,Manufacturing use
+M1-3,Manufacturing use
+M2-1,Manufacturing use
+M2-2,Manufacturing use
+M2-3,Manufacturing use
+M3-1,
+M3-2,Manufacturing use
+M3-3,Manufacturing use
+PD,
+PMD,Planned Development
+POS-1,Public Open Space
+POS-2,Public Open Space
+POS-3,Public Open Space
+RM-4.5,
+RM-5,Residential, maximum height 45-47 feet (depending on lot frontage), construction density no more than 6,250 square feet on an average city lot (25x125 feet)
+RM-5.5,
+RM-6,
+RM-6.5,
+RS-1,
+RS-2,Residential, maximum height 30 feet, minimum lot size 5,000 square feet, construction density no more than 2,032 square feet per each average city lot (25x125 feet)
+RS-3,
+RT-3.5,
+RT-4,
+RT-4A,
+T,Transportation District

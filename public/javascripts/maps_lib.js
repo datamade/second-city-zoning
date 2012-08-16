@@ -134,6 +134,9 @@ var MapsLib = {
   },
 
   openFtInfoWindow: function(position, zone_type, zone_class, ordinance, ordinance_date) {
+    console.log(ordinance);
+    console.log(ordinance_date);
+    
     // Set up and create the infowindow
     if (!MapsLib.infoWindow) MapsLib.infoWindow = new google.maps.InfoWindow({});
      
@@ -163,7 +166,7 @@ var MapsLib = {
   setInfoWindowContent: function(json) { 
     console.log(json);
     var data = json["rows"];
-    MapsLib.openFtInfoWindow(MapsLib.currentPinpoint, data[0][0], data[0][1])
+    MapsLib.openFtInfoWindow(MapsLib.currentPinpoint, data[0][0], data[0][1], data[0][2], data[0][3])
   },
   
   clearSearch: function() {
