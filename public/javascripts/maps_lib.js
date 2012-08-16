@@ -142,7 +142,7 @@ var MapsLib = {
     content += "<p>Zoned <a href='zones#" + MapsLib.createZoneSlug(zone_class) + "'>" + zone_class + "</a>"
     if (ordinance != "" && ordinance != undefined) 
       content += "<br />Ordinance: " + ordinance
-    if (ordinance_date != "0000/00/00" && ordinance_date != undefined) 
+    if (ordinance_date != "" && ordinance_date != undefined) 
       content += "<br />Ordinance date: " + ordinance_date
     content += '</p></div>';
     
@@ -161,6 +161,7 @@ var MapsLib = {
   },
   
   setInfoWindowContent: function(json) { 
+    console.log(json);
     var data = json["rows"];
     MapsLib.openFtInfoWindow(MapsLib.currentPinpoint, data[0][0], data[0][1])
   },
