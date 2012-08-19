@@ -19,6 +19,7 @@ var MapsLib = {
   
   //Setup - put your Fusion Table details here
   fusionTableId:      "1HmI6PT0q7rFbEXDfEt2VTbFyZVLZn__58AUe86E",        //the encrypted Table ID of your Fusion Table (found under File => About)
+  zoneDescriptionId:  "1r2vtU4il89uXmlcqAjGs72sjSXN-zuuS2vtnLu0",
   googleApiKey:       "AIzaSyAcsnDc7_YZskPj4ep3jT_fkpB3HI_1a98",        //*NEW* API key. found at https://code.google.com/apis/console/
   locationColumn:     "geometry",     //name of the location column in your Fusion Table
   map_centroid:       new google.maps.LatLng(41.8781136, -87.66677856445312), //center that your map defaults to
@@ -39,7 +40,15 @@ var MapsLib = {
     var myOptions = {
       zoom: MapsLib.defaultZoom,
       center: MapsLib.map_centroid,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      styles: [
+        {
+          stylers: [
+            { saturation: -100 },
+            { lightness: 40 }
+          ]
+        }
+      ]
     };
     map = new google.maps.Map($("#mapCanvas")[0],myOptions);
     
@@ -140,11 +149,13 @@ var MapsLib = {
     var content = "<div class='googft-info-window' style='font-family: sans-serif'>";
     content += "<span class='lead'>" + ZoningDict[zone_type - 1] + "</span>"
     content += "<p>Zoned <a href='zones#" + MapsLib.createZoneSlug(zone_class) + "'>" + zone_class + "</a>"
+    //content += '<br /><br /><!-- description -->';
     if (ordinance != "" && ordinance != undefined) 
-      content += "<br />Ordinance: " + ordinance
+      content += "<br /><br />Ordinance: " + ordinance
     if (ordinance_date != "" && ordinance_date != undefined) 
       content += "<br />Ordinance date: " + ordinance_date
-    content += '</p></div>';
+    content += '</p>';
+    content += '</div>';
     
     MapsLib.infoWindow.setOptions({
       content: content,
@@ -153,16 +164,27 @@ var MapsLib = {
     });
     // Infowindow-opening event handler
     MapsLib.infoWindow.open(map);
+    //MapsLib.getInfoWindowDescription(zone_class);
   },
   
   getInfoWindowContent: function(whereClause) {
     var selectColumns = "ZONE_TYPE, ZONE_CLASS, ORDINANCE_, ORDINANCE1";
-    MapsLib.query(selectColumns, whereClause,"MapsLib.setInfoWindowContent");
+    MapsLib.query(selectColumns, whereClause, MapsLib.fusionTableId, "MapsLib.setInfoWindowContent");
   },
   
   setInfoWindowContent: function(json) { 
     var data = json["rows"];
     MapsLib.openFtInfoWindow(MapsLib.currentPinpoint, data[0][0], data[0][1], data[0][2], data[0][3])
+  },
+  
+  getInfoWindowDescription: function(zone_class) {
+    var selectColumns = "'New Code', Description";
+    MapsLib.query(selectColumns, "'New Code' = '" + MapsLib.createZoneSlug(zone_class) + "'", MapsLib.zoneDescriptionId, "MapsLib.setInfoWindowDescription");
+  },
+  
+  setInfoWindowDescription: function(json) { 
+    var data = json["rows"];
+    MapsLib.infoWindow.setContent(MapsLib.infoWindow.getContent().replace("<br /><!-- description -->", data[0][1]));
   },
   
   clearSearch: function() {
@@ -219,10 +241,10 @@ var MapsLib = {
       MapsLib.searchRadiusCircle = new google.maps.Circle(circleOptions);
   },
   
-  query: function(selectColumns, whereClause, callback) {
+  query: function(selectColumns, whereClause, tableId, callback) {
     var queryStr = [];
     queryStr.push("SELECT " + selectColumns);
-    queryStr.push(" FROM " + MapsLib.fusionTableId);
+    queryStr.push(" FROM " + tableId);
     queryStr.push(" WHERE " + whereClause);
   
     var sql = encodeURIComponent(queryStr.join(" "));

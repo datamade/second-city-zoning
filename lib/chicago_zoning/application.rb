@@ -29,6 +29,12 @@ module ChicagoZoning
       haml :index
     end
     
+    get "/ordinances" do 
+      @current_menu = "zones"
+      @ordinances = FT.execute("SELECT ORDINANCE1, ORDINANCE_ FROM 4904329 WHERE ORDINANCE1 NOT EQUAL TO '' AND ORDINANCE_ NOT EQUAL TO '' ORDER BY ORDINANCE1 DESC LIMIT 100;")
+      haml :ordinances
+    end
+    
     get "/zones" do 
       @current_menu = "zones"
       @zones = FT.execute("SELECT * FROM 4895941;")
