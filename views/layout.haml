@@ -18,18 +18,25 @@
     /[if lt IE 9]
       <script type="text/javascript" src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
   %body
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.brand(href="/") Chicago Zoning
+          
+          .container.nav-collapse
+            %ul.nav.pull-right
+              %li{:class => current_menu_class("home")}
+                %a{:href => "/"} Home
+              %li{:class => current_menu_class("about")}
+                %a{:href => "/about"} About
+              %li{:class => current_menu_class("zones")}
+                %a{:href => "/zones"} Zone definitions
+  
     .container-fluid
-      .page-header
-        %ul.nav.nav-pills.pull-right
-          %li{:class => current_menu_class("home")}
-            %a{:href => "/"} Home
-          %li{:class => current_menu_class("about")}
-            %a{:href => "/about"} About
-          %li{:class => current_menu_class("zones")}
-            %a{:href => "/zones"} Zone definitions
-        %h1
-          %a{:href => "/"} Chicago Zoning
-          %small Find out how your building is zoned
           
       = yield
     
