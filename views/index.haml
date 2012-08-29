@@ -1,3 +1,23 @@
+#welcome-modal.modal.hide.fade.in{"aria-hidden" => "true", "aria-labelledby" => "welcomeModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3#myModalLabel Explore Chicago's Zoning
+  .modal-body
+    %p Welcome to Chicago Zoning! This app lets you: 
+    %ul
+      %li find out how your building is zoned
+      %li explore zoning areas throughout the city
+      
+    %p 
+      If you've ever played 
+      = link_to "Sim City", "http://en.wikipedia.org/wiki/SimCity_2000"
+      I tried to follow the color scheme: green for residential, blue for commercial and yellow for industrial. 
+      
+    %p
+      So dive in and explore!
+  .modal-footer
+    %button.btn.btn-info{"aria-hidden" => "true", "data-dismiss" => "modal"} Ok, thanks!
+
 .row-fluid
   .span3
     .well
@@ -35,30 +55,7 @@
             %input#cbZone3{:type => "checkbox"}
             %span.zone-box.zone-3
             Manufacturing
-
-      %h4
-        Downtown Districts
-      %ul.inputs-list.unstyled
-        %li
-          %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Downtown Core (DC)", :"data-content" => "Downtown Core district is primarily intended to promote high-intensity office and employment growth within the downtown core." }
-            %input#cbZone8{:type => "checkbox"}
-            %span.zone-box.zone-8
-            Downtown Core
-        %li
-          %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Downtown Mixed-Use (DX)", :"data-content" => "Downtown Mixed-Use district is primarily intended to accommodate office, commercial, public, institutional and residential development.  " }
-            %input#cbZone7{:type => "checkbox"}
-            %span.zone-box.zone-7
-            Downtown Mixed-use
-        %li
-          %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Downtown Residential (DR)", :"data-content" => "Downtown Residential district is primarily intended to accommodate residential development and small-scale commercial uses on lower floors, with residential units above." }
-            %input#cbZone9{:type => "checkbox"}
-            %span.zone-box.zone-9
-            Downtown Residential
-        %li
-          %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Downtown Service (DS)", :"data-content" => "Downtown Service district is primarily intended to accommodate commercial and service uses that are essential for the livelihood of businesses and residents of the downtown area and surrounding neighborhoods." }
-            %input#cbZone10{:type => "checkbox"}
-            %span.zone-box.zone-10
-            Downtown Service
+        
       %h4
         Special Purpose Districts
       %ul.inputs-list.unstyled
@@ -67,11 +64,6 @@
             %input#cbZone5{:type => "checkbox"}
             %span.zone-box.zone-5
             Planned Development
-        %li
-          %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Planned Manufacturing District (PMD)", :"data-content" => "The planned manufacturing district zoning classification is intended to foster the city’s industrial base." }
-            %input#cbZone6{:type => "checkbox"}
-            %span.zone-box.zone-6
-            Planned Manufacturing
         %li
           %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Transportation (T)", :"data-content" => "Transportation zoning district is intended to preserve, protect and enhance road, rail and other important transportation corridors" }
             %input#cbZone11{:type => "checkbox"}
@@ -96,6 +88,8 @@
   = include_javascript :"http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"
   = include_javascript :maps_lib
   = include_javascript :"bootstrap-popover"
+  = include_javascript :"bootstrap-modal"
+  = include_javascript :"jquery.cookie"
 
   :javascript
     $(window).resize(function () {
@@ -124,6 +118,7 @@
       
       $('#reset').click(function(){
         $.address.parameter('address','');
+        $.address.parameter('radius','');
         MapsLib.initialize(); 
         return false;
       });
@@ -135,4 +130,10 @@
               return false;
           }
       });
+      
+      //$('#welcome-modal').modal('show');
+      if ($.cookie("show-welcome") != "read") {
+        $('#welcome-modal').modal('show');
+        $.cookie("show-welcome", "read", { expires: 7 });
+      }
     });
