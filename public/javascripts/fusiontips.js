@@ -217,42 +217,9 @@
       var swhere = "ST_INTERSECTS(" + opts.geometryColumn + ",RECTANGLE(LATLNG(" + bounds.getSouthWest().lat() + "," + bounds.getSouthWest().lng() + "),LATLNG(" + bounds.getNorthEast().lat() + "," + bounds.getNorthEast().lng() + ")))";
       var queryText = encodeURIComponent("SELECT " + opts.select + " FROM " + opts.from + " WHERE " + swhere);
       queryPending = true;
-      if (google.visualization) {
-        queryVisualization(latlng, queryText);
-      } else {
-        queryFusionJson(latlng, queryText);
-      }
+      queryFusionJson(latlng, queryText);
     }
     
-    function queryVisualization(latlng, queryText) {
-      console.log("queryText: " + queryText);
-      var vquery = new google.visualization.Query('http://www.google.com/fusiontables/gvizdata?tq=' + queryText);
-      vquery.send(function(response) {
-        queryPending = false;
-        var data = response.getDataTable();
-        html = "";
-        var row = {};
-        if (data) {
-          var numRows = data.getNumberOfRows();
-          var numCols = data.getNumberOfColumns();
-          if (numRows > 0) {
-            for (i = 0; i < numCols; i++) {
-              html += "Zoned " + data.getValue(0, i) + " - " + data.getValue(1, i) + "<br/>";
-              var cell = {
-                columnName: data.getColumnLabel(i),
-                value: data.getValue(0, i)
-              };
-              row[data.getColumnLabel(i)] = cell;
-            }
-          }
-          
-        } else {
-          if (console) 
-            console.log('no data');
-        }
-        fireEvents(html, latlng, row);
-      });
-    }
     // IE does not like delete window[sid], so create a name space here.
     window.fusiontips = window.fusiontips||{};
     

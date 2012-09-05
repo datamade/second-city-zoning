@@ -157,7 +157,7 @@ var MapsLib = {
         paths: newCoordinates,
         strokeColor: "#333333",
         strokeOpacity: 1,
-        strokeWeight: 2,
+        strokeWeight: 3,
         fillOpacity: 0
       });
 
