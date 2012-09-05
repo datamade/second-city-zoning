@@ -9,10 +9,6 @@
  * Date: 5/2/2012
  * 
  */
- 
-var ZoningDict = ["Business", "Commercial / Mixed-Use", "Manufacturing", "Residential", "Planned Development",
-                  "Planned Manufacturing District", "Downtown Mixed-Use", "Downtown Core", "Downtown Residential", "Downtown Service",
-                  "Transportation","Parks and Open Space"];
 
 var MapsLib = MapsLib || {};
 var MapsLib = {
@@ -97,11 +93,10 @@ var MapsLib = {
             animation: google.maps.Animation.DROP,
             title:address
           });
-          MapsLib.drawSearchRadiusCircle(MapsLib.currentPinpoint);
+
+          addressWhereClause = " AND ST_INTERSECTS(" + MapsLib.locationColumn + ", CIRCLE(LATLNG" + MapsLib.currentPinpoint.toString() + "," + MapsLib.searchRadius + "))";
           
-          whereClause += " AND ST_INTERSECTS(" + MapsLib.locationColumn + ", CIRCLE(LATLNG" + MapsLib.currentPinpoint.toString() + "," + MapsLib.searchRadius + "))";
-          
-          MapsLib.submitSearch(whereClause, map, MapsLib.currentPinpoint);
+          MapsLib.submitSearch(whereClause, addressWhereClause, map, MapsLib.currentPinpoint);
         } 
         else {
           alert("We could not find your address: " + status);
@@ -109,11 +104,11 @@ var MapsLib = {
       });
     }
     else { //search without geocoding callback
-      MapsLib.submitSearch(whereClause, map);
+      MapsLib.submitSearch(whereClause, "", map);
     }
   },
   
-  submitSearch: function(whereClause, map, location) {
+  submitSearch: function(whereClause, addressWhereClause, map, location) {
     //get using all filters
     MapsLib.searchrecords = new google.maps.FusionTablesLayer({
       query: {
@@ -123,9 +118,13 @@ var MapsLib = {
       },
       suppressInfoWindows: true
     });
+
     MapsLib.searchrecords.setMap(map);
+    MapsLib.enableMapTips();
+    
     if (location) {
-      MapsLib.getInfoWindowContent(whereClause);
+      MapsLib.getInfoWindowContent(whereClause + addressWhereClause);
+      MapsLib.query(MapsLib.locationColumn, whereClause + addressWhereClause, MapsLib.fusionTableId, "MapsLib.drawResultPolygon");
     }
     
     //override default info window
@@ -135,6 +134,46 @@ var MapsLib = {
         MapsLib.openFtInfoWindow(e.latLng, e.row['ZONE_TYPE'].value, e.row['ZONE_CLASS'].value, e.row['ORDINANCE_'].value, e.row['ORDINANCE1'].value);
       }
     ); 
+  },
+
+  drawResultPolygon: function(data) {
+    //console.log(data);
+    var rows = data["rows"];
+    for (var i in rows) {
+      var newCoordinates = [];
+      var geometries = rows[0][0]['geometries'];
+      //console.log(geometries);
+      if (geometries) {
+        for (var j in geometries) {
+          //console.log(geometries[j]);
+          newCoordinates.push(MapsLib.constructNewCoordinates(geometries[j]));
+        }
+      } else {
+        //console.log("returning one geometry");
+        newCoordinates = MapsLib.constructNewCoordinates(rows[0][0]['geometry']);
+      }
+      var randomnumber = Math.floor(Math.random() * 4);
+      var zone = new google.maps.Polygon({
+        paths: newCoordinates,
+        strokeColor: "#333333",
+        strokeOpacity: 1,
+        strokeWeight: 2,
+        fillOpacity: 0
+      });
+
+      zone.setMap(map);
+    }
+  },
+
+  constructNewCoordinates: function(polygon) {
+    //console.log(polygon);
+    var newCoordinates = [];
+    var coordinates = polygon['coordinates'][0];
+    for (var i in coordinates) {
+      newCoordinates.push(
+          new google.maps.LatLng(coordinates[i][1], coordinates[i][0]));
+    }
+    return newCoordinates;
   },
 
   openFtInfoWindow: function(position, zone_type, zone_class, ordinance, ordinance_date) {
@@ -181,6 +220,15 @@ var MapsLib = {
     var data = json["rows"];
     MapsLib.infoWindow.setContent(MapsLib.infoWindow.getContent().replace("<br /><!-- description -->", data[0][1]));
   },
+
+  enableMapTips: function () {
+    MapsLib.searchrecords.enableMapTips({
+      select: 'ZONE_TYPE, ZONE_CLASS',
+      from: MapsLib.fusionTableId,
+      geometryColumn: MapsLib.locationColumn,
+      delay: 100
+    });
+  },
   
   clearSearch: function() {
     if (MapsLib.searchrecords != null)
@@ -218,22 +266,6 @@ var MapsLib = {
         alert("Geocoder failed due to: " + status);
       }
     });
-  },
-  
-  drawSearchRadiusCircle: function(point) {
-      var circleOptions = {
-        strokeColor: "#4b58a6",
-        strokeOpacity: 0.3,
-        strokeWeight: 1,
-        fillColor: "#4b58a6",
-        fillOpacity: 0.05,
-        map: map,
-        center: point,
-        clickable: false,
-        zIndex: -1,
-        radius: parseInt(MapsLib.searchRadius)
-      };
-      MapsLib.searchRadiusCircle = new google.maps.Circle(circleOptions);
   },
   
   query: function(selectColumns, whereClause, tableId, callback) {
