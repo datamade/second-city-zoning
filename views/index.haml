@@ -21,7 +21,7 @@
 .row-fluid
   .span3
     .well
-      %h3
+      %h4
         Find address
         <small>(<a id='findMe' href='#'>find me</a>)</small>
 
@@ -31,7 +31,7 @@
       %button#reset.btn Reset
       
     .well
-      %h3
+      %h4
         Filter by zoning type
         <small>(<a href='/zones'>huh?</a>)</small>
       %ul.inputs-list.unstyled
@@ -39,12 +39,7 @@
           %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Business (B)", :"data-content" => "Business districts are intended to accommodate retail, service and commercial uses." }
             %input#cbZone1{:type => "checkbox"}
             %span.zone-box.zone-1
-            Business
-        %li
-          %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Mixed-Use / Commercial (C)", :"data-content" => "Mixed-Use / commercial districts are intended to accommodate retail, service and commercial uses with residential dwelling units above the ground floor." }
-            %input#cbZone2{:type => "checkbox"}
-            %span.zone-box.zone-2
-            Mixed-Use / Commercial
+            Commercial
         %li
           %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Residential (R)", :"data-content" => "Residential districts are intended to create, maintain and promote a variety of housing opportunities for individual households and to maintain the desired physical character of the city’s existing neighborhoods. While the districts primarily accommodate residential use types, nonresidential uses that are compatible with residential neighborhoods are also allowed." }
             %input#cbZone4{:type => "checkbox"}
@@ -54,9 +49,9 @@
           %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Manufacturing (M)", :"data-content" => "Manufacturing districts are intended to accommodate manufacturing, warehousing, wholesale and industrial uses outside the Central (Planned Manufacturing) Area." }
             %input#cbZone3{:type => "checkbox"}
             %span.zone-box.zone-3
-            Manufacturing
+            Industrial
         
-      %h4
+      %h5
         Special Purpose Districts
       %ul.inputs-list.unstyled
         %li
@@ -104,7 +99,7 @@
   :javascript
     $(window).resize(function () {
       var h = $(window).height(),
-        offsetTop = 100; // Calculate the top offset
+        offsetTop = 70; // Calculate the top offset
     
       $('#mapCanvas').css('height', (h - offsetTop));
     }).resize();

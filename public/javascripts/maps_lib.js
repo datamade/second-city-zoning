@@ -65,8 +65,7 @@ var MapsLib = {
     var whereClause = MapsLib.locationColumn + " not equal to ''";
     
     var searchType = "ZONE_TYPE IN (-1,";
-    if ( $("#cbZone1").is(':checked')) searchType += "1,8,10,";
-    if ( $("#cbZone2").is(':checked')) searchType += "2,7,";
+    if ( $("#cbZone1").is(':checked')) searchType += "1,2,7,8,10,";
     if ( $("#cbZone3").is(':checked')) searchType += "3,6,";
     if ( $("#cbZone4").is(':checked')) searchType += "4,9,";
     if ( $("#cbZone5").is(':checked')) searchType += "5,";
@@ -119,13 +118,13 @@ var MapsLib = {
       suppressInfoWindows: true
     });
 
-    MapsLib.searchrecords.setMap(map);
-    MapsLib.enableMapTips();
-    
     if (location) {
       MapsLib.getInfoWindowContent(whereClause + addressWhereClause);
       MapsLib.query(MapsLib.locationColumn, whereClause + addressWhereClause, MapsLib.fusionTableId, "MapsLib.drawResultPolygon");
     }
+
+    MapsLib.searchrecords.setMap(map);
+    MapsLib.enableMapTips();
     
     //override default info window
     google.maps.event.addListener(MapsLib.searchrecords, 'click', 

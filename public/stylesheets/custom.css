@@ -2,16 +2,6 @@ body {
 	padding-top: 60px;
 }
 
-a { color: #4B58A6; }
-.well {margin-bottom: 10px; padding-bottom: 15px; }
-
-
-.nav-pills > .active > a,
-.nav-pills > .active > a:hover {
-  color: #ffffff;
-  background-color: #4B58A6;
-}
-
 #mapCanvas img {
   max-width: none;
 }
@@ -31,15 +21,15 @@ a { color: #4B58A6; }
           background-clip: padding-box; 
 }
 
-.zone-1 { background-color: #0000ff; }
-.zone-2 { background-color: #00ffff; }
-.zone-3 { background-color: #ffff00; }
-.zone-4 { background-color: #00ff00; }
-.zone-5 { background-color: #ff0000; }
-.zone-6 { background-color: #ffff00; }
-.zone-7 { background-color: #00ffff; }
-.zone-8 { background-color: #0000ff; }
-.zone-9 { background-color: #00ff00; }
-.zone-10 { background-color: #0000ff; }
-.zone-11 { background-color: #666666; }
-.zone-12 { background-color: #38761d; }
+.zone-1 { background-color: #7474D7; }
+.zone-2 { background-color: #7474D7; }
+.zone-3 { background-color: #DCDC7F; }
+.zone-4 { background-color: #7DD67D; }
+.zone-5 { background-color: #d27979; }
+.zone-6 { background-color: #DCDC7F; }
+.zone-7 { background-color: #7474D7; }
+.zone-8 { background-color: #7474D7; }
+.zone-9 { background-color: #7DD67D; }
+.zone-10 { background-color: #7474D7; }
+.zone-11 { background-color: #9C9C9C; }
+.zone-12 { background-color: #869b7c; }
