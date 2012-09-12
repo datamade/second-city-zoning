@@ -1,51 +1,92 @@
 .row-fluid
+  .span3
+    .well
+      %h3 Sections
+      %ol
+        %li
+          %a{:href => "#what-is-this"} What is this?
+        %li
+          %a{:href => "#what-is-zoning"} What is zoning?
+        %li
+          %a{:href => "#how-does-zoning-work"} How does zoning work?
+        %li
+          %a{:href => "#zoning-types"} What are the different zoning types?
+        %li
+          %a{:href => "#where-did-you-get-your-data-from"} Where did you get your data from?
+        %li
+          %a{:href => "#what-did-you-use-to-build-it"} What did you use to build it?
+        %li
+          %a{:href => "#team"} Team
   .span9
     %h2 About
-    
-    %p Questions for the about page:
+
+    %h4#what-is-this What is this?
+    %p Chicago Zoning is an app that lets you:
     %ul
-      %li
-        %p What is zoning?
+      %li find out how your building is zoned
+      %li explore zoning areas throughout the city
+
+    %p It is entirely open source and built with open data.
+
+    %h4#what-is-zoning What is zoning?
     %p
       regulations governing what you can do on a property and how big the
       building can be
-    %ul
-      %li
-        %p Why does it matter?
-    %p
-      because it literally shapes the city. the block-by-block character of our
-      city is inscribed in the law. convey that zoning isn’t about boring laws
-      and weird classifications - it’s the DNA of the built environment, the
-      way that government shapes the urban landscape that surrounds us.
-    %ul
-      %li
-        %p How does it work?
+    
+    %h4#how-does-zoning-work How does zoning work?
     %p
       explain R-B-C-M scheme, explain the idea that bigger numbers after R B or C
       basically means ‘taller’. would be really good to have pictures of
       building that are exemplify each district type (i.e. rs3 = bungalow, rt3.5
       \= two flats, etc.)
+
+    %h4#zoning-types What are the different zoning types?
     %ul
       %li
-        %p Why were they reformed in 2004?
+        Planned development
       %li
-        %p What is a planned development?
+        Downtown districts
+      %li
+        Planned manufacturing districts
+      %li
+        Ttransportation district
+      %li
+        Parks and Open Space
+
+    %h4#where-did-you-get-your-data-from Where did you get your data from?
+
+    %h4#what-did-you-use-to-build-it What did you use to build it?
     %p
-      explain what they are, why the city uses them a lot. the legal definition
-      of these things is an unhelpful catch-all, better to give people a sense of
-      how and why they’re using in practice.
+      This site is built with Sinatra, Ruby, Haml, Twiiter Bootstrap, Javascript and Google's Fusion Tables and Maps API. The data is stored in Fusion Tables and was pulled from the
+      = succeed "." do
+        %a{:href => "http://data.cityofchicago.org/"} City of Chicago Data Portal
+    %p Technologies used:
     %ul
       %li
-        %p What do the downtown districts mean?
+        %a{:href => "http://www.ruby-lang.org/en/downloads"} Ruby 1.9.3
       %li
-        %p Why are there separate downtown districts?
+        %a{:href => "http://www.sinatrarb.com"} Sinatra
       %li
-        %p What are planned manufacturing districts?
+        %a{:href => "http://haml.info"} Haml
+      %li
+        %a{:href => "http://www.heroku.com"} Heroku
+      %li
+        %a{:href => "http://twitter.github.com/bootstrap"} Twitter Bootstrap
+      %li
+        %a{:href => "http://jquery.com"} jQuery
+      %li
+        %a{:href => "http://code.google.com/apis/maps/documentation/javascript/"} Google Maps API V3
+      %li
+        %a{:href => "http://www.google.com/fusiontables"} Google Fusion Tables
     %p
-      explain what they are, how they’re different from manufacturing
-      districts, why the city has been using them
+      All the code for this project is up on
+      = succeed "." do
+        %a{:href => "https://github.com/open-city/chicago-zoning"} Github
+    %h4#team Team
     %ul
       %li
-        %p What is a transportation district?
+        %a{:href => "http://derekeder.com"} Derek Eder
+        \- developer and designer
       %li
-        %p What is an open space district?
+        %a{:href => "https://jpvelez.contently.com/"} Juan-Pablo Velez
+        \- zoning research and descriptions
