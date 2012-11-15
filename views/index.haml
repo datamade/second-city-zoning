@@ -64,7 +64,7 @@
             %span.zone-box.zone-5
             Planned Development
         %li
-          %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Transportation (T)", :"data-content" => "Transportation zoning district is intended to preserve, protect and enhance road, rail and other important transportation corridors" }
+          %label.checkbox.inline#transit-zone{:rel => "popover", :"data-original-title" => "Transportation (T)", :"data-content" => "Transportation zoning district is intended to preserve, protect and enhance road, rail and other important transportation corridors" }
             %input#cbZone11{:type => "checkbox"}
             %span.zone-box.zone-11
             Transportation
@@ -75,12 +75,10 @@
             Parks and Open Space
 
     .well
-      %audio#reticulating-splines
-        %source{:src => '/audio/reticulating splines.mp3'}
-
-      %audio#explosion
-        %source{:src => '/audio/explosion.mp3'}
-
+      %audio#reticulating-splines{:src => 'https://s3.amazonaws.com/chicago-zoning/effects/reticulating+splines.mp3'}
+      %audio#explosion{:src => 'https://s3.amazonaws.com/chicago-zoning/effects/explosion.mp3'}
+      %audio#mouse-click{:src => 'https://s3.amazonaws.com/chicago-zoning/effects/click.mp3'}
+      %audio#train{:src => 'https://s3.amazonaws.com/chicago-zoning/effects/train.mp3'}
 
       #jquery_jplayer
       / Using the cssSelectorAncestor option with the default cssSelector class names to enable control association of standard functions using built in features
@@ -98,11 +96,11 @@
               %i.icon-stop
         %ul#jplayer-tracks.nav.nav-pills
           %li
-            %a.track.track-default{:href => "/audio/Sim City 2000 - Theme.mp3"} Sim City Theme
+            %a.track.track-default{:href => "https://s3.amazonaws.com/chicago-zoning/Sim+City+2000+-+Theme.mp3"} Sim City Theme
           %li
-            %a.track{:href => "/audio/SimCity 2000 - MoogyCit.mp3"} MoogyCit
+            %a.track{:href => "https://s3.amazonaws.com/chicago-zoning/SimCity+2000+-+MoogyCit.mp3"} MoogyCit
           %li
-            %a.track{:href => "/audio/SimCity 2000 - City Shimmy.mp3"} City Shimmy
+            %a.track{:href => "https://s3.amazonaws.com/chicago-zoning/SimCity+2000+-+City+Shimmy.mp3"} City Shimmy
 
     %p
       An 
@@ -144,9 +142,10 @@
       
       MapsLib.initialize();
       $(':checkbox').click(function(){
+        play_multi_sound("mouse-click");
         MapsLib.doSearch();
       });
-      
+
       $('#btnSearch').click(function(){
         $("#reticulating-splines")[0].play();
         MapsLib.doSearch();
@@ -173,12 +172,13 @@
           }
       });
       
-      $('#welcome-modal').modal('show');
-      // if ($.cookie("show-welcome") != "read") {
-      //   $('#welcome-modal').modal('show');
-      //   $.cookie("show-welcome", "read", { expires: 7 });
-      // }
+      //$('#welcome-modal').modal('show');
+      if ($.cookie("show-welcome") != "read") {
+        $('#welcome-modal').modal('show');
+        $.cookie("show-welcome", "read", { expires: 7 });
+      }
 
+      //music player
       // Local copy of jQuery selectors, for performance.
       var my_jPlayer = $("#jquery_jplayer"),
         my_trackName = $("#jp_container .track-name"),
@@ -217,5 +217,26 @@
         $(this).blur();
         return false;
       });
+
+      //multi-channel audio stuff
+      var channel_max = 10;                   // number of channels
+      var audiochannels = new Array();
+      for (a=0;a<channel_max;a++) {                 // prepare the channels
+        audiochannels[a] = new Array();
+        audiochannels[a]['channel'] = new Audio();            // create a new audio object
+        audiochannels[a]['finished'] = -1;              // expected end time for this channel
+      }
+      function play_multi_sound(s) {
+        for (a=0;a<audiochannels.length;a++) {
+          thistime = new Date();
+          if (audiochannels[a]['finished'] < thistime.getTime()) {      // is this channel finished?
+            audiochannels[a]['finished'] = thistime.getTime() + document.getElementById(s).duration*1000;
+            audiochannels[a]['channel'].src = document.getElementById(s).src;
+            audiochannels[a]['channel'].load();
+            audiochannels[a]['channel'].play();
+            break;
+          }
+        }
+      }
 
     });
