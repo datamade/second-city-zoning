@@ -33,3 +33,15 @@ body {
 .zone-10 { background-color: #7474D7; }
 .zone-11 { background-color: #9C9C9C; }
 .zone-12 { background-color: #869b7c; }
+
+.zones .checkbox.inline {
+  display: inherit;
+}
+
+#jplayer-tracks {
+  margin-bottom: 0;
+}
+
+#jp_container a:hover {
+  text-decoration: none;
+}

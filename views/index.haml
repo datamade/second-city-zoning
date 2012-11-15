@@ -38,48 +38,43 @@
       %h4
         Zoning type
         <small>(<a href='/zones'>huh?</a>)</small>
-      %ul.inputs-list.unstyled
+      %ul.inputs-list.unstyled.zones
         %li
-          %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Business (B)", :"data-content" => "Business districts are intended to accommodate retail, service and commercial uses." }
+          %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Commercial (C,B)", :"data-content" => "Business districts are intended to accommodate retail, service and commercial uses." }
             %input#cbZone1{:type => "checkbox"}
-            %span.zone-box.zone-1
+            %img{:src => '/images/icons/commercial.png', :alt=> 'Commercial'}
             Commercial
         %li
           %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Residential (R)", :"data-content" => "Residential districts are intended to create, maintain and promote a variety of housing opportunities for individual households and to maintain the desired physical character of the city’s existing neighborhoods. While the districts primarily accommodate residential use types, nonresidential uses that are compatible with residential neighborhoods are also allowed." }
             %input#cbZone4{:type => "checkbox"}
-            %span.zone-box.zone-4
+            %img{:src => '/images/icons/residential.png', :alt=> 'Residential'}
             Residential
         %li
-          %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Manufacturing (M)", :"data-content" => "Manufacturing districts are intended to accommodate manufacturing, warehousing, wholesale and industrial uses outside the Central (Planned Manufacturing) Area." }
+          %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Industrial (M)", :"data-content" => "Manufacturing districts are intended to accommodate manufacturing, warehousing, wholesale and industrial uses outside the Central (Planned Manufacturing) Area." }
             %input#cbZone3{:type => "checkbox"}
-            %span.zone-box.zone-3
+            %img{:src => '/images/icons/industrial.png', :alt=> 'Industrial'}
             Industrial
         
       %h5
         Special Purpose Districts
-      %ul.inputs-list.unstyled
+      %ul.inputs-list.unstyled.zones
         %li
           %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Planned Development (PD)", :"data-content" => "The Planned Development zoning designation is required for certain projects to ensure adequate public review, encourage unified planning and development, promote economically beneficial development patterns that are compatible with the character of existing neighborhoods, allow design flexibility, and encourage the protection and conservation of the city's natural resources." }
             %input#cbZone5{:type => "checkbox"}
-            %span.zone-box.zone-5
+            %img{:src => '/images/icons/government.png', :alt=> 'Planned Development'}
             Planned Development
         %li
           %label.checkbox.inline#transit-zone{:rel => "popover", :"data-original-title" => "Transportation (T)", :"data-content" => "Transportation zoning district is intended to preserve, protect and enhance road, rail and other important transportation corridors" }
             %input#cbZone11{:type => "checkbox"}
-            %span.zone-box.zone-11
+            %img{:src => '/images/icons/trains.png', :alt=> 'Transportation'}
             Transportation
         %li
           %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Parks and Open Space (POS)", :"data-content" => "Parks and Open Space zoning district is intended to preserve, protect and enhance lands set aside for public open space, public parks and public beaches." }
             %input#cbZone12{:type => "checkbox"}
-            %span.zone-box.zone-12
+            %img{:src => '/images/icons/parks-entertainment.png', :alt=> 'Parks and Open Space'}
             Parks and Open Space
 
     .well
-      %audio#reticulating-splines{:src => 'https://s3.amazonaws.com/chicago-zoning/effects/reticulating+splines.mp3'}
-      %audio#explosion{:src => 'https://s3.amazonaws.com/chicago-zoning/effects/explosion.mp3'}
-      %audio#mouse-click{:src => 'https://s3.amazonaws.com/chicago-zoning/effects/click.mp3'}
-      %audio#train{:src => 'https://s3.amazonaws.com/chicago-zoning/effects/train.mp3'}
-
       #jquery_jplayer
       / Using the cssSelectorAncestor option with the default cssSelector class names to enable control association of standard functions using built in features
       #jp_container
@@ -102,16 +97,23 @@
           %li
             %a.track{:href => "https://s3.amazonaws.com/chicago-zoning/SimCity+2000+-+City+Shimmy.mp3"} City Shimmy
 
-    %p
+  .span8
+    #mapCanvas
+    %span.pull-right
       An 
-      %a{:href => "https://data.cityofchicago.org/Community-Economic-Development/Boundaries-Zoning-Districts/p8va-airx"} open data 
-      project by
-      %a{:href => "http://derekeder.com"} Derek Eder
+      %a.yay-link{:href => "http://opencityapps.org"} Open City 
+      app by
+      %a.yay-link{:href => "http://derekeder.com"} Derek Eder
       /and
       /%a{:href => "https://jpvelez.contently.com"} Juan-Pablo Velez
 
-  .span8
-    #mapCanvas
+%audio#reticulating-splines{:src => 'https://s3.amazonaws.com/chicago-zoning/effects/reticulating+splines.mp3'}
+%audio#explosion{:src => 'https://s3.amazonaws.com/chicago-zoning/effects/explosion.mp3'}
+%audio#mouse-click{:src => 'https://s3.amazonaws.com/chicago-zoning/effects/click.mp3'}
+%audio#simcopter-one{:src => 'https://s3.amazonaws.com/chicago-zoning/effects/simcopter-one.mp3'}
+%audio#yay{:src => 'https://s3.amazonaws.com/chicago-zoning/effects/yay.mp3'}
+%audio#zzt{:src => 'https://s3.amazonaws.com/chicago-zoning/effects/zzt.mp3'}
+%audio#train{:src => 'https://s3.amazonaws.com/chicago-zoning/effects/train.mp3'}
 
 - content_for :javascripts do
   :javascript
@@ -132,7 +134,7 @@
   :javascript
     $(window).resize(function () {
       var h = $(window).height(),
-        offsetTop = 70; // Calculate the top offset
+        offsetTop = 85; // Calculate the top offset
     
       $('#mapCanvas').css('height', (h - offsetTop));
     }).resize();
@@ -147,17 +149,18 @@
       });
 
       $('#btnSearch').click(function(){
-        $("#reticulating-splines")[0].play();
+        play_multi_sound("reticulating-splines");
         MapsLib.doSearch();
       });
       
       $('#findMe').click(function(){
+        play_multi_sound("zzt");
         MapsLib.findMe(); 
         return false;
       });
       
       $('#reset').click(function(){
-        $("#explosion")[0].play();
+        play_multi_sound("explosion");
         $.address.parameter('address','');
         $.address.parameter('radius','');
         MapsLib.initialize(); 
@@ -171,6 +174,16 @@
               return false;
           }
       });
+
+      $('.yay-link').click(function(e){
+        var location = $(this).attr('href');
+        play_multi_sound("yay");
+        setTimeout(
+          function(){
+            window.location = location;
+          },3000)
+        e.preventDefault();
+      });
       
       //$('#welcome-modal').modal('show');
       if ($.cookie("show-welcome") != "read") {
@@ -178,7 +191,7 @@
         $.cookie("show-welcome", "read", { expires: 7 });
       }
 
-      //music player
+      //---------music player---------------
       // Local copy of jQuery selectors, for performance.
       var my_jPlayer = $("#jquery_jplayer"),
         my_trackName = $("#jp_container .track-name"),
@@ -218,7 +231,7 @@
         return false;
       });
 
-      //multi-channel audio stuff
+      //-----------handle multi-channel audio-----------------
       var channel_max = 10;                   // number of channels
       var audiochannels = new Array();
       for (a=0;a<channel_max;a++) {                 // prepare the channels
