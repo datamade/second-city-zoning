@@ -1,24 +1,43 @@
 #welcome-modal.modal.hide.fade.in{"aria-hidden" => "true", "aria-labelledby" => "welcomeModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-header
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-    %h3#myModalLabel Chicago Zoning
+    %h3#myModalLabel Welcome to Chicago Zoning!
   .modal-body
     %p 
       %img.img-polaroid.pull-right{:src => '/images/sim-city-intro.jpg'}
-      Welcome to Chicago Zoning!
     %p
-      This app lets you: 
+      Howdy! This interactive map lets you: 
     %ul
-      %li find out how your building is zoned
-      %li explore zoning areas throughout the city
+      %li 
+        find out 
+        %strong how your building is zoned
+      %li
+        learn 
+        %strong what kinds of buildings 
+        and businesses you can build and where
+      %li 
+        explore 
+        %strong zoning patterns
+        throughout the city
       
+    .clearfix
     %p 
-      If you've ever played 
-      = link_to "Sim City", "http://en.wikipedia.org/wiki/SimCity_2000"
-      I tried to follow the color scheme: green for residential, blue for commercial and yellow for industrial. 
+      I took inspiration from one of my favorite games: 
+      = succeed '.' do
+        = link_to "Sim City 2000", "http://en.wikipedia.org/wiki/SimCity_2000"
+      It started with the color scheme: 
+      %strong{:style => 'color: #7DD67D;'} green 
+      for residential,
+      %strong{:style => 'color: #7474D7;'} blue 
+      for commercial and 
+      %strong{:style => 'color: #DCDC7F;'} yellow 
+      for industrial.
+
+    %p
+      From there I got a little carried away. Graphics, sounds, music, oh my.
       
     %p
-      So dive in and explore!
+      I had a lot of fun making this, so dive in and explore!
   .modal-footer
     %button.btn.btn-info{"aria-hidden" => "true", "data-dismiss" => "modal"} Ok, thanks!
 
@@ -40,15 +59,15 @@
         <small>(<a href='/zones'>huh?</a>)</small>
       %ul.inputs-list.unstyled.zones
         %li
-          %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Commercial (C,B)", :"data-content" => "Business districts are intended to accommodate retail, service and commercial uses." }
-            %input#cbZone1{:type => "checkbox"}
-            %img{:src => '/images/icons/commercial.png', :alt=> 'Commercial'}
-            Commercial
-        %li
           %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Residential (R)", :"data-content" => "Residential districts are intended to create, maintain and promote a variety of housing opportunities for individual households and to maintain the desired physical character of the city’s existing neighborhoods. While the districts primarily accommodate residential use types, nonresidential uses that are compatible with residential neighborhoods are also allowed." }
             %input#cbZone4{:type => "checkbox"}
             %img{:src => '/images/icons/residential.png', :alt=> 'Residential'}
             Residential
+        %li
+          %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Commercial (C,B)", :"data-content" => "Business districts are intended to accommodate retail, service and commercial uses." }
+            %input#cbZone1{:type => "checkbox"}
+            %img{:src => '/images/icons/commercial.png', :alt=> 'Commercial'}
+            Commercial
         %li
           %label.checkbox.inline{:rel => "popover", :"data-original-title" => "Industrial (M)", :"data-content" => "Manufacturing districts are intended to accommodate manufacturing, warehousing, wholesale and industrial uses outside the Central (Planned Manufacturing) Area." }
             %input#cbZone3{:type => "checkbox"}
