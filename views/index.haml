@@ -33,9 +33,6 @@
       
       %input#btnSearch.btn.btn-primary{:type => "button", :value => "Search"}
       %button#reset.btn Reset
-
-      %audio#reticulating-splines
-        %source{:src => '/audio/reticulating splines.mp3'}
       
     .well
       %h4
@@ -78,6 +75,13 @@
             Parks and Open Space
 
     .well
+      %audio#reticulating-splines
+        %source{:src => '/audio/reticulating splines.mp3'}
+
+      %audio#explosion
+        %source{:src => '/audio/explosion.mp3'}
+
+
       #jquery_jplayer
       / Using the cssSelectorAncestor option with the default cssSelector class names to enable control association of standard functions using built in features
       #jp_container
@@ -154,6 +158,7 @@
       });
       
       $('#reset').click(function(){
+        $("#explosion")[0].play();
         $.address.parameter('address','');
         $.address.parameter('radius','');
         MapsLib.initialize(); 
