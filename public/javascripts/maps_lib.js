@@ -23,8 +23,8 @@ var MapsLib = {
   recordName:         "zoning area",       //for showing number of results
   recordNamePlural:   "zoning areas", 
   
-  searchRadius:       1,            //in meters ~ 1/2 mile
-  defaultZoom:        13,             //zoom level when map is loaded (bigger is more zoomed in)
+  searchRadius:       0.0001,            //in meters ~ 1/2 mile
+  defaultZoom:        12,             //zoom level when map is loaded (bigger is more zoomed in)
   addrMarkerImage: 'http://derekeder.com/images/icons/blue-pushpin.png',
   infoWindow: null,
   currentPinpoint: null,

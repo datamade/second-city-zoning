@@ -1,9 +1,13 @@
 #welcome-modal.modal.hide.fade.in{"aria-hidden" => "true", "aria-labelledby" => "welcomeModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-header
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-    %h3#myModalLabel Explore Chicago's Zoning
+    %h3#myModalLabel Chicago Zoning
   .modal-body
-    %p Welcome to Chicago Zoning! This app lets you: 
+    %p 
+      %img.img-polaroid.pull-right{:src => '/images/sim-city-intro.jpg'}
+      Welcome to Chicago Zoning!
+    %p
+      This app lets you: 
     %ul
       %li find out how your building is zoned
       %li explore zoning areas throughout the city
@@ -19,7 +23,7 @@
     %button.btn.btn-info{"aria-hidden" => "true", "data-dismiss" => "modal"} Ok, thanks!
 
 .row-fluid
-  .span3
+  .span4
     .well
       %h4
         Find address
@@ -32,7 +36,7 @@
       
     .well
       %h4
-        Filter by zoning type
+        Zoning type
         <small>(<a href='/zones'>huh?</a>)</small>
       %ul.inputs-list.unstyled
         %li
@@ -78,7 +82,7 @@
       /and
       /%a{:href => "https://jpvelez.contently.com"} Juan-Pablo Velez
 
-  .span9
+  .span8
     #mapCanvas
 
 - content_for :javascripts do
@@ -136,9 +140,9 @@
           }
       });
       
-      //$('#welcome-modal').modal('show');
-      if ($.cookie("show-welcome") != "read") {
-        $('#welcome-modal').modal('show');
-        $.cookie("show-welcome", "read", { expires: 7 });
-      }
+      $('#welcome-modal').modal('show');
+      // if ($.cookie("show-welcome") != "read") {
+      //   $('#welcome-modal').modal('show');
+      //   $.cookie("show-welcome", "read", { expires: 7 });
+      // }
     });
