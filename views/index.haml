@@ -33,6 +33,9 @@
       
       %input#btnSearch.btn.btn-primary{:type => "button", :value => "Search"}
       %button#reset.btn Reset
+
+      %audio#reticulating-splines
+        %source{:src => '/audio/reticulating splines.mp3'}
       
     .well
       %h4
@@ -74,6 +77,29 @@
             %span.zone-box.zone-12
             Parks and Open Space
 
+    .well
+      #jquery_jplayer
+      / Using the cssSelectorAncestor option with the default cssSelector class names to enable control association of standard functions using built in features
+      #jp_container
+        %h4
+          Sim City Music
+          %small
+            %a.jp-play{:href => "#"}
+              %i.icon-play
+        
+            %a.jp-pause{:href => "#"}
+              %i.icon-pause
+        
+            %a.jp-stop{:href => "#"}
+              %i.icon-stop
+        %ul#jplayer-tracks.nav.nav-pills
+          %li
+            %a.track.track-default{:href => "/audio/Sim City 2000 - Theme.mp3"} Sim City Theme
+          %li
+            %a.track{:href => "/audio/SimCity 2000 - MoogyCit.mp3"} MoogyCit
+          %li
+            %a.track{:href => "/audio/SimCity 2000 - City Shimmy.mp3"} City Shimmy
+
     %p
       An 
       %a{:href => "https://data.cityofchicago.org/Community-Economic-Development/Boundaries-Zoning-Districts/p8va-airx"} open data 
@@ -99,6 +125,7 @@
   = include_javascript :"bootstrap-popover"
   = include_javascript :"bootstrap-modal"
   = include_javascript :"jquery.cookie"
+  = include_javascript :"jquery.jplayer.min"
 
   :javascript
     $(window).resize(function () {
@@ -117,6 +144,7 @@
       });
       
       $('#btnSearch').click(function(){
+        $("#reticulating-splines")[0].play();
         MapsLib.doSearch();
       });
       
@@ -145,4 +173,44 @@
       //   $('#welcome-modal').modal('show');
       //   $.cookie("show-welcome", "read", { expires: 7 });
       // }
+
+      // Local copy of jQuery selectors, for performance.
+      var my_jPlayer = $("#jquery_jplayer"),
+        my_trackName = $("#jp_container .track-name"),
+        my_playState = $("#jp_container .play-state")
+
+      // Some options
+      var opt_play_first = true, // If true, will attempt to auto-play the default track on page loads. No effect on mobile devices, like iOS.
+        opt_auto_play = true // If true, when a track is selected, it will auto-play.
+
+      // A flag to capture the first track
+      var first_track = true;
+
+      // Instance jPlayer
+      my_jPlayer.jPlayer({
+        ready: function () {
+          $("#jp_container .track-default").click();
+        },
+        swfPath: "javascripts",
+        cssSelectorAncestor: "#jp_container",
+        supplied: "mp3",
+        wmode: "window",
+        loop: true
+      });
+
+      // Create click handlers for the different tracks
+      $("#jp_container .track").click(function(e) {
+        $('#jplayer-tracks').children('li').attr('class', '');
+        $(this).parent().attr('class', 'active');
+        my_jPlayer.jPlayer("setMedia", {
+          mp3: $(this).attr("href")
+        });
+        if((opt_play_first && first_track) || (opt_auto_play && !first_track)) {
+          my_jPlayer.jPlayer("play");
+        }
+        first_track = false;
+        $(this).blur();
+        return false;
+      });
+
     });
