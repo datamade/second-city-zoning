@@ -1,43 +1,45 @@
 #welcome-modal.modal.hide.fade.in{"aria-hidden" => "true", "aria-labelledby" => "welcomeModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-header
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-    %h3#myModalLabel Welcome to Chicago Zoning!
+    %h3#myModalLabel Welcome to Chicago Zoning 2012!
   .modal-body
-    %p 
+    %p
       %img.img-polaroid.pull-right{:src => '/images/sim-city-intro.jpg'}
     %p
-      Howdy! This interactive map lets you: 
+      Howdy! This interactive map lets you:
     %ul
-      %li 
-        find out 
+      %li
+        find out
         %strong how your building is zoned
       %li
-        learn 
-        %strong what kinds of buildings 
+        learn
+        %strong what kinds of buildings
         and businesses you can build and where
-      %li 
-        explore 
+      %li
+        explore
         %strong zoning patterns
         throughout the city
-      
+
     .clearfix
-    %p 
-      I took inspiration from one of my favorite games: 
+    %p
+      I took inspiration from one of my favorite games:
       = succeed '.' do
         = link_to "Sim City 2000", "http://en.wikipedia.org/wiki/SimCity_2000"
-      It started with the color scheme: 
-      %strong{:style => 'color: #7DD67D;'} green 
+      It started with the color scheme:
+      %strong{:style => 'color: #7DD67D;'} green
       for residential,
-      %strong{:style => 'color: #7474D7;'} blue 
-      for commercial and 
-      %strong{:style => 'color: #DCDC7F;'} yellow 
+      %strong{:style => 'color: #7474D7;'} blue
+      for commercial and
+      %strong{:style => 'color: #DCDC7F;'} yellow
       for industrial.
 
     %p
-      From there I got a little carried away. Graphics, sounds, music, oh my.
-      
+      From there I got a little carried away.
+      %a{:href => '/about#dear-maxis'} Graphics, sounds, music, oh my.
+
     %p
       I had a lot of fun making this, so dive in and explore!
+
   .modal-footer
     %button.btn.btn-info{"aria-hidden" => "true", "data-dismiss" => "modal"} Ok, thanks!
 
@@ -49,10 +51,10 @@
         <small>(<a id='findMe' href='#'>find me</a>)</small>
 
       %input#txtSearchAddress.input-block-level{:placeholder => "Enter an address or an intersection", :type => "text"}
-      
+
       %input#btnSearch.btn.btn-primary{:type => "button", :value => "Search"}
       %button#reset.btn Reset
-      
+
     .well
       %h4
         Zoning type
@@ -73,7 +75,7 @@
             %input#cbZone3{:type => "checkbox"}
             %img{:src => '/images/icons/industrial.png', :alt=> 'Industrial'}
             Industrial
-        
+
       %h5
         Special Purpose Districts
       %ul.inputs-list.unstyled.zones
@@ -98,14 +100,14 @@
       / Using the cssSelectorAncestor option with the default cssSelector class names to enable control association of standard functions using built in features
       #jp_container
         %h4
-          Sim City Music
+          Music
           %small
             %a.jp-play{:href => "#"}
               %i.icon-play
-        
+
             %a.jp-pause{:href => "#"}
               %i.icon-pause
-        
+
             %a.jp-stop{:href => "#"}
               %i.icon-stop
         %ul#jplayer-tracks.nav.nav-pills
@@ -119,8 +121,8 @@
   .span8
     #mapCanvas
     %span.pull-right
-      An 
-      %a.yay-link{:href => "http://opencityapps.org"} Open City 
+      An
+      %a.yay-link{:href => "http://opencityapps.org"} Open City
       app by
       %a.yay-link{:href => "http://derekeder.com"} Derek Eder
       /and
@@ -154,13 +156,13 @@
     $(window).resize(function () {
       var h = $(window).height(),
         offsetTop = 85; // Calculate the top offset
-    
+
       $('#mapCanvas').css('height', (h - offsetTop));
     }).resize();
-    
+
     $(function() {
       $('label.checkbox.inline').popover();
-      
+
       MapsLib.initialize();
       $(':checkbox').click(function(){
         play_multi_sound("mouse-click");
@@ -171,21 +173,21 @@
         play_multi_sound("reticulating-splines");
         MapsLib.doSearch();
       });
-      
+
       $('#findMe').click(function(){
         play_multi_sound("zzt");
-        MapsLib.findMe(); 
+        MapsLib.findMe();
         return false;
       });
-      
+
       $('#reset').click(function(){
         play_multi_sound("explosion");
         $.address.parameter('address','');
         $.address.parameter('radius','');
-        MapsLib.initialize(); 
+        MapsLib.initialize();
         return false;
       });
-      
+
       $("#txtSearchAddress").keydown(function(e){
           var key =  e.keyCode ? e.keyCode : e.which;
           if(key == 13) {
@@ -203,12 +205,12 @@
           },3000)
         e.preventDefault();
       });
-      
-      //$('#welcome-modal').modal('show');
-      if ($.cookie("show-welcome") != "read") {
-        $('#welcome-modal').modal('show');
-        $.cookie("show-welcome", "read", { expires: 7 });
-      }
+
+      $('#welcome-modal').modal('show');
+      // if ($.cookie("show-welcome") != "read") {
+      //   $('#welcome-modal').modal('show');
+      //   $.cookie("show-welcome", "read", { expires: 7 });
+      // }
 
       //---------music player---------------
       // Local copy of jQuery selectors, for performance.

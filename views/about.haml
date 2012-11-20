@@ -8,56 +8,193 @@
         %li
           %a{:href => "#what-is-zoning"} What is zoning?
         %li
-          %a{:href => "#how-does-zoning-work"} How does zoning work?
+          %a{:href => "#how-does-zoning-work"} How does zoning work in Chicago?
         %li
           %a{:href => "#zoning-types"} What are the different zoning types?
         %li
-          %a{:href => "#where-did-you-get-your-data-from"} Where did you get your data from?
-        %li
-          %a{:href => "#what-did-you-use-to-build-it"} What did you use to build it?
-        %li
           %a{:href => "#team"} Team
+        %li
+          %a{:href => "#data"} Data
+        %li
+          %a{:href => "#code"} Code
+
   .span9
     %h2 About
 
     %h4#what-is-this What is this?
-    %p Chicago Zoning is an app that lets you:
+    %p Chicago Zoning is an interactive map lets you:
     %ul
-      %li find out how your building is zoned
-      %li explore zoning areas throughout the city
+      %li
+        find out
+        %strong how your building is zoned
+      %li
+        learn
+        %strong what kinds of buildings
+        and businesses you can build and where
+      %li
+        explore
+        %strong zoning patterns
+        throughout the city
 
-    %p It is entirely open source and built with open data.
+    %p
+      I took inspiration from one of my favorite games:
+      = succeed '.' do
+        = link_to "Sim City 2000", "http://en.wikipedia.org/wiki/SimCity_2000"
+      It started with the color scheme:
+      %strong{:style => 'color: #7DD67D;'} green
+      for residential,
+      %strong{:style => 'color: #7474D7;'} blue
+      for commercial and
+      %strong{:style => 'color: #DCDC7F;'} yellow
+      for industrial.
+
+    %p
+      From there I got a little carried away. Graphics, sounds, music, oh my.
+
+    %p
+      I had a lot of fun making this, so dive in and explore!
+
+    %p Oh yah, just like all
+    %a{:href => 'http://opencityapps.org'} Open City
+    apps, it is entirely
+    %a{:href => '#code'} open source
+    and built with
+    = succeed '.' do
+      %a{:href => '#data'} open data
 
     %h4#what-is-zoning What is zoning?
-    %p
-      regulations governing what you can do on a property and how big the
-      building can be
-    
-    %h4#how-does-zoning-work How does zoning work?
-    %p
-      explain R-B-C-M scheme, explain the idea that bigger numbers after R B or C
-      basically means ‘taller’. would be really good to have pictures of
-      building that are exemplify each district type (i.e. rs3 = bungalow, rt3.5
-      \= two flats, etc.)
 
-    %h4#zoning-types What are the different zoning types?
+    %p
+      Zoning is making sure a factory doesn't open next door to a school.
+    %p
+      It consists of
+      %a{:href => '/docs/Chicago-Zoning-Ordinance.pdf'} regulations
+      governing what you can do on a property and how big the
+      building can be. Its a way of organizing and clustering functions of a city or town.
+
+    %h4#how-does-zoning-work How does zoning work in Chicago?
+    %p
+      All areas of Chicago are designated a
+      %strong zoning type
+      and a
+      = succeed '.' do
+        %strong zoning class
+
+    %p
+      The type is a larger bucket that designates the general purpose of the area, like residential (R) or commercial (C).
+    %p
+      The class determines the density (building height, setback and floor to area ratio) and is indicated by a number (usually between 1 and 5). The larger the number, the more dense the buildings can be.
+
+    %p
+      Zoning is controlled by Chicago's City Council. They have a Zoning Board that reviews all proposed zoning changes, which are then passed on to a City Council vote. Unlike most cities, each zoning change, when approved, is put down in the books as a
+      = succeed '.' do
+        %strong separate ordinance
+
+    %p
+      Zoning changes can be proposed in two ways:
+
     %ul
       %li
-        Planned development
+        As a submitted proposal with no Aldermanic sponsor, requiring financial and personal disclosures, along with submitted architecture drawings.
       %li
-        Downtown districts
-      %li
-        Planned manufacturing districts
-      %li
-        Ttransportation district
-      %li
-        Parks and Open Space
+        As an Aldermanic decree, consisting of a few sentences.
 
-    %h4#where-did-you-get-your-data-from Where did you get your data from?
+    %p more on this?
 
-    %h4#what-did-you-use-to-build-it What did you use to build it?
+    %h4#zoning-types What are the different zoning types?
+
     %p
-      This site is built with Sinatra, Ruby, Haml, Twiiter Bootstrap, Javascript and Google's Fusion Tables and Maps API. The data is stored in Fusion Tables and was pulled from the
+      The 12 different zoning types in Chicago are:
+
+    %dl
+      %dt Business (B) and Commercial (C)
+      %dd
+        The “B” and “C” (Business and Commercial) districts are intended to accommodate retail, service and commercial uses and to ensure that business and commercial-zoned areas are compatible with the character of existing neighborhoods.
+      %dt Manufacturing (M)
+      %dd
+        The “M,” Manufacturing districts are intended to accommodate manufacturing, warehousing, wholesale and industrial uses outside the Central Area.
+      %dt Residential (R)
+      %dd
+        The “R,” residential districts are intended to create, maintain and promote a variety of housing opportunities for individual households and to maintain the desired physical character of the city’s existing neighborhoods. While the districts primarily accommodate residential use types, nonresidential uses that are compatible with residential neighborhoods are also allowed.
+      %dt Planned development (PD)
+      %dd
+        Uses identified with a “PD” may be allowed if reviewed and approved in accordance with the planned development procedures of Sec. 17-13-0600. Other uses and development activities may also require review and approval as a planned development based on their size, height or other threshold criteria. (See the mandatory planned development thresholds of Sec. 17-8- 0500.)
+      %dt Downtown core (DC)
+      %dd
+        The DC, Downtown Core district is primarily intended to promote high-intensity office and employment growth within the downtown core.
+      %dt Downtown mixed use (DX)
+      %dd
+        The DX, Downtown Mixed-Use district is primarily intended to accommodate office, commercial, public, institutional and residential development.
+      %dt Downtown residential (DR)
+      %dd
+        The DR, Downtown Residential district is primarily intended to accommodate residential development and small-scale commercial uses on lower floors, with residential units above.
+      %dt Downtown service (DS)
+      %dd
+        The DS, Downtown Service district is primarily intended to accommodate commercial and service uses that are essential for the livelihood of businesses and residents of the downtown area and surrounding neighborhoods.
+      %dt Planned manufacturing districts (PMD)
+      %dd
+        The "PMD," Planned Manufacturing District are 14 large areas designated as main industrial corriodors of the city.
+      %dt Ttransportation district (T)
+      %dd
+        The “T,” Transportation zoning district is intended to preserve, protect and enhance road, rail and other important transportation corridors and to ensure public review of proposals to convert such corridors to non-transportation use.
+      %dt Parks and Open Space (POS)
+      %dd
+        The “POS,” Parks and Open Space zoning district is intended to preserve, protect and enhance lands set aside for public open space, public parks and public beaches.
+
+    %p
+      = succeed '.' do
+        %a{:href => '/zones'} See the full list of zoning types
+    %p
+      For more details, read the
+      = succeed '.' do
+        %a{:href => '/docs/Chicago-Zoning-Ordinance.pdf'} City of Chicago Zoning Ordinance
+
+    %h4#dear-maxis Dear Maxis and Electronic Arts: Don't sue us!
+
+    %p
+      We are using some music and sound effects from Sim City 2000 on this website. This is not to make a Sim City competitor, but to make the experience of diving in to zoning laws fun!
+    %p
+      Sim City is a trademark of Maxis and Electronic Arts.
+
+    %p [section on music credits]
+
+    %p [link to buy Sim City game]
+
+    %h4#team Team
+    %p
+      This is an
+      %a{:href => 'http://opencityapps.org'} Open City
+      project done as a volunteer effort. We built this site for fun and education (ours and yours).
+
+    %p
+      The team is:
+
+    %ul
+      %li
+        %a{:href => "http://derekeder.com"} Derek Eder
+        \- developer and designer
+      %li
+        %a{:href => "https://jpvelez.contently.com/"} Juan-Pablo Velez
+        \- zoning research and descriptions
+
+    %h4#data Data
+
+    %p
+      This site was built with
+      %a{:href => 'http://data.cityofchicago.org/'} zoning shapefiles
+      from the City of Chicago Data Portal.
+
+      We love that the City of Chicago has opened their data for citizens to use. This site represents just one example of what can be done with it. We hope it inspires others to dive in to zoning (and other) datasets the
+      = succeed ',' do
+        %a{:href => 'http://data.cityofchicago.org/'} City
+      %a{:href => 'http://data.cookcountyil.gov/'} County
+      and
+      %a{:href => 'http://data.il.gov'} State
+      have released.
+
+    %h4#code Code
+    %p
+      All the code for this site is open source. It was built with Sinatra, Ruby, Haml, Twiiter Bootstrap, Javascript and Google's Fusion Tables and Maps API. The data is stored in Fusion Tables and was pulled from the
       = succeed "." do
         %a{:href => "http://data.cityofchicago.org/"} City of Chicago Data Portal
     %p Technologies used:
@@ -82,11 +219,3 @@
       All the code for this project is up on
       = succeed "." do
         %a{:href => "https://github.com/open-city/chicago-zoning"} Github
-    %h4#team Team
-    %ul
-      %li
-        %a{:href => "http://derekeder.com"} Derek Eder
-        \- developer and designer
-      %li
-        %a{:href => "https://jpvelez.contently.com/"} Juan-Pablo Velez
-        \- zoning research and descriptions
