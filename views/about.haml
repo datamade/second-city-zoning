@@ -18,9 +18,9 @@
         %li
           %a{:href => "#code"} Code
 
-  .span9
+  .span7
     %h2 About
-
+    %hr
     %h4#what-is-this What is this?
     %p Chicago Zoning is an interactive map lets you:
     %ul
@@ -47,21 +47,18 @@
       for commercial and
       %strong{:style => 'color: #DCDC7F;'} yellow
       for industrial.
-
-    %p
       From there I got a little carried away. Graphics, sounds, music, oh my.
 
     %p
-      I had a lot of fun making this, so dive in and explore!
+      Just like all
+      %a{:href => 'http://opencityapps.org'} Open City
+      apps, it is entirely
+      %a{:href => '#code'} open source
+      and built with
+      = succeed '.' do
+        %a{:href => '#data'} open data
 
-    %p Oh yah, just like all
-    %a{:href => 'http://opencityapps.org'} Open City
-    apps, it is entirely
-    %a{:href => '#code'} open source
-    and built with
-    = succeed '.' do
-      %a{:href => '#data'} open data
-
+    %hr
     %h4#what-is-zoning What is zoning?
 
     %p
@@ -72,6 +69,7 @@
       governing what you can do on a property and how big the
       building can be. Its a way of organizing and clustering functions of a city or town.
 
+    %hr
     %h4#how-does-zoning-work How does zoning work in Chicago?
     %p
       All areas of Chicago are designated a
@@ -101,6 +99,7 @@
 
     %p more on this?
 
+    %hr
     %h4#zoning-types What are the different zoning types?
 
     %p
@@ -149,6 +148,7 @@
       = succeed '.' do
         %a{:href => '/docs/Chicago-Zoning-Ordinance.pdf'} City of Chicago Zoning Ordinance
 
+    %hr
     %h4#dear-maxis Dear Maxis and Electronic Arts: Don't sue us!
 
     %p
@@ -160,6 +160,7 @@
 
     %p [link to buy Sim City game]
 
+    %hr
     %h4#team Team
     %p
       This is an
@@ -177,6 +178,7 @@
         %a{:href => "https://jpvelez.contently.com/"} Juan-Pablo Velez
         \- zoning research and descriptions
 
+    %hr
     %h4#data Data
 
     %p
@@ -192,6 +194,7 @@
       %a{:href => 'http://data.il.gov'} State
       have released.
 
+    %hr
     %h4#code Code
     %p
       All the code for this site is open source. It was built with Sinatra, Ruby, Haml, Twiiter Bootstrap, Javascript and Google's Fusion Tables and Maps API. The data is stored in Fusion Tables and was pulled from the
