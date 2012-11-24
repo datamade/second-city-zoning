@@ -1,7 +1,7 @@
 #welcome-modal.modal.hide.fade.in{"aria-hidden" => "true", "aria-labelledby" => "welcomeModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-header
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-    %h3#myModalLabel Welcome to Chicago Zoning 2012!
+    %h3#myModalLabel Welcome to 2nd City Zoning!
   .modal-body
     %p
       %img.img-polaroid.pull-right{:src => '/images/sim-city-intro.jpg'}
@@ -46,7 +46,7 @@
 .row-fluid
   .span4
     .well
-      %h4
+      %h5
         Find address
         <small>(<a id='findMe' href='#'>find me</a>)</small>
 
@@ -56,7 +56,7 @@
       %button#reset.btn Reset
 
     .well
-      %h4
+      %h5
         Zoning type
         <small>(<a href='/zones'>huh?</a>)</small>
       %ul.inputs-list.unstyled.zones
@@ -158,7 +158,7 @@
   :javascript
     $(window).resize(function () {
       var h = $(window).height(),
-        offsetTop = 85; // Calculate the top offset
+        offsetTop = 115; // Calculate the top offset
 
       $('#mapCanvas').css('height', (h - offsetTop));
     }).resize();
