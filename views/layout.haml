@@ -2,10 +2,11 @@
 %html{:lang => "en"}
   %head
     %title 2nd City Zoning
-    %meta{:charset => "utf-8"}/
-    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
-    %meta{:content => "", :name => "description"}/
-    %meta{:content => "", :name => "author"}/
+    %meta{:charset => "utf-8"}
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
+    %meta{:content => "", :name => "description"}
+    %meta{:content => "", :name => "author"}
+    %link{:href => "/favicon.ico", :rel => "shortcut icon"}
 
     / Styles
     = include_stylesheet "bootstrap.readable.min"
@@ -25,10 +26,12 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          %a.brand{:href => '/'} 2nd City Zoning
-          / An
-          / %a{:href => 'http://opencityapps.org'} Open City
-          / app
+          %a.brand{:href => '/'}
+            %img{:src => '/images/logo.png', :alt => '2nd City Zoning'}
+          %p.navbar-text.pull-left
+            An
+            %a{:href => 'http://opencityapps.org'} Open City
+            app
 
           .container.nav-collapse
             %ul.nav.pull-right

@@ -10,6 +10,8 @@
         %li
           %a{:href => "#how-does-zoning-work"} How does zoning work in Chicago?
         %li
+          %a{:href => "#how-does-zoning-get-changed"} How does zoning get changed?
+        %li
           %a{:href => "#zoning-types"} What are the different zoning types?
         %li
           %a{:href => "#team"} Team
@@ -17,6 +19,8 @@
           %a{:href => "#data"} Data
         %li
           %a{:href => "#code"} Code
+        %li
+          %a{:href => "#contact-us"} Contact us
 
   .span7
     %h2 About
@@ -62,7 +66,7 @@
     %h4#what-is-zoning What is zoning?
 
     %p
-      Zoning is making sure a factory doesn't open next door to a school.
+      Zoning basically makes sure a factory doesn't open next to a school.
     %p
       It consists of
       %a{:href => '/docs/Chicago-Zoning-Ordinance.pdf'} regulations
@@ -78,87 +82,157 @@
       = succeed '.' do
         %strong zoning class
 
-    %p
-      The type is a larger bucket that designates the general purpose of the area, like residential (R) or commercial (C).
-    %p
-      The class determines the density (building height, setback and floor to area ratio) and is indicated by a number (usually between 1 and 5). The larger the number, the more dense the buildings can be.
+    %ul
+      %li
+        The 
+        %strong zoning type
+        is a letter (or letters) that designates the general purpose of the area, like residential (R) or commercial (C).
+      %li
+        The 
+        %strong zoning class 
+        determines the density (building height, setback and 
+        = succeed ')' do
+          %a{:href => 'http://en.wikipedia.org/wiki/Floor_area_ratio'} floor to area ratio 
+        and is indicated by a number (usually between 1 and 5). The larger the number, the more dense the buildings can be.
 
     %p
-      Zoning is controlled by Chicago's City Council. They have a Zoning Board that reviews all proposed zoning changes, which are then passed on to a City Council vote. Unlike most cities, each zoning change, when approved, is put down in the books as a
+      Zoning is controlled by Chicago's 
+      = succeed '.' do
+        %a{:href => 'http://www.cityofchicago.org/city/en/about/council.html'} City Council
+      They have a 
+      %a{:href => 'https://www.cityofchicago.org/city/en/depts/dcd/supp_info/zoning_board_of_appeals.html'} Zoning Board 
+      that reviews all proposed zoning changes, which are then passed on to a City Council vote. Unlike most cities, each zoning change, when approved, is put down in the books as a
       = succeed '.' do
         %strong separate ordinance
+      = succeed '.' do
+        %a{:href => 'http://chicago.legistar.com/LegislationDetail.aspx?ID=1222600&GUID=95D948AE-2AF6-4D85-95CC-AE7AD0F403F6&Options=Advanced&Search='} Here's an example of one
+
+    %hr
+    %h4#how-does-zoning-get-changed How does zoning get changed?
 
     %p
       Zoning changes can be proposed in two ways:
 
-    %ul
+    %ol
       %li
-        As a submitted proposal with no Aldermanic sponsor, requiring financial and personal disclosures, along with submitted architecture drawings.
-      %li
-        As an Aldermanic decree, consisting of a few sentences.
+        %p
+          As a 
+          %a{:href => 'http://www.cityofchicago.org/city/en/depts/dcd/provdrs/admin/svcs/zoning_amendments.html'} Zoning Reclassification Application 
+          with no Aldermanic sponsor, requiring financial and personal disclosures, along with submitted architecture drawings and a non-refundable fee of $1,025. 
+        %p
+          Here's 
+          %a{:href => 'http://chicago.legistar.com/LegislationDetail.aspx?ID=1222600&GUID=95D948AE-2AF6-4D85-95CC-AE7AD0F403F6&Options=Advanced&Search='} an example
+          of one of these applications. 
 
-    %p more on this?
+      %li
+        %p
+          As an ordinance sponsored by an Alderman, consisting of a few sentences. 
+        %p
+          Here's an example of a re-classification at 
+          %a{:href => 'http://chicago.legistar.com/LegislationDetail.aspx?ID=1195282&GUID=817208B6-563D-4A16-A846-EA72C085E02C&Options=Advanced&Search='} 1511-1553 W Division St and 1141 N Ashland Ave
+          sponsored by Alderman Proco Joe Moreno.
 
     %hr
     %h4#zoning-types What are the different zoning types?
 
     %p
-      The 12 different zoning types in Chicago are:
-
-    %dl
-      %dt Business (B) and Commercial (C)
-      %dd
-        The “B” and “C” (Business and Commercial) districts are intended to accommodate retail, service and commercial uses and to ensure that business and commercial-zoned areas are compatible with the character of existing neighborhoods.
-      %dt Manufacturing (M)
-      %dd
-        The “M,” Manufacturing districts are intended to accommodate manufacturing, warehousing, wholesale and industrial uses outside the Central Area.
-      %dt Residential (R)
-      %dd
-        The “R,” residential districts are intended to create, maintain and promote a variety of housing opportunities for individual households and to maintain the desired physical character of the city’s existing neighborhoods. While the districts primarily accommodate residential use types, nonresidential uses that are compatible with residential neighborhoods are also allowed.
-      %dt Planned development (PD)
-      %dd
-        Uses identified with a “PD” may be allowed if reviewed and approved in accordance with the planned development procedures of Sec. 17-13-0600. Other uses and development activities may also require review and approval as a planned development based on their size, height or other threshold criteria. (See the mandatory planned development thresholds of Sec. 17-8- 0500.)
-      %dt Downtown core (DC)
-      %dd
-        The DC, Downtown Core district is primarily intended to promote high-intensity office and employment growth within the downtown core.
-      %dt Downtown mixed use (DX)
-      %dd
-        The DX, Downtown Mixed-Use district is primarily intended to accommodate office, commercial, public, institutional and residential development.
-      %dt Downtown residential (DR)
-      %dd
-        The DR, Downtown Residential district is primarily intended to accommodate residential development and small-scale commercial uses on lower floors, with residential units above.
-      %dt Downtown service (DS)
-      %dd
-        The DS, Downtown Service district is primarily intended to accommodate commercial and service uses that are essential for the livelihood of businesses and residents of the downtown area and surrounding neighborhoods.
-      %dt Planned manufacturing districts (PMD)
-      %dd
-        The "PMD," Planned Manufacturing District are 14 large areas designated as main industrial corriodors of the city.
-      %dt Ttransportation district (T)
-      %dd
-        The “T,” Transportation zoning district is intended to preserve, protect and enhance road, rail and other important transportation corridors and to ensure public review of proposals to convert such corridors to non-transportation use.
-      %dt Parks and Open Space (POS)
-      %dd
-        The “POS,” Parks and Open Space zoning district is intended to preserve, protect and enhance lands set aside for public open space, public parks and public beaches.
-
-    %p
-      = succeed '.' do
-        %a{:href => '/zones'} See the full list of zoning types
-    %p
-      For more details, read the
+      There are 12 different zoning types in Chicago. For more details
+      %a{:href => '/zones'} see the full list of zoning types
+      or read the
       = succeed '.' do
         %a{:href => '/docs/Chicago-Zoning-Ordinance.pdf'} City of Chicago Zoning Ordinance
+    
+    %h5
+      %span.zone-box.zone-B
+      Business (B) and Commercial (C)
+    %p
+      The “B” and “C” (Business and Commercial) districts are intended to accommodate retail, service and commercial uses and to ensure that business and commercial-zoned areas are compatible with the character of existing neighborhoods.
+    %h5
+      %span.zone-box.zone-M
+      Manufacturing (M)
+    %p
+      The “M,” Manufacturing districts are intended to accommodate manufacturing, warehousing, wholesale and industrial uses outside the Central Area.
+    %h5
+      %span.zone-box.zone-R 
+      Residential (R)
+    %p
+      The “R,” residential districts are intended to create, maintain and promote a variety of housing opportunities for individual households and to maintain the desired physical character of the city’s existing neighborhoods. While the districts primarily accommodate residential use types, nonresidential uses that are compatible with residential neighborhoods are also allowed.
+    %h5 
+      %span.zone-box.zone-PD
+      Planned development (PD)
+    %p
+      Uses identified with a “PD” may be allowed if reviewed and approved in accordance with the planned development procedures of Sec. 17-13-0600. Other uses and development activities may also require review and approval as a planned development based on their size, height or other threshold criteria. (See the mandatory planned development thresholds of Sec. 17-8- 0500.)
+    %h5
+      %span.zone-box.zone-DC
+      Downtown core (DC)
+    %p
+      The DC, Downtown Core district is primarily intended to promote high-intensity office and employment growth within the downtown core.
+    %h5 
+      %span.zone-box.zone-DX
+      Downtown mixed use (DX)
+    %p
+      The DX, Downtown Mixed-Use district is primarily intended to accommodate office, commercial, public, institutional and residential development.
+    %h5 
+      %span.zone-box.zone-DR
+      Downtown residential (DR)
+    %p
+      The DR, Downtown Residential district is primarily intended to accommodate residential development and small-scale commercial uses on lower floors, with residential units above.
+    %h5 
+      %span.zone-box.zone-DS
+      Downtown service (DS)
+    %p
+      The DS, Downtown Service district is primarily intended to accommodate commercial and service uses that are essential for the livelihood of businesses and residents of the downtown area and surrounding neighborhoods.
+    %h5 
+      %span.zone-box.zone-PMD
+      Planned manufacturing districts (PMD)
+    %p
+      The "PMD," Planned Manufacturing District are 14 large areas designated as main industrial corriodors of the city.
+    %h5 
+      %span.zone-box.zone-T
+      Ttransportation district (T)
+    %p
+      The “T,” Transportation zoning district is intended to preserve, protect and enhance road, rail and other important transportation corridors and to ensure public review of proposals to convert such corridors to non-transportation use.
+    %h5
+      %span.zone-box.zone-POS
+      Parks and Open Space (POS)
+    %p
+      The “POS,” Parks and Open Space zoning district is intended to preserve, protect and enhance lands set aside for public open space, public parks and public beaches.
 
     %hr
     %h4#dear-maxis Dear Maxis and Electronic Arts: Don't sue us!
 
     %p
-      We are using some music and sound effects from Sim City 2000 on this website. This is not to make a Sim City competitor, but to make the experience of diving in to zoning laws fun!
+      We are using some music and sound effects from 
+      %a{:href => 'http://en.wikipedia.org/wiki/SimCity_2000'} Sim City 2000 
+      on this website. This is not to make a Sim City competitor, but to make the experience of diving in to zoning laws fun!
+
+    %h5 Credits
+    %p 
+      Sim City 2000 was made by 
+      %a{:href => 'http://en.wikipedia.org/wiki/Will_Wright_(game_designer)'} Will Wright 
+      and 
+      %a{:href => 'http://en.wikipedia.org/wiki/Fred_Haslam'} Fred Haslam
+      and many others at 
+      = succeed '.' do
+        %a{:href => 'http://www.maxis.com/'} Maxis
     %p
-      Sim City is a trademark of Maxis and Electronic Arts.
+      Sim City 2000 soundtrack by Brian Conrad, Sue Kasper, Justin McCormick.
+    %p
+      &copy; Maxis/Maxis, Electronic Arts, DSI Games/Zoo Digital (GBA), all rights reserved. 
+    %p
+      Sim City is a trademark of Maxis.
 
-    %p [section on music credits]
+    %h5 Buy it!
+    %p 
+      If you love Sim City as much as we do, go buy it!
 
-    %p [link to buy Sim City game]
+    %ul
+      %li
+        %a{:href => 'https://www.google.com/search?q=sim+city+2000&hl=en&tbo=u&source=univ&tbm=shop'} Sim City 2000
+        on Google Shopping
+      %li
+        %a{:href => 'http://www.gog.com/gamecard/simcity_2000_special_edition'} Sim City 2000
+        on Gog.com
 
     %hr
     %h4#team Team
@@ -175,6 +249,9 @@
         %a{:href => "http://derekeder.com"} Derek Eder
         \- developer and designer
       %li
+        %a{:href => "https://ayaoconnor.com"} Aya O'Connor
+        \- logo and design
+      %li
         %a{:href => "https://jpvelez.contently.com/"} Juan-Pablo Velez
         \- zoning research and descriptions
 
@@ -183,9 +260,11 @@
 
     %p
       This site was built with
-      %a{:href => 'http://data.cityofchicago.org/'} zoning shapefiles
-      from the City of Chicago Data Portal.
-
+      %a{:href => 'https://data.cityofchicago.org/Community-Economic-Development/Boundaries-Zoning-Districts/p8va-airx'} zoning shapefiles
+      from the City of Chicago 
+      = succeed '.' do
+        %a{:href => 'https://data.cityofchicago.org/'} Data Portal
+    %p
       We love that the City of Chicago has opened their data for citizens to use. This site represents just one example of what can be done with it. We hope it inspires others to dive in to zoning (and other) datasets the
       = succeed ',' do
         %a{:href => 'http://data.cityofchicago.org/'} City
@@ -222,3 +301,10 @@
       All the code for this project is up on
       = succeed "." do
         %a{:href => "https://github.com/open-city/chicago-zoning"} Github
+
+    %hr
+    %h4#contact-us Contact us
+
+    %p
+      Found a bug? Have a suggestion? Want to sue us? (please don't!) Contact us at 
+      %a{:href => 'mailto:second-city-zoning@opencityapps.org'} second-city-zoning@opencityapps.org

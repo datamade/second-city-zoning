@@ -1,10 +1,6 @@
 body {
-  margin:0;
   font-family:Chicago,Verdana,sans-serif;
   font-size:14px;
-  line-height:1.4em;
-  color:#282828;
-  background-color:#fafdfa;
 }
 
 input,button,select,textarea {
@@ -16,8 +12,52 @@ label,input,button,select,textarea {
   line-height:1.2em;
 }
 
+h1,h2,h3{line-height:inherit;}
+
 .navbar-inner {
-  min-height:70px;
+  min-height:60px;
+  background-color:#ddd;
+  background-image: -moz-linear-gradient(top, #eee, #ddd);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#eee), to(#ddd));
+  background-image: -webkit-linear-gradient(top, #eee, #ddd);
+  background-image: -o-linear-gradient(top, #eee, #ddd);
+  background-image: linear-gradient(to bottom, #eee, #ddd);
+  background-repeat: repeat-x;
+  border: 1px solid #333333;
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+  filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ffeeeeee', endColorstr='#ffdddddd', GradientType=0);
+  *zoom: 1;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+     -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+}
+
+.navbar .nav>.active>a,
+.navbar .nav>.active>a:hover,
+.navbar .nav>.active>a:focus {
+  color:#9c0001;
+  text-decoration:none;
+  background-color:transparent;
+  -webkit-box-shadow:none;
+  -moz-box-shadow:none;
+  box-shadow:none;
+}
+
+.navbar .navbar-text {
+  margin-bottom:0;
+  line-height:60px;
+}
+
+.navbar .nav li {
+  margin-bottom:0;
+  line-height:53px;
+}
+
+.nav-pills li.active>a,
+.nav-pills li.active>a:hover {
+  background-color:#ddd;
 }
 
 .well {
@@ -43,18 +83,18 @@ label,input,button,select,textarea {
           background-clip: padding-box;
 }
 
-.zone-1 { background-color: #7474D7; }
-.zone-2 { background-color: #7474D7; }
-.zone-3 { background-color: #DCDC7F; }
-.zone-4 { background-color: #7DD67D; }
-.zone-5 { background-color: #d27979; }
-.zone-6 { background-color: #DCDC7F; }
-.zone-7 { background-color: #7474D7; }
-.zone-8 { background-color: #7474D7; }
-.zone-9 { background-color: #7DD67D; }
-.zone-10 { background-color: #7474D7; }
-.zone-11 { background-color: #9C9C9C; }
-.zone-12 { background-color: #869b7c; }
+.zone-B   { background-color: #7474D7; }
+.zone-C   { background-color: #7474D7; }
+.zone-M   { background-color: #DCDC7F; }
+.zone-R   { background-color: #7DD67D; }
+.zone-PD  { background-color: #d27979; }
+.zone-PMD { background-color: #DCDC7F; }
+.zone-DX  { background-color: #7474D7; }
+.zone-DC  { background-color: #7474D7; }
+.zone-DR  { background-color: #7DD67D; }
+.zone-DS  { background-color: #7474D7; }
+.zone-T   { background-color: #9C9C9C; }
+.zone-POS { background-color: #869b7c; }
 
 .zones .checkbox.inline {
   display: inherit;

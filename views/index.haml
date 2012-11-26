@@ -4,7 +4,7 @@
     %h3#myModalLabel Welcome to 2nd City Zoning!
   .modal-body
     %p
-      %img.img-polaroid.pull-right{:src => '/images/sim-city-intro.jpg'}
+      %img.img-polaroid.pull-right{:src => '/images/logo.png'}
     %p
       Howdy! This interactive map lets you:
     %ul
@@ -41,13 +41,13 @@
       I had a lot of fun making this, so dive in and explore!
 
   .modal-footer
-    %button.btn.btn-info{"aria-hidden" => "true", "data-dismiss" => "modal"} Ok, thanks!
+    %button.btn.btn-primary{"aria-hidden" => "true", "data-dismiss" => "modal"} Ok, thanks!
 
 .row-fluid
   .span4
     .well
       %h5
-        Find address
+        Find zone
         <small>(<a id='findMe' href='#'>find me</a>)</small>
 
       %input#txtSearchAddress.input-block-level{:placeholder => "Enter an address or an intersection", :type => "text"}
@@ -99,7 +99,7 @@
       #jquery_jplayer
       / Using the cssSelectorAncestor option with the default cssSelector class names to enable control association of standard functions using built in features
       #jp_container
-        %h4
+        %h5
           Music
           %small
             %a.jp-play{:href => "#"}
@@ -127,17 +127,20 @@
       An
       %a.yay-link{:href => "http://opencityapps.org"} Open City
       app by
-      %a.yay-link{:href => "http://derekeder.com"} Derek Eder
-      /and
-      /%a{:href => "https://jpvelez.contently.com"} Juan-Pablo Velez
+      = succeed ',' do
+        %a.yay-link{:href => "http://derekeder.com"} Derek Eder
+      %a.yay-link{:href => "http://ayaoconnor.com"} Aya O'Connor
+      and
+      %a{:href => "https://jpvelez.contently.com"} Juan-Pablo Velez
 
 %audio#reticulating-splines{:src => 'https://s3.amazonaws.com/chicago-zoning/effects/reticulating+splines.mp3'}
 %audio#explosion{:src => 'https://s3.amazonaws.com/chicago-zoning/effects/explosion.mp3'}
 %audio#mouse-click{:src => 'https://s3.amazonaws.com/chicago-zoning/effects/click.mp3'}
-%audio#simcopter-one{:src => 'https://s3.amazonaws.com/chicago-zoning/effects/simcopter-one.mp3'}
 %audio#yay{:src => 'https://s3.amazonaws.com/chicago-zoning/effects/yay.mp3'}
-%audio#zzt{:src => 'https://s3.amazonaws.com/chicago-zoning/effects/zzt.mp3'}
-%audio#train{:src => 'https://s3.amazonaws.com/chicago-zoning/effects/train.mp3'}
+
+/%audio#simcopter-one{:src => 'https://s3.amazonaws.com/chicago-zoning/effects/simcopter-one.mp3'}
+/%audio#zzt{:src => 'https://s3.amazonaws.com/chicago-zoning/effects/zzt.mp3'}
+/%audio#train{:src => 'https://s3.amazonaws.com/chicago-zoning/effects/train.mp3'}
 
 - content_for :javascripts do
   :javascript
@@ -158,7 +161,7 @@
   :javascript
     $(window).resize(function () {
       var h = $(window).height(),
-        offsetTop = 115; // Calculate the top offset
+        offsetTop = 120; // Calculate the top offset
 
       $('#mapCanvas').css('height', (h - offsetTop));
     }).resize();
@@ -178,7 +181,7 @@
       });
 
       $('#findMe').click(function(){
-        play_multi_sound("zzt");
+        play_multi_sound("reticulating-splines");
         MapsLib.findMe();
         return false;
       });
@@ -209,11 +212,11 @@
         e.preventDefault();
       });
 
-      $('#welcome-modal').modal('show');
-      // if ($.cookie("show-welcome") != "read") {
-      //   $('#welcome-modal').modal('show');
-      //   $.cookie("show-welcome", "read", { expires: 7 });
-      // }
+      //$('#welcome-modal').modal('show');
+      if ($.cookie("show-welcome") != "read") {
+        $('#welcome-modal').modal('show');
+        $.cookie("show-welcome", "read", { expires: 7 });
+      }
 
       //---------music player---------------
       // Local copy of jQuery selectors, for performance.
