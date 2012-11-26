@@ -212,6 +212,18 @@
         e.preventDefault();
       });
 
+      $('.jp-stop').click(function(){
+        $.cookie("play-music", "off", { expires: 7 });
+      });
+
+      $('.jp-pause').click(function(){
+        $.cookie("play-music", "off", { expires: 7 });
+      });
+
+      $('.jp-play').click(function(){
+        $.cookie("play-music", "on", { expires: 7 });
+      });
+
       //$('#welcome-modal').modal('show');
       if ($.cookie("show-welcome") != "read") {
         $('#welcome-modal').modal('show');
@@ -227,6 +239,10 @@
       // Some options
       var opt_play_first = true, // If true, will attempt to auto-play the default track on page loads. No effect on mobile devices, like iOS.
         opt_auto_play = true // If true, when a track is selected, it will auto-play.
+
+      if ($.cookie("play-music") == "off") {
+        opt_play_first = false;
+      }
 
       // A flag to capture the first track
       var first_track = true;
