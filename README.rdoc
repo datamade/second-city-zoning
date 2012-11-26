@@ -1,4 +1,4 @@
-= Chicago Zoning
+= Second City Zoning
 
 What zone is my building in?
 
@@ -23,8 +23,8 @@ What zone is my building in?
 
 == Team
 
-* Derek Eder mailto:derek.eder@opencityapps.org
-* Juan-Pablo Velez mailto:juan.velez@opencityapps.org
+* Derek Eder mailto:derek.eder@gmail.com
+* Juan-Pablo Velez mailto:jpvelez@gmail.com
 
 
 == More detail needed?
@@ -44,4 +44,4 @@ Report it here: https://github.com/open-city/site-template/issues
 * Make your feature addition or bug fix.
 * Commit, do not mess with rakefile, version, or history.
   * (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
-* Send me a pull request. Bonus points for topic branches.
+* Send a pull request. Bonus points for topic branches.
