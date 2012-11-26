@@ -14,8 +14,9 @@
           %th Minimum Lot Area
       %tbody
         - @zones.each do |zone|
+          - zone_css = zone[:new_code].gsub(/[^A-Z]/, '')
           %tr
-            = "<td id='#{zone[:new_code].gsub(/\s+/,'-')}' class='zone-#{zone[:zone_type]}'></td>"
+            = "<td id='#{zone[:new_code].gsub(/\s+/,'-')}' class='zone-#{zone_css}'></td>"
             = "<td>#{zone[:new_code]}</td>"
             = "<td>#{decodeZoneClass(zone[:zone_type])}</td>"
             = "<td>#{zone[:description]}</td>"
