@@ -1,3 +1,5 @@
 development: 
   google_account: xxxxxxx
   google_password: xxxxxxx 
+  zoning_map_id xxxxxxx
+  zoning_code_summary_id: xxxxxxx

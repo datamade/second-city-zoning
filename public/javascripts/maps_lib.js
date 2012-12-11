@@ -15,7 +15,7 @@ var MapsLib = {
   
   //Setup - put your Fusion Table details here
   fusionTableId:      "1HmI6PT0q7rFbEXDfEt2VTbFyZVLZn__58AUe86E",        //the encrypted Table ID of your Fusion Table (found under File => About)
-  zoneDescriptionId:  "1r2vtU4il89uXmlcqAjGs72sjSXN-zuuS2vtnLu0",
+  zoneDescriptionId:  "1PQbB_VtNVlGV2p1W1kLjLTq3h3LEqf1VnlRIfn4",
   googleApiKey:       "AIzaSyAcsnDc7_YZskPj4ep3jT_fkpB3HI_1a98",        //*NEW* API key. found at https://code.google.com/apis/console/
   locationColumn:     "geometry",     //name of the location column in your Fusion Table
   map_centroid:       new google.maps.LatLng(41.8781136, -87.66677856445312), //center that your map defaults to
@@ -151,7 +151,6 @@ var MapsLib = {
         //console.log("returning one geometry");
         newCoordinates = MapsLib.constructNewCoordinates(rows[0][0]['geometry']);
       }
-      var randomnumber = Math.floor(Math.random() * 4);
       var zone = new google.maps.Polygon({
         paths: newCoordinates,
         strokeColor: "#333333",

@@ -31,14 +31,20 @@ module ChicagoZoning
     
     get "/ordinances" do 
       @current_menu = "zones"
-      @ordinances = FT.execute("SELECT ORDINANCE1, ORDINANCE_ FROM 4904329 WHERE ORDINANCE1 NOT EQUAL TO '' AND ORDINANCE_ NOT EQUAL TO '' ORDER BY ORDINANCE1 DESC LIMIT 100;")
+      @ordinances = FT.execute("SELECT ORDINANCE1, ORDINANCE_ FROM #{Zoning_map_id} WHERE ORDINANCE1 NOT EQUAL TO '' AND ORDINANCE_ NOT EQUAL TO '' ORDER BY ORDINANCE1 DESC LIMIT 100;")
       haml :ordinances
     end
     
     get "/zones" do 
       @current_menu = "zones"
-      @zones = FT.execute("SELECT * FROM 4895941;")
+      @zones = FT.execute("SELECT * FROM #{Zoning_code_summary_id};")
       haml :zones
+    end
+
+    get "/zone/:zone_id" do
+      @current_menu = "zones"
+      @zone = FT.execute("SELECT * FROM #{Zoning_code_summary_id} WHERE 'District type code' = '#{params[:zone_id]}';").first
+      haml :zone_detail
     end
     
     get "/:page" do
