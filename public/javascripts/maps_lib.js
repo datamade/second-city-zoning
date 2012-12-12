@@ -180,7 +180,7 @@ var MapsLib = {
      
     var content = "<div class='googft-info-window' style='font-family: sans-serif'>";
     content += "<span class='lead'>" + ZoningDict[zone_type - 1] + "</span>"
-    content += "<p>Zoned <a href='zones#" + MapsLib.createZoneSlug(zone_class) + "'>" + zone_class + "</a>"
+    content += "<p>Zoned <a href='/zone/" + zone_class + "'>" + zone_class + "</a>"
     //content += '<br /><br /><!-- description -->';
     if (ordinance != "" && ordinance != undefined) 
       content += "<br /><br />Ordinance: " + ordinance
