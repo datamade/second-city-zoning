@@ -3,6 +3,7 @@ GEM
   specs:
     addressable (2.2.6)
     backports (2.3.0)
+    dalli (2.6.0)
     eventmachine (0.12.10)
     fusion_tables (0.3.1)
       gdata_19 (>= 1.1.2)
@@ -19,6 +20,8 @@ GEM
     mime-types (1.17.2)
     r18n-core (0.4.13)
     rack (1.4.0)
+    rack-cache (1.2)
+      rack (>= 0.4)
     rack-protection (1.2.0)
       rack
     rack-test (0.6.1)
@@ -55,9 +58,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  dalli
   fusion_tables
   haml
   heroku
+  rack-cache
   sinatra
   sinatra-initializers
   sinatra-r18n

@@ -37,6 +37,7 @@ module ChicagoZoning
     end
     
     get "/zones" do 
+      cache_control :public, max_age: 1800  # 30 mins.
       @current_menu = "zones"
       @zones = FT.execute("SELECT * FROM #{Zoning_code_summary_id};")
       haml :zones
