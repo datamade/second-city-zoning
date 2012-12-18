@@ -1,32 +1,105 @@
 .row-fluid
   .span12
-    %h2 Zone definitions
-    %table.table.table-bordered
-      %thead
-        %tr
-          %th
-          %th Zone
-          %th Description
-          %th Floor area ratio
-          %th Maximum height
-          %th Density
-      %tbody
-        - @zones.each do |zone|
-          - zone_css = zone[:district_type_code].gsub(/[^A-Z]/, '')
-          %tr
-            = "<td id='#{zone[:district_type_code].gsub(/\s+/,'-')}' class='zone-#{zone_css}'></td>"
-            %td
-              %a{:href => "/zone/#{zone[:district_type_code]}"}
-                %h4
-                  = zone[:district_type_code]
-                  %small
-                    %br
-                    = zone[:disctrict_title]
-            %td
-              = zone[:juan_description]
-            %td
-              = zone[:floor_area_ratio]
-            %td
-              = zone[:maximum_building_height]
-            %td
-              = zone[:lot_area_per_unit]
+    %h1 Zone definitions
+
+    %p
+      There are nine different zoning classes in Chicago. They are:
+
+
+    .well.span6
+      %ul.zone-legend.unstyled
+        %li
+          %img{:src => '/images/icons/commercial.png', :alt=> 'Commercial'} 
+          %a{:href => '#B'} B - Business
+        %li
+          %img{:src => '/images/icons/commercial.png', :alt=> 'Commercial'} 
+          %a{:href => '#C'} C - Commercial
+        %li
+          %img{:src => '/images/icons/commercial-residential.png', :alt=> 'Commercial'} 
+          %a{:href => '#D'} D - Downtown
+        %li
+          %img{:src => '/images/icons/industrial.png', :alt=> 'Manufacturing'} 
+          %a{:href => '#M'} M - Manufacturing
+        %li
+          %img{:src => '/images/icons/government.png', :alt=> 'Planned Development'} 
+          %a{:href => '#PD'} PD - Planned Development
+        %li
+          %img{:src => '/images/icons/industrial.png', :alt=> 'Manufacturing'} 
+          %a{:href => '#PMD'} PMD - Planned Manufacturing Districts
+        %li
+          %img{:src => '/images/icons/parks-entertainment.png', :alt=> 'Parks and Open Space'} 
+          %a{:href => '#POS'} POS - Parks and Open Space
+        %li
+          %img{:src => '/images/icons/residential.png', :alt=> 'Residential'} 
+          %a{:href => '#R'} R - Residential
+        %li
+          %img{:src => '/images/icons/trains.png', :alt=> 'Transportation'} 
+          %a{:href => '#T'} T - Transportation
+
+    .clearfix
+
+    %h2#B
+      %img{:src => '/images/icons/commercial.png', :alt=> 'Commercial'} 
+      B - Business
+    %p Business districts are intended to accommodate retail, service and commercial uses.
+
+    = haml(:'_district_table', :collection => (@zone_type = 'B1'))
+    = haml(:'_district_table', :collection => (@zone_type = 'B2'))
+    = haml(:'_district_table', :collection => (@zone_type = 'B3'))
+
+    %h2#C
+      %img{:src => '/images/icons/commercial.png', :alt=> 'Commercial'} 
+      C - Commercial
+
+    = haml(:'_district_table', :collection => (@zone_type = 'C1'))
+    = haml(:'_district_table', :collection => (@zone_type = 'C2'))
+    = haml(:'_district_table', :collection => (@zone_type = 'C3'))
+
+    %h2#D
+      %img{:src => '/images/icons/commercial-residential.png', :alt=> 'Commercial / Residential'}
+      D - Downtown
+
+    = haml(:'_district_table', :collection => (@zone_type = 'DC'))
+    = haml(:'_district_table', :collection => (@zone_type = 'DR'))
+    = haml(:'_district_table', :collection => (@zone_type = 'DS'))
+    = haml(:'_district_table', :collection => (@zone_type = 'DX'))
+
+    %h2#M
+      %img{:src => '/images/icons/industrial.png', :alt=> 'Industrial'} 
+      M - Manufacturing
+
+    = haml(:'_district_table', :collection => (@zone_type = 'M1'))
+    = haml(:'_district_table', :collection => (@zone_type = 'M2'))
+    = haml(:'_district_table', :collection => (@zone_type = 'M3'))
+
+    %h2#PD
+      %img{:src => '/images/icons/government.png', :alt=> 'Planned Development'} 
+      PD - Planned Development
+
+    = haml(:'_district_table', :collection => (@zone_type = 'PD'))
+
+    %h2#PMD
+      %img{:src => '/images/icons/industrial.png', :alt=> 'Planned Manufacturing District'} 
+      PMD - Planned Manufacturing Districts
+
+    = haml(:'_district_table', :collection => (@zone_type = 'PMD'))
+
+    %h2#POS
+      %img{:src => '/images/icons/parks-entertainment.png', :alt=> 'Parks and Open Space'} 
+      POS - Parks and Open Space
+
+    = haml(:'_district_table', :collection => (@zone_type = 'POS'))
+
+    %h2#R
+      %img{:src => '/images/icons/residential.png', :alt=> 'Residential'} 
+      R - Residential
+
+    = haml(:'_district_table', :collection => (@zone_type = 'RS'))
+    = haml(:'_district_table', :collection => (@zone_type = 'RT'))
+    = haml(:'_district_table', :collection => (@zone_type = 'RM'))
+
+    %h2#T
+      %img{:src => '/images/icons/trains.png', :alt=> 'Transportation'} 
+      T - Transportation
+
+    = haml(:'_district_table', :collection => (@zone_type = 'T'))

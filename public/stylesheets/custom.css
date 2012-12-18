@@ -103,6 +103,24 @@ h1,h2,h3{line-height:inherit;}
 .zone-T   { background-color: #9C9C9C; }
 .zone-POS { background-color: #869b7c; }
 
+.zone-B-text{ color: #7474D7; }
+.zone-C-text{ color: #7474D7; }
+.zone-M-text{ color: #DCDC7F; }
+.zone-R-text{ color: #7DD67D; }
+.zone-RS-text{ color: #7DD67D; }
+.zone-RT-text{ color: #7DD67D; }
+.zone-RM-text{ color: #7DD67D; }
+.zone-PD-text{ color: #d27979; }
+.zone-PMD-text{ color: #DCDC7F; }
+.zone-DX-text{ color: #7474D7; }
+.zone-DC-text{ color: #7474D7; }
+.zone-DR-text{ color: #7DD67D; }
+.zone-DS-text{ color: #7474D7; }
+.zone-T-text{ color: #9C9C9C; }
+.zone-POS-text{ color: #869b7c; }
+
+.zone-legend li {font-weight: bold;}
+
 .zones .checkbox.inline {
   display: inherit;
 }

@@ -1,0 +1,34 @@
+- @districts = get_zone_districts @zone_type
+
+%h5 
+  = @zone_type
+  \-
+  = @districts.first[:district_title]
+%p= @districts.first[:juan_description]
+%table.table.table-bordered
+  %thead
+    %tr
+      %th
+      %th Name
+      %th Floor area ratio
+      %th Maximum height
+      %th Lot area/unit
+      %th Max height
+      %th Front yard setback
+      %th Side yard setback
+      %th Back yard setback
+  %tbody
+    - @districts.each do |zone|
+      - zone_css = zone[:district_type_code].gsub(/[^A-Z]/, '')
+      %tr
+        = "<td id='#{zone[:district_type_code].gsub(/\s+/,'-')}' class='zone-#{zone_css}'></td>"
+        %td
+          %a{:href => "/zone/#{zone[:district_type_code]}"}
+            = zone[:district_type_code]
+        %td= zone[:floor_area_ratio]
+        %td= zone[:maximum_building_height]
+        %td= zone[:lot_area_per_unit]
+        %td= zone[:maximum_building_height]
+        %td= zone[:front_yard_setback]
+        %td= zone[:side_setback]
+        %td= zone[:rear_yard_setback]

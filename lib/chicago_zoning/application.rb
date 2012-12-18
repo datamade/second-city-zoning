@@ -23,6 +23,7 @@ module ChicagoZoning
     use Rack::Session::Cookie
 
     helpers SiteTemplate::HtmlHelpers
+    helpers SiteTemplate::FtHelpers
     
     get "/" do
       @current_menu = "home"
