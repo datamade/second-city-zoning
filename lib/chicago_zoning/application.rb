@@ -26,24 +26,27 @@ module ChicagoZoning
     helpers SiteTemplate::FtHelpers
     
     get "/" do
+      cache_control :public, max_age: 604800  # 1 week
       @current_menu = "home"
       haml :index
     end
     
     get "/ordinances" do 
+      cache_control :public, max_age: 604800  # 1 week
       @current_menu = "zones"
       @ordinances = FT.execute("SELECT ORDINANCE1, ORDINANCE_ FROM #{Zoning_map_id} WHERE ORDINANCE1 NOT EQUAL TO '' AND ORDINANCE_ NOT EQUAL TO '' ORDER BY ORDINANCE1 DESC LIMIT 100;")
       haml :ordinances
     end
     
     get "/zones" do 
-      cache_control :public, max_age: 1800  # 30 mins.
+      cache_control :public, max_age: 604800  # 1 week
       @current_menu = "zones"
       @zones = FT.execute("SELECT * FROM #{Zoning_code_summary_id};")
       haml :zones
     end
 
     get "/zone/:zone_id" do
+      cache_control :public, max_age: 604800  # 1 week
       @current_menu = "zones"
       @zone = FT.execute("SELECT * FROM #{Zoning_code_summary_id} WHERE 'District type code' = '#{params[:zone_id]}';").first
       haml :zone_detail
