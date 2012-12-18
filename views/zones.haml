@@ -1,3 +1,12 @@
+
+- content_for :javascripts do
+  = include_javascript :"bootstrap-popover"
+
+  :javascript
+    $(function() {
+      $('th').popover();
+    });
+
 .row-fluid
   .span12
     %h1 Zoning districts
