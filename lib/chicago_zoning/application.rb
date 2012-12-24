@@ -53,6 +53,7 @@ module ChicagoZoning
     end
     
     get "/:page" do
+      cache_control :public, max_age: 604800  # 1 week
       @current_menu = params[:page]
       haml params[:page].to_sym
     end
