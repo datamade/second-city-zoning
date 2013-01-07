@@ -228,7 +228,7 @@ var MapsLib = {
       select: "ZONE_CLASS, 'District Title', ZONE_TYPE",
       from: MapsLib.fusionTableId,
       geometryColumn: MapsLib.locationColumn,
-      googleApiKey: "AIzaSyC1-tKubZIJd3JumqGIzm4kYxSw9n8DIFc",
+      googleApiKey: MapsLib.googleApiKey,
       delay: 100
     });
   },
