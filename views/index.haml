@@ -144,15 +144,16 @@
 
 - content_for :javascripts do
   :javascript
-    var ZoningDict = ["Business", "Commercial / Mixed-Use", "Manufacturing", "Residential", "Planned Development",
-                  "Planned Manufacturing District", "Downtown Mixed-Use", "Downtown Core", "Downtown Residential", "Downtown Service",
-                  "Transportation","Parks and Open Space"];
+    var ZoningDict = ["Business", "Commercial / Mixed-Use", "Manufacturing", "Residential", 
+                      "Planned Development", "Planned Manufacturing District", "Downtown Mixed-Use",
+                      "Downtown Core", "Downtown Residential", "Downtown Service", 
+                      "Transportation","Parks and Open Space"];
 
   = include_javascript :"jquery.address.min"
   = include_javascript :"http://maps.google.com/maps/api/js?sensor=false"
   = include_javascript :"http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"
-  = include_javascript :fusiontips
-  = include_javascript :maps_lib
+  %script{:src => "/javascripts/fusiontips.js?2", :type => "text/javascript"}
+  %script{:src => "/javascripts/maps_lib.js?2", :type => "text/javascript"}
   = include_javascript :"bootstrap-popover"
   = include_javascript :"bootstrap-modal"
   = include_javascript :"jquery.cookie"

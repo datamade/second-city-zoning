@@ -230,7 +230,8 @@
       // Note that a simplified geometry and the NAME column are being requested
       //http://www.google.com/fusiontables/api/query?sql=
       var sid = 'query_' + scriptid++;
-      script.setAttribute('src', 'http://fusiontables.googleusercontent.com/fusiontables/api/query?sql=' + queryText + '&jsonCallback=fusiontips.' + sid);
+      script.setAttribute('src', 'https://www.googleapis.com/fusiontables/v1/query?sql=' + queryText + '&callback=fusiontips.' + sid + '&key=' + opts.googleApiKey + "&typed=false");
+      //script.setAttribute('src', 'http://fusiontables.googleusercontent.com/fusiontables/api/query?sql=' + queryText + '&jsonCallback=fusiontips.' + sid);
       window.fusiontips[sid] = function(json) {
         delete window.fusiontips[sid];
         queryPending = false;
@@ -241,24 +242,25 @@
     
     function processFusionJson(json, latlng) {
       //{table:{cols:[col1,col2], rows:[[val11,val12],[val21,val22]]}};
-      var data = json.table;
+      var data = json;
       html = "";
       var row = null;
       if (data) {
         var numRows = data.rows.length;
-        var numCols = data.cols.length;
+        var numCols = data.columns.length;
         if (numRows > 0) {
           row = {};
           
-          html += ZoningDict[data.rows[0][0] - 1] + "<br/>";
-          html += "Zoned: " + data.rows[0][1];
+          html += data.rows[0][0] + "<br/>";
+          html += data.rows[0][1] + "<br/>";
+          html += ZoningDict[data.rows[0][2] - 1] + "<br/>";
 
           for (i = 0; i < numCols; i++) {
             var cell = {
-              columnName: data.cols[i],
+              columnName: data.columns[i],
               value: data.rows[0][i]
             };
-            row[data.cols[i]] = cell;
+            row[data.columns[i]] = cell;
           }
         }
         

@@ -5,9 +5,11 @@
     %h2 
       = @zone[:district_type_code]
       %small
-        = decodeZoneClass(@zone[:zone_type])
-        \- 
-        = @zone[:disctrict_title]
+        = @zone[:district_title]
+
+    %p
+      Zoning class: 
+      = decodeZoneClass(@zone[:zone_type])
 
     %p
       = @zone[:juan_description]

@@ -14,8 +14,7 @@ var MapsLib = MapsLib || {};
 var MapsLib = {
   
   //Setup - put your Fusion Table details here
-  fusionTableId:      "1HmI6PT0q7rFbEXDfEt2VTbFyZVLZn__58AUe86E",        //the encrypted Table ID of your Fusion Table (found under File => About)
-  zoneDescriptionId:  "1PQbB_VtNVlGV2p1W1kLjLTq3h3LEqf1VnlRIfn4",
+  fusionTableId:      "1SgNVAujZ7rg-AmNOpNF-JacoP73x8V5HtG6lz0M",        //the encrypted Table ID of your Fusion Table (found under File => About)
   googleApiKey:       "AIzaSyC1-tKubZIJd3JumqGIzm4kYxSw9n8DIFc",        //*NEW* API key. found at https://code.google.com/apis/console/
   locationColumn:     "geometry",     //name of the location column in your Fusion Table
   map_centroid:       new google.maps.LatLng(41.8781136, -87.66677856445312), //center that your map defaults to
@@ -115,6 +114,8 @@ var MapsLib = {
         select: MapsLib.locationColumn,
         where:  whereClause
       },
+      styleId: 2,
+      templateId: 2,
       suppressInfoWindows: true
     });
 
@@ -130,7 +131,7 @@ var MapsLib = {
     google.maps.event.addListener(MapsLib.searchrecords, 'click', 
       function(e) { 
         if (MapsLib.infoWindow) MapsLib.infoWindow.close();
-        MapsLib.openFtInfoWindow(e.latLng, e.row['ZONE_TYPE'].value, e.row['ZONE_CLASS'].value, e.row['ORDINANCE_'].value, e.row['ORDINANCE1'].value);
+        MapsLib.openFtInfoWindow(e.latLng, e.row['ZONE_TYPE'].value, e.row['District Title'].value, e.row['Juan Description'].value, e.row['ZONE_CLASS'].value, e.row['ORDINANCE_'].value, e.row['ORDINANCE1'].value);
       }
     ); 
   },
@@ -174,14 +175,27 @@ var MapsLib = {
     return newCoordinates;
   },
 
-  openFtInfoWindow: function(position, zone_type, zone_class, ordinance, ordinance_date) {
+  openFtInfoWindow: function(position, zone_type, district_title, description, zone_class, ordinance, ordinance_date) {
     // Set up and create the infowindow
     if (!MapsLib.infoWindow) MapsLib.infoWindow = new google.maps.InfoWindow({});
+
+    zone_class_link = zone_class;
+
+    // PD and PMD have different numbers for each district. Fix for displaying generic title and link.
+    if (zone_class.substring(0, 'PMD'.length) === 'PMD') {
+      zone_class_link = 'PMD';
+      district_title = 'Planned Manufacturing District';
+    }
+
+    if (zone_class.substring(0, 'PD'.length) === 'PD') {
+      zone_class_link = 'PD';
+      district_title = 'Planned Development';
+    }
      
     var content = "<div class='googft-info-window' style='font-family: sans-serif'>";
-    content += "<span class='lead'>" + ZoningDict[zone_type - 1] + "</span>"
-    content += "<p>Zoned <a href='/zone/" + zone_class + "'>" + zone_class + "</a>"
-    //content += '<br /><br /><!-- description -->';
+    content += "<h4><a href='/zone/" + zone_class_link + "'>" + zone_class + " - " + district_title + "</a></h4>";
+    content += "<p><strong>" + ZoningDict[zone_type - 1] + "</strong>";
+    content += "<br />" + description;
     if (ordinance != "" && ordinance != undefined) 
       content += "<br /><br />Ordinance: " + ordinance
     if (ordinance_date != "" && ordinance_date != undefined) 
@@ -200,30 +214,21 @@ var MapsLib = {
   },
   
   getInfoWindowContent: function(whereClause) {
-    var selectColumns = "ZONE_TYPE, ZONE_CLASS, ORDINANCE_, ORDINANCE1";
+    var selectColumns = "ZONE_TYPE, 'District Title', 'Juan Description', ZONE_CLASS, ORDINANCE_, ORDINANCE1";
     MapsLib.query(selectColumns, whereClause, MapsLib.fusionTableId, "MapsLib.setInfoWindowContent");
   },
   
   setInfoWindowContent: function(json) { 
     var data = json["rows"];
-    MapsLib.openFtInfoWindow(MapsLib.currentPinpoint, data[0][0], data[0][1], data[0][2], data[0][3])
-  },
-  
-  getInfoWindowDescription: function(zone_class) {
-    var selectColumns = "'New Code', Description";
-    MapsLib.query(selectColumns, "'New Code' = '" + MapsLib.createZoneSlug(zone_class) + "'", MapsLib.zoneDescriptionId, "MapsLib.setInfoWindowDescription");
-  },
-  
-  setInfoWindowDescription: function(json) { 
-    var data = json["rows"];
-    MapsLib.infoWindow.setContent(MapsLib.infoWindow.getContent().replace("<br /><!-- description -->", data[0][1]));
+    MapsLib.openFtInfoWindow(MapsLib.currentPinpoint, data[0][0], data[0][1], data[0][2], data[0][3], data[0][4], data[0][5])
   },
 
   enableMapTips: function () {
     MapsLib.searchrecords.enableMapTips({
-      select: 'ZONE_TYPE, ZONE_CLASS',
+      select: "ZONE_CLASS, 'District Title', ZONE_TYPE",
       from: MapsLib.fusionTableId,
       geometryColumn: MapsLib.locationColumn,
+      googleApiKey: "AIzaSyC1-tKubZIJd3JumqGIzm4kYxSw9n8DIFc",
       delay: 100
     });
   },
@@ -298,6 +303,12 @@ var MapsLib = {
     if (text == undefined) return '';
   	return decodeURIComponent(text);
   }
+}
+
+if (typeof String.prototype.startsWith != 'function') {
+ String.prototype.startsWith = function (str){
+   return this.slice(0, str.length) == str;
+ };
 }
 
 // Hack for fusion tables tiles not loading
