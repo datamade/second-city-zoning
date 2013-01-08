@@ -27,6 +27,7 @@ var MapsLib = {
   addrMarkerImage: 'http://derekeder.com/images/icons/blue-pushpin.png',
   infoWindow: null,
   currentPinpoint: null,
+  currentZone: null,
   
   initialize: function() {
     $( "#resultCount" ).html("");
@@ -152,7 +153,7 @@ var MapsLib = {
         //console.log("returning one geometry");
         newCoordinates = MapsLib.constructNewCoordinates(rows[0][0]['geometry']);
       }
-      var zone = new google.maps.Polygon({
+      MapsLib.currentZone = new google.maps.Polygon({
         paths: newCoordinates,
         strokeColor: "#333333",
         strokeOpacity: 1,
@@ -160,7 +161,10 @@ var MapsLib = {
         fillOpacity: 0
       });
 
-      zone.setMap(map);
+      map.fitBounds(MapsLib.map_bounds);
+      if (map.getZoom() > 16)
+        map.setZoom(16);
+      MapsLib.currentZone.setMap(map);
     }
   },
 
@@ -169,6 +173,7 @@ var MapsLib = {
     var newCoordinates = [];
     var coordinates = polygon['coordinates'][0];
     for (var i in coordinates) {
+      MapsLib.map_bounds.extend(new google.maps.LatLng(coordinates[i][1], coordinates[i][0]));
       newCoordinates.push(
           new google.maps.LatLng(coordinates[i][1], coordinates[i][0]));
     }
@@ -240,6 +245,10 @@ var MapsLib = {
       MapsLib.addrMarker.setMap(null);  
     if (MapsLib.searchRadiusCircle != null)
       MapsLib.searchRadiusCircle.setMap(null);
+    if (MapsLib.currentZone != null)
+      MapsLib.currentZone.setMap(null);
+
+    MapsLib.map_bounds = new google.maps.LatLngBounds();
   },
   
   findMe: function() {
@@ -303,12 +312,6 @@ var MapsLib = {
     if (text == undefined) return '';
   	return decodeURIComponent(text);
   }
-}
-
-if (typeof String.prototype.startsWith != 'function') {
- String.prototype.startsWith = function (str){
-   return this.slice(0, str.length) == str;
- };
 }
 
 // Hack for fusion tables tiles not loading
