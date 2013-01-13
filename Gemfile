@@ -6,7 +6,7 @@ gem "sinatra-initializers"
 gem "sinatra-reloader"
 gem "sinatra-r18n"
 gem "haml"
-gem "fusion_tables"
+gem "fusion_tables", :git  => 'git://github.com/derekeder/fusion_tables.git'
 
 # cache
 gem "dalli"
