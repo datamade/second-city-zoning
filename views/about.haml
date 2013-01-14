@@ -12,7 +12,7 @@
         %li
           %a{:href => "#how-does-zoning-get-changed"} How does zoning get changed?
         %li
-          %a{:href => "#zoning-types"} What are the different zoning types?
+          %a{:href => "#zoning-categories"} What are the different zoning categories?
         %li
           %a{:href => "#team"} Team and credits
         %li
@@ -33,15 +33,15 @@
         %strong how your building is zoned
       %li
         learn
-        %strong what kinds of buildings
-        and businesses you can build and where
+        %strong where to locate your business
       %li
         explore
         %strong zoning patterns
         throughout the city
 
     %p
-      I took inspiration from one of my favorite games:
+      To make Chicago's zoning code digestible by humans,
+      we took inspiration from one of our favorite games:
       = succeed '.' do
         = link_to "Sim City 2000", "http://en.wikipedia.org/wiki/SimCity_2000"
       It started with the color scheme:
@@ -50,13 +50,15 @@
       %strong{:style => 'color: #7474D7;'} blue
       for commercial and
       %strong{:style => 'color: #DCDC7F;'} yellow
-      for industrial.
-      From there I got a little carried away. Graphics, sounds, music, oh my.
+      for industrial. (This oversimplifies things a bit, 
+      %a{ :href => 'http://secondcityzoning.org/about#zoning-categories' } click here
+      for the full story.)
+      From there we got a little carried away. Graphics, sounds, music, oh my.
 
     %p
-      Just like all
+      Like all
       %a{:href => 'http://opencityapps.org'} Open City
-      apps, it is entirely
+      apps, Second City Zoning is entirely
       %a{:href => '#code'} open source
       and built with
       = succeed '.' do
@@ -70,31 +72,15 @@
     %p
       It consists of
       %a{:href => '/docs/Chicago-Zoning-Ordinance.pdf'} regulations
-      governing what you can do on a property and how big the
-      building can be. Its a way of organizing and clustering functions of a city or town.
-
-    %hr
-    %h4#how-does-zoning-work How does zoning work in Chicago?
-    %p
-      All areas of Chicago are designated a
-      %strong zoning type
-      and a
-      = succeed '.' do
-        %strong zoning class
-
-    %ul
-      %li
-        The 
-        %strong zoning type
-        is a letter (or letters) that designates the general purpose of the area, like residential (R) or commercial (C).
-      %li
-        The 
-        %strong zoning class 
-        determines the density (building height, setback and 
-        = succeed ')' do
-          %a{:href => 'http://en.wikipedia.org/wiki/Floor_area_ratio'} floor to area ratio 
-        and is indicated by a number (usually between 1 and 5). The larger the number, the more dense the buildings can be.
-
+      that control how big of a building you can build on a property, 
+      what you can do inside it. You can't just build anything anywhere -
+      every property in Chicago lives in a zoning district of one kind or another. 
+    %p 
+      These districts shape the physical character and economic 
+      makeup of our neighborhoods. They're the DNA of our city's build environment:
+      some districts allow high rises to sprout around downtown, others encourage
+      walkable, mixed-use commercial corridors on arterial streets, and 
+      still others insulate the city's lingering industrial corridors. 
     %p
       Zoning is controlled by Chicago's 
       = succeed '.' do
@@ -106,6 +92,48 @@
         %strong separate ordinance
       = succeed '.' do
         %a{:href => 'http://chicago.legistar.com/LegislationDetail.aspx?ID=1222600&GUID=95D948AE-2AF6-4D85-95CC-AE7AD0F403F6&Options=Advanced&Search='} Here's an example of one
+
+
+    %hr
+    %h4#how-does-zoning-work How do zoning districts work?
+    %p
+      All properties in Chicago fall within a zoning district. These districts are grouped 
+      into 
+      %a{ :href => '' } broad categories 
+      like Residential and Manufacturing.
+    %p
+      Every zoning district has a designation (in 'land use-density' format,) a name, and a description. Let's look at an example:
+    %h5
+      B1-1: Neighborhood Shopping District
+    %p
+      %strong Description:
+      Retail storefronts on low-traffic streets. Apartments allowed above the ground floor.
+
+    %p
+      Remember, zoning is about land use - what you can do with a property - and density
+      - how big the building can be. 
+    %p
+      The "B1" piece of this district's designation captures the 
+      %strong land use 
+      part. The zoning ordinance
+      lists in excrutiating detail every business that is and isn't allow in a B1 district. Its official official name is a "Neighborhood Shopping District," and we distilled the description of what goes on there from the zoning ordinance. (No need to thank us.)
+    %p
+      By the way, the B1 designation starts with the letter "B" because it falls under the 
+      %a{ :href = > 'http://secondcityzoning.org/zones#B' } Business category 
+      of zoning districts, which also contains Neighborhood Mixed-Use (B2) and Community Shopping (B3) districts.
+    %p
+      The "-1" bit of the designation captures the 
+      %strong density 
+      part. In zoning, there are a bunch
+      of rules ("density and bulk requirements," in zoning-speak) that restrict how big a building you can build on a property -
+      titillating things like maximum height requirements, floor-area ratios, and others. (They're all explained 
+      %a{ :href => 'http://secondcityzoning.org/definitions' }here
+      .)
+    %p 
+      The larger the number after the hyphen, the denser the buildings can be. 
+      In all, there are five flavors of B1 district, B1-1 through B1-5. They all allow exactly
+      the same land uses, but you can building denser buildings in B1-3 and B1-5 districts 
+      than in B1-1. This "land use-density" designation pattern applies to all districts.
 
     %hr
     %h4#how-does-zoning-get-changed How does zoning get changed?
@@ -132,72 +160,70 @@
           %a{:href => 'http://chicago.legistar.com/LegislationDetail.aspx?ID=1195282&GUID=817208B6-563D-4A16-A846-EA72C085E02C&Options=Advanced&Search='} 1511-1553 W Division St and 1141 N Ashland Ave
           sponsored by Alderman Proco Joe Moreno.
 
+    %p
+      In Chicago, aldermen have long controlled most zoning decisions, giving them significant 
+      sway over the shape and evolution of neighborhoods.
+
+
     %hr
-    %h4#zoning-types What are the different zoning types?
+    %h4#zoning-categories What are the different zoning categories?
 
     %p
-      There are 12 different zoning types in Chicago. For more details
-      %a{:href => '/zones'} see the full list of zoning types
+      In Chicago, all districts fall within one of twelve broad zoning categories, explained
+      below. To learn more about a particular district, visit the 
+      %a{:href => '/zones'} zoning districts page
       or read the
       = succeed '.' do
         %a{:href => '/docs/Chicago-Zoning-Ordinance.pdf'} City of Chicago Zoning Ordinance
-    
-    %h5
-      %span.zone-box.zone-B
-      Business (B) and Commercial (C)
-    %p
-      The “B” and “C” (Business and Commercial) districts are intended to accommodate retail, service and commercial uses and to ensure that business and commercial-zoned areas are compatible with the character of existing neighborhoods.
-    %h5
-      %span.zone-box.zone-M
-      Manufacturing (M)
-    %p
-      The “M,” Manufacturing districts are intended to accommodate manufacturing, warehousing, wholesale and industrial uses outside the Central Area.
     %h5
       %span.zone-box.zone-R 
       Residential (R)
     %p
-      The “R,” residential districts are intended to create, maintain and promote a variety of housing opportunities for individual households and to maintain the desired physical character of the city’s existing neighborhoods. While the districts primarily accommodate residential use types, nonresidential uses that are compatible with residential neighborhoods are also allowed.
-    %h5 
-      %span.zone-box.zone-PD
-      Planned development (PD)
+      Houses and apartment buildings only on these parcels! No stores, offices, or factories allowed. Schools, churches, police stations and the like are cool, though.
+    %h5
+      %span.zone-box.zone-B
+      Business (B)
     %p
-      Uses identified with a “PD” may be allowed if reviewed and approved in accordance with the planned development procedures of Sec. 17-13-0600. Other uses and development activities may also require review and approval as a planned development based on their size, height or other threshold criteria. (See the mandatory planned development thresholds of Sec. 17-8- 0500.)
+      From bodegas to big boxes, these districts are for stores and offices. B districts promote walkable storefronts and shopping centers. To promote mix-use neighborhoods, above-ground floor apartments are usually cool.
+    %h5
+      %span.zone-box.zone-B
+      Commercial (C)
+    %p
+      C districts are also geared towards commerce, but allow a wider variety of businesses than B districts, especially car-oriented stuff like strip malls and drive-through banks. Above-ground floor apartments are usually still okay.
     %h5
       %span.zone-box.zone-DC
-      Downtown core (DC)
+      Downtown (D)
     %p
-      The DC, Downtown Core district is primarily intended to promote high-intensity office and employment growth within the downtown core.
-    %h5 
-      %span.zone-box.zone-DX
-      Downtown mixed use (DX)
+      Downtown zoning districts can only be found in the Loop and its environs. They're what makes it legal to build high-rise offices and apartments downtown. Weirdly, the Downtown Service (DS) districts in this category also cover the South Loop warehouse area between the Dan Ryan and the Chicago River.  
+    %h5
+      %span.zone-box.zone-M
+      Manufacturing (M)
     %p
-      The DX, Downtown Mixed-Use district is primarily intended to accommodate office, commercial, public, institutional and residential development.
-    %h5 
-      %span.zone-box.zone-DR
-      Downtown residential (DR)
-    %p
-      The DR, Downtown Residential district is primarily intended to accommodate residential development and small-scale commercial uses on lower floors, with residential units above.
-    %h5 
-      %span.zone-box.zone-DS
-      Downtown service (DS)
-    %p
-      The DS, Downtown Service district is primarily intended to accommodate commercial and service uses that are essential for the livelihood of businesses and residents of the downtown area and surrounding neighborhoods.
+      Factories, warehouses, freight, junkyards... all the heavy duty stuff that still litters Chicago's industrial corridors. These districts range from nondescript warehouses (M1) to hardcore factories (M3).
     %h5 
       %span.zone-box.zone-PMD
       Planned manufacturing districts (PMD)
     %p
-      The "PMD," Planned Manufacturing District are 14 large areas designated as main industrial corriodors of the city.
+      Fourteen special zoning districts that protect industry from encroachment by commercial and residential buildings. Unlike other districts, parcels in PMDs cannot be rezoned to non-industrial uses, so they take zoning decisions out of aldermens' hands. 
+    %p 
+      In 1988, the Harold Washington administration created the Clybourn Corridor, the city's first PMD, and Daley continued the policy. For an evaluation of whether the PMD's have actually kept industrial jobs in Chicago, see Joel Rast's article "
+      %a{ :href => 'https://www4.uwm.edu/ced/publications/pmdstudy1.pdf'}Curbing Industrial Decline or Thwarting Redevelopment?
+      "
+    %h5 
+      %span.zone-box.zone-PD
+      Planned development (PD)
+    %p
+      Tall buildings, hospital campuses, and other large developments that must be negotiated with city planners. Developers gain freedom in building design (read: they can bend the zoning rules,) but must work with city to ensure projects gel with and benefit the neighborhood.
     %h5 
       %span.zone-box.zone-T
-      Ttransportation district (T)
+      Transportation district (T)
     %p
-      The “T,” Transportation zoning district is intended to preserve, protect and enhance road, rail and other important transportation corridors and to ensure public review of proposals to convert such corridors to non-transportation use.
+      Bits of land designed to protect roads, bus ways, bike trails, and rail lines. Only a handful of properties in town are zoned this way.
     %h5
       %span.zone-box.zone-POS
       Parks and Open Space (POS)
     %p
-      The “POS,” Parks and Open Space zoning district is intended to preserve, protect and enhance lands set aside for public open space, public parks and public beaches.
-
+      Protects land set side for public parks, open space, beaches, and cemeteries. Most Chicago Park District land lives in these districts. Also, this is what keeps the lakefront forever open, free, and clear.
     %hr
     %h4#dear-maxis Dear Maxis and Electronic Arts: Don't sue us!
 
