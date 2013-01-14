@@ -1,7 +1,7 @@
 .row-fluid
   .span3
     .well
-      %h3 Definitions
+      %h3 Bulk/density requirements
       %ol
         %li
           %a{:href => "#floor-area-ratio"} Floor Area Ratio
@@ -19,13 +19,22 @@
           %a{:href => "#on-site-open-space"} On-site open space
 
   .span7
-    %h2 Definitions
+    %h2 Zoning rules
+    %hr
+    %p
+     Zoning is about land use - what you can do with a property - and density - how big the building can be. This page explains the rules governing density. We haven't tackled
+     land use yet. For that, you'll have to dig into the 
+      = succeed '.' do
+        %a{:href => '/docs/Chicago-Zoning-Ordinance.pdf'}zoning ordinance
+    %p
+      Each zoning district has rules ("bulk and density requirements," in zoning-speak) that restrict the density of buildings you can build on properties within the district. These
+      rules have titillating name like maximum height requirements, floor-area ratios, and others.They're all explained below.
     %hr
     %h4#floor-area-ratio 
       Floor area ratio
       %small Zoning code section 17-17-0305
     %p 
-      A building's total floor area - that is, the square footage of every floor - divided by the area of the parcel of land its built on. Controls a property's density.                            
+      A building's total floor area - that is, the square footage of every floor - divided by the area of the parcel of land it's built on. Controls a property's density.                            
     %p
       For example, if you build a building on a property with an floor area ratio (FAR) of .5, as some detached houses do, then the total area of the building's floors must be less than half the area of the parcel. On the other hand, if the property has a FAR of 2, then the area of the building's floors will be double that of the parcel's area, and the building will have to be multi-story.
     %p
@@ -33,7 +42,9 @@
     %p
       In other words, a small floor-area ratio suppresses a building's density, and a large FAR increases it. Suburban properties tend to have low FARs (less than 1), and downtown properties large ones (7-16.)                                           
     %p
-      Why not just control density through building heights? Take the property with FAR of 1. An architect can build a single story building that uses the entire allowable area (half of the parcel area) in one floor, or a multi-story building that spreads out the same area over several floors and will be 'skinnier' as a result. So FAR allows flexibility on a building's design, while enforcing a hard limit on its density.  
+      Why not just control density through building heights? 
+    %p
+      Take the property with FAR of 1. An architect can build a single story building that uses the entire allowable area (half of the parcel area) in one floor, or a multi-story building that spreads out the same area over several floors and will be 'skinnier' as a result. So FAR allows flexibility on a building's design, while enforcing a hard limit on its density.  
     %p
       %img.img-polaroid{:src => '/images/FAR_loop.gif', :alt => 'Floor area ratio'} 
     %p
