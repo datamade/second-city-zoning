@@ -228,11 +228,11 @@
         $.cookie("play-music", "on", { expires: 7 });
       });
 
-      $('#welcome-modal').modal('show');
-      //if ($.cookie("show-welcome") != "read") {
-      //  $('#welcome-modal').modal('show');
-      //  $.cookie("show-welcome", "read", { expires: 7 });
-      //}
+      //$('#welcome-modal').modal('show');
+      if ($.cookie("show-welcome") != "read") {
+        $('#welcome-modal').modal('show');
+        $.cookie("show-welcome", "read", { expires: 7 });
+      }
 
       //---------music player---------------
       // Local copy of jQuery selectors, for performance.
