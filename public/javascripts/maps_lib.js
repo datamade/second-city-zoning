@@ -196,9 +196,29 @@ var MapsLib = {
       district_title = 'Planned Development';
       description = "Tall buildings, campuses, and other large developments that must be negotiated with city planners. Developers gain freedom in building design, but must work with city to ensure project serves and integrates with surrounding neighborhood.";
     }
+
+    var zone_icon = '';
+    switch(zone_class_link) {
+      case 'B'   : zone_icon = 'commercial'; break;
+      case 'C'   : zone_icon = 'commercial'; break;
+      case 'M'   : zone_icon = 'industrial'; break;
+      case 'R'   : zone_icon = 'residential'; break;
+      case 'RS'  : zone_icon = 'residential'; break;
+      case 'RT'  : zone_icon = 'residential'; break;
+      case 'RTA' : zone_icon = 'residential'; break;
+      case 'RM'  : zone_icon = 'residential'; break;
+      case 'PD'  : zone_icon = 'government'; break;
+      case 'PMD' : zone_icon = 'industrial'; break;
+      case 'DX'  : zone_icon = 'commercial'; break;
+      case 'DC'  : zone_icon = 'commercial'; break;
+      case 'DR'  : zone_icon = 'residential'; break;
+      case 'DS'  : zone_icon = 'commercial'; break;
+      case 'T'   : zone_icon = 'trains'; break;
+      case 'POS' : zone_icon = 'parks-entertainment'; break;
+    }
      
     var content = "<div class='googft-info-window' style='font-family: sans-serif'>";
-    content += "<h4><a href='/zones#" + zone_class_link + "'>" + zone_class + " - " + district_title + "</a></h4>";
+    content += "<h4><img src='/images/icons/" + zone_icon + ".png' /> <a href='/zones#" + zone_class_link + "'>" + zone_class + " - " + district_title + "</a></h4>";
     //content += "<p><strong>" + ZoningDict[zone_type - 1] + "</strong>";
     content += "<p><strong>What's here?</strong> " + description;
     content += "<br /><a href='/zone/" + zone_class_link + "'>Learn more &raquo;</a>";
