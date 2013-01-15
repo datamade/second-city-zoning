@@ -184,23 +184,24 @@ var MapsLib = {
     // Set up and create the infowindow
     if (!MapsLib.infoWindow) MapsLib.infoWindow = new google.maps.InfoWindow({});
 
-    zone_class_link = zone_class;
+    zone_class_link = zone_class.replace( new RegExp("[^A-Z]","gm"),"");
 
     // PD and PMD have different numbers for each district. Fix for displaying generic title and link.
     if (zone_class.substring(0, 'PMD'.length) === 'PMD') {
-      zone_class_link = 'PMD';
       district_title = 'Planned Manufacturing District';
+      description = "All kinds of manufacturing, warehouses, and waste disposal. Special service district - not technically a manufacturing district - intended to protect the city's industrial base.";
     }
 
     if (zone_class.substring(0, 'PD'.length) === 'PD') {
-      zone_class_link = 'PD';
       district_title = 'Planned Development';
+      description = "Tall buildings, campuses, and other large developments that must be negotiated with city planners. Developers gain freedom in building design, but must work with city to ensure project serves and integrates with surrounding neighborhood.";
     }
      
     var content = "<div class='googft-info-window' style='font-family: sans-serif'>";
-    content += "<h4><a href='/zone/" + zone_class_link + "'>" + zone_class + " - " + district_title + "</a></h4>";
-    content += "<p><strong>" + ZoningDict[zone_type - 1] + "</strong>";
-    content += "<br />" + description;
+    content += "<h4><a href='/zones#" + zone_class_link + "'>" + zone_class + " - " + district_title + "</a></h4>";
+    //content += "<p><strong>" + ZoningDict[zone_type - 1] + "</strong>";
+    content += "<p><strong>What's here?</strong> " + description;
+    content += "<br /><a href='/zone/" + zone_class_link + "'>Learn more &raquo;</a>";
     if (ordinance != "" && ordinance != undefined) 
       content += "<br /><br />Ordinance: " + ordinance
     if (ordinance_date != "" && ordinance_date != undefined) 

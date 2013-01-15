@@ -93,6 +93,7 @@ h1,h2,h3{line-height:inherit;}
 .zone-R   { background-color: #7DD67D; }
 .zone-RS  { background-color: #7DD67D; }
 .zone-RT  { background-color: #7DD67D; }
+.zone-RTA { background-color: #7DD67D; }
 .zone-RM  { background-color: #7DD67D; }
 .zone-PD  { background-color: #d27979; }
 .zone-PMD { background-color: #DCDC7F; }
@@ -109,6 +110,7 @@ h1,h2,h3{line-height:inherit;}
 .zone-R-text{ color: #7DD67D; }
 .zone-RS-text{ color: #7DD67D; }
 .zone-RT-text{ color: #7DD67D; }
+.zone-RTA-text{ color: #7DD67D; }
 .zone-RM-text{ color: #7DD67D; }
 .zone-PD-text{ color: #d27979; }
 .zone-PMD-text{ color: #DCDC7F; }

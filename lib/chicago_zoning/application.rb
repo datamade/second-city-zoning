@@ -33,6 +33,7 @@ module ChicagoZoning
     
     get "/ordinances" do 
       cache_control :public, max_age: 604800  # 1 week
+      @title = "Ordinances"
       @current_menu = "zones"
       @ordinances = FT.execute("SELECT ORDINANCE1, ORDINANCE_ FROM #{Zoning_map_id} WHERE ORDINANCE1 NOT EQUAL TO '' AND ORDINANCE_ NOT EQUAL TO '' ORDER BY ORDINANCE1 DESC LIMIT 100;")
       haml :ordinances
@@ -40,6 +41,7 @@ module ChicagoZoning
     
     get "/zones" do 
       cache_control :public, max_age: 604800  # 1 week
+      @title = "Zoning districts"
       @current_menu = "zones"
       @zones = FT.execute("SELECT * FROM #{Zoning_code_summary_id};")
       haml :zones
@@ -48,14 +50,30 @@ module ChicagoZoning
     get "/zone/:zone_id" do
       cache_control :public, max_age: 604800  # 1 week
       @current_menu = "zones"
-      @zone = FT.execute("SELECT * FROM #{Zoning_code_summary_id} WHERE 'District type code' = '#{params[:zone_id]}';").first
-      haml :zone_detail
+      @zones = FT.execute("SELECT * FROM #{Zoning_code_summary_id} WHERE 'District type code' = '#{params[:zone_id]}';")
+      unless @zones.length == 0
+        @zone = @zone.first
+        @title = "#{@zone[:district_type_code]} - #{@zone[:district_title]}"
+        haml :zone_detail
+      else
+        params[:page] = params[:zone_id] # hack to get URL to show up on not_found page
+        haml :not_found
+      end
     end
     
     get "/:page" do
-      cache_control :public, max_age: 604800  # 1 week
-      @current_menu = params[:page]
-      haml params[:page].to_sym
+      begin
+        cache_control :public, max_age: 604800  # 1 week
+        @title = params[:page].capitalize.gsub(/[_-]/, " ")
+        @current_menu = params[:page]
+        haml params[:page].to_sym
+      rescue Errno::ENOENT
+        haml :not_found
+      end
+    end
+
+    error do
+      'Sorry there was a nasty error - ' + env['sinatra.error'].name
     end
   end
 end

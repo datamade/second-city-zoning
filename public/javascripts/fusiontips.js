@@ -252,7 +252,7 @@
           
           html += data.rows[0][0] + "<br/>";
           html += data.rows[0][1] + "<br/>";
-          html += ZoningDict[data.rows[0][2] - 1] + "<br/>";
+          //html += ZoningDict[data.rows[0][2] - 1] + "<br/>";
 
           for (i = 0; i < numCols; i++) {
             var cell = {

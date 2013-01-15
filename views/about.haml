@@ -51,8 +51,8 @@
       for commercial and
       %strong{:style => 'color: #DCDC7F;'} yellow
       for industrial. (This oversimplifies things a bit, 
-      %a{ :href => 'http://secondcityzoning.org/about#zoning-categories' } click here
-      for the full story.)
+      = succeed '.)' do
+        %a{ :href => '/about#zoning-categories' } read the full story
       From there we got a little carried away. Graphics, sounds, music, oh my.
 
     %p
@@ -103,11 +103,12 @@
       like Residential and Manufacturing.
     %p
       Every zoning district has a designation (in 'land use-density' format,) a name, and a description. Let's look at an example:
-    %h5
-      B1-1: Neighborhood Shopping District
-    %p
-      %strong Description:
-      Retail storefronts on low-traffic streets. Apartments allowed above the ground floor.
+    .well
+      %h5
+        B1-1: Neighborhood Shopping District
+      %p
+        %strong What's here?
+        Retail storefronts on low-traffic streets. Apartments allowed above the ground floor.
 
     %p
       Remember, zoning is about land use - what you can do with a property - and density - how big the building can be. 
@@ -118,7 +119,7 @@
       lists in excrutiating detail every business that is and isn't allow in a B1 district. Its official official name is a "Neighborhood Shopping District," and we distilled the description of what goes on there from the zoning ordinance. (No need to thank us.)
     %p
       By the way, the B1 designation starts with the letter "B" because it falls under the 
-      %a{ :href = > 'http://secondcityzoning.org/zones#B' } Business category 
+      %a{ :href => 'http://secondcityzoning.org/zones#B' } Business category 
       of zoning districts, which also contains Neighborhood Mixed-Use (B2) and Community Shopping (B3) districts.
     %p
       The "-1" bit of the designation captures the 
@@ -126,8 +127,9 @@
       part. In zoning, there are a bunch
       of rules ("density and bulk requirements," in zoning-speak) that restrict how big a building you can build on a property -
       titillating things like maximum height requirements, floor-area ratios, and others. (They're all explained 
-      %a{ :href => 'http://secondcityzoning.org/definitions' }here
-      .)
+      = succeed '.)' do
+        %a{ :href => 'http://secondcityzoning.org/zoning_rules' }here
+
     %p 
       The larger the number after the hyphen, the denser the buildings can be. 
       In all, there are five flavors of B1 district, B1-1 through B1-5. They all allow exactly
@@ -174,34 +176,41 @@
       or read the
       = succeed '.' do
         %a{:href => '/docs/Chicago-Zoning-Ordinance.pdf'} City of Chicago Zoning Ordinance
+
     %h5
-      %span.zone-box.zone-R 
-      Residential (R)
+      %a{:href => '/zones#R'}
+        %img{:src => '/images/icons/residential.png', :alt=> 'Residential'}
+        Residential (R)
     %p
       Houses and apartment buildings only on these parcels! No stores, offices, or factories allowed. Schools, churches, police stations and the like are cool, though.
     %h5
-      %span.zone-box.zone-B
-      Business (B)
+      %a{:href => '/zones#B'}
+        %img{:src => '/images/icons/commercial.png', :alt=> 'Commercial'}
+        Business (B)
     %p
       From bodegas to big boxes, these districts are for stores and offices. B districts promote walkable storefronts and shopping centers. To promote mix-use neighborhoods, above-ground floor apartments are usually cool.
     %h5
-      %span.zone-box.zone-B
-      Commercial (C)
+      %a{:href => '/zones#C'}
+        %img{:src => '/images/icons/commercial.png', :alt=> 'Commercial'}
+        Commercial (C)
     %p
       C districts are also geared towards commerce, but allow a wider variety of businesses than B districts, especially car-oriented stuff like strip malls and drive-through banks. Above-ground floor apartments are usually still okay.
     %h5
-      %span.zone-box.zone-DC
-      Downtown (D)
+      %a{:href => '/zones#D'}
+        %img{:src => '/images/icons/commercial-residential.png', :alt=> 'Commercial'} 
+        Downtown (D)
     %p
       Downtown zoning districts can only be found in the Loop and its environs. They're what makes it legal to build high-rise offices and apartments downtown. Weirdly, the Downtown Service (DS) districts in this category also cover the South Loop warehouse area between the Dan Ryan and the Chicago River.  
     %h5
-      %span.zone-box.zone-M
-      Manufacturing (M)
+      %a{:href => '/zones#M'}
+        %img{:src => '/images/icons/industrial.png', :alt=> 'Manufacturing'}
+        Manufacturing (M)
     %p
       Factories, warehouses, freight, junkyards... all the heavy duty stuff that still litters Chicago's industrial corridors. These districts range from nondescript warehouses (M1) to hardcore factories (M3).
     %h5 
-      %span.zone-box.zone-PMD
-      Planned manufacturing districts (PMD)
+      %a{:href => '/zones#PMD'}
+        %img{:src => '/images/icons/industrial.png', :alt=> 'Manufacturing'}
+        Planned manufacturing districts (PMD)
     %p
       Fourteen special zoning districts that protect industry from encroachment by commercial and residential buildings. Unlike other districts, parcels in PMDs cannot be rezoned to non-industrial uses, so they take zoning decisions out of aldermens' hands. 
     %p 
@@ -209,20 +218,24 @@
       %a{ :href => 'https://www4.uwm.edu/ced/publications/pmdstudy1.pdf'}Curbing Industrial Decline or Thwarting Redevelopment?
       "
     %h5 
-      %span.zone-box.zone-PD
-      Planned development (PD)
+      %a{:href => '/zones#PD'}
+        %img{:src => '/images/icons/government.png', :alt=> 'Planned Development'} 
+        Planned development (PD)
     %p
       Tall buildings, hospital campuses, and other large developments that must be negotiated with city planners. Developers gain freedom in building design (read: they can bend the zoning rules,) but must work with city to ensure projects gel with and benefit the neighborhood.
     %h5 
-      %span.zone-box.zone-T
-      Transportation district (T)
+      %a{:href => '/zones#T'}
+        %img{:src => '/images/icons/trains.png', :alt=> 'Planned Development'} 
+        Transportation district (T)
     %p
       Bits of land designed to protect roads, bus ways, bike trails, and rail lines. Only a handful of properties in town are zoned this way.
     %h5
-      %span.zone-box.zone-POS
-      Parks and Open Space (POS)
+      %a{:href => '/zones#POS'}
+        %img{:src => '/images/icons/parks-entertainment.png', :alt=> 'Parks and Open Space'} 
+        Parks and Open Space (POS)
     %p
       Protects land set side for public parks, open space, beaches, and cemeteries. Most Chicago Park District land lives in these districts. Also, this is what keeps the lakefront forever open, free, and clear.
+
     %hr
     %h4#dear-maxis Dear Maxis and Electronic Arts: Don't sue us!
 

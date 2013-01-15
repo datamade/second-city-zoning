@@ -1,7 +1,7 @@
 !!! 5
 %html{:lang => "en"}
   %head
-    %title 2nd City Zoning
+    %title= @title.nil? ? '2nd City Zoning' : "#{@title} - 2nd City Zoning"
     %meta{:charset => "utf-8"}
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
     %meta{:content => "", :name => "description"}
@@ -41,8 +41,8 @@
                 %a{:href => "/about"} About
               %li{:class => current_menu_class("zones")}
                 %a{:href => "/zones"} Zoning districts
-              %li{:class => current_menu_class("definitions")}
-                %a{:href => "/definitions"} Zoning rules
+              %li{:class => current_menu_class("zoning_rules")}
+                %a{:href => "/zoning_rules"} Zoning rules
 
     .container-fluid
 

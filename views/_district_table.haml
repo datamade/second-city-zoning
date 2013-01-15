@@ -1,6 +1,6 @@
 - @districts = get_zone_districts @zone_type
 
-%h5 
+%h5{:id => @zone_type}
   = @zone_type
   \-
   = @districts.first[:district_title]
@@ -10,7 +10,7 @@
     %tr
       %th
       %th Name
-      %th{:rel => "popover", :"data-placement" => 'top', :"data-original-title" => "Floor area ratio", :"data-content" => "A building's total floor area - that is, the square footage of every floor - divided by the area of the parcel of land its built on. Controls a property's density." } Floor area ratio
+      %th{:rel => "popover", :"data-placement" => 'top', :"data-original-title" => "Floor area ratio", :"data-content" => "A building's total floor area - that is, the square footage of every floor - divided by the area of the parcel of land it's built on. Controls a property's density." } Floor area ratio
       %th{:rel => "popover", :"data-placement" => 'top', :"data-original-title" => "Lot area per unit", :"data-content" => "The amount of lot area required for each dwelling unit on the property. Like floor area ratio, controls a property's density. " } Lot area per unit
       %th{:rel => "popover", :"data-placement" => 'top', :"data-original-title" => "Maximum height", :"data-content" => "How tall your building can be. While a building's FAR and Lot Area per Unit regulate its density, max building height works in concert with setback requirements to control its bulk." } Maximum height
       %th{:rel => "popover", :"data-placement" => 'top', :"data-original-title" => "Front yard setback", :"data-content" => "The required distance between a building and its lot's street-facing edge. Basically, how big your front yard needs to be. Controls a building's bulk." } Front yard setback
