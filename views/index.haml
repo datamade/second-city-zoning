@@ -1,50 +1,51 @@
-#welcome-modal.modal.hide.fade.in{"aria-hidden" => "true", "aria-labelledby" => "welcomeModalLabel", :role => "dialog", :tabindex => "-1"}
-  .modal-header
-    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-    %h3#myModalLabel Welcome to 2nd City Zoning!
-  .modal-body
-    %p
-      %img.img-polaroid.pull-right{:src => '/images/logo.png'}
-    %p Second City Zoning is an interactive map lets you:
-    %ul
-      %li
-        find out
-        %strong how your building is zoned
-      %li
-        learn
-        %strong where to locate your business
-      %li
-        explore
-        %strong zoning patterns
-        throughout the city
-
-    %p
-      To make Chicago's zoning code digestible by humans,
-      we took inspiration from one of our favorite games:
-      = succeed '.' do
-        = link_to "Sim City 2000", "http://en.wikipedia.org/wiki/SimCity_2000"
-    %p
-      It started with the color scheme:
-      %strong{:style => 'color: #7DD67D;'} green
-      for residential,
-      %strong{:style => 'color: #7474D7;'} blue
-      for commercial and
-      %strong{:style => 'color: #DCDC7F;'} yellow
-      for industrial. (This oversimplifies things a bit, 
-      = succeed '.)' do
-        %a{ :href => '/about#zoning-categories' } read the full story
-      
-    %p
-      From there we got a little carried away. Graphics, sounds, music, oh my.
-
-    %p
-      We had a lot of fun making this, so dive in and explore!
-
-  .modal-footer
-    %button.btn.btn-primary{"aria-hidden" => "true", "data-dismiss" => "modal"} Ok, thanks!
-
 .row-fluid
   .span4
+    #view_accordion.accordion
+      .accordion-group
+        .accordion-heading
+          %a.accordion-toggle#accordionAbout{"data-parent" => "#view_accordion", "data-toggle" => "collapse", :href => "#viewAbout"}
+            What is this?
+        .accordion-body.collapse{:id => "viewAbout"}
+          .accordion-inner
+            %p 2nd City Zoning is an interactive map lets you:
+            %ul
+              %li
+                find out
+                %strong how your building is zoned
+              %li
+                learn
+                %strong where to locate your business
+              %li
+                explore
+                %strong zoning patterns
+                throughout the city
+
+            %p
+              To make Chicago's zoning code digestible by humans,
+              we took inspiration from one of our favorite games:
+              = succeed '.' do
+                = link_to "Sim City 2000", "http://en.wikipedia.org/wiki/SimCity_2000"
+            %p
+              It started with the color scheme:
+              %strong{:style => 'color: #7DD67D;'} green
+              for residential,
+              %strong{:style => 'color: #7474D7;'} blue
+              for commercial and
+              %strong{:style => 'color: #DCDC7F;'} yellow
+              for industrial. (This oversimplifies things a bit, 
+              = succeed '.)' do
+                %a{ :href => '/about#zoning-categories' } read the full story
+            %p
+              From there we got a little carried away. Graphics, sounds, music, oh my.
+            %p
+              We had a lot of fun making this, so dive in and explore!
+
+            %p.pull-right
+              %a#closeAbout.btn.btn-primary.btn-small{:href => "#"} Ok, thanks!
+              %a.btn.btn-small{:href => "/about"} Read more &raquo;
+
+
+
     .well
       %h5
         Find zone
@@ -215,23 +216,15 @@
         e.preventDefault();
       });
 
-      $('.jp-stop').click(function(){
-        $.cookie("play-music", "off", { expires: 7 });
-      });
-
-      $('.jp-pause').click(function(){
-        $.cookie("play-music", "off", { expires: 7 });
-      });
-
-      $('.jp-play').click(function(){
-        $.cookie("play-music", "on", { expires: 7 });
-      });
-
       //$('#welcome-modal').modal('show');
       if ($.cookie("show-welcome") != "read") {
-        $('#welcome-modal').modal('show');
+        $('#accordionAbout').click();
         $.cookie("show-welcome", "read", { expires: 7 });
       }
+
+      $('#closeAbout').click(function(){
+        $('#accordionAbout').click();
+      });
 
       //---------music player---------------
       // Local copy of jQuery selectors, for performance.
@@ -240,12 +233,8 @@
         my_playState = $("#jp_container .play-state")
 
       // Some options
-      var opt_play_first = true, // If true, will attempt to auto-play the default track on page loads. No effect on mobile devices, like iOS.
+      var opt_play_first = false, // If true, will attempt to auto-play the default track on page loads. No effect on mobile devices, like iOS.
         opt_auto_play = true // If true, when a track is selected, it will auto-play.
-
-      if ($.cookie("play-music") == "off") {
-        opt_play_first = false;
-      }
 
       // A flag to capture the first track
       var first_track = true;
