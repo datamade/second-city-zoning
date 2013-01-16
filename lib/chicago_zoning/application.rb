@@ -24,6 +24,11 @@ module ChicagoZoning
 
     helpers SiteTemplate::HtmlHelpers
     helpers SiteTemplate::FtHelpers
+
+    # redirects
+    get "/definitions/?" do
+      redirect "/zoning_rules"
+    end
     
     get "/" do
       cache_control :public, max_age: 604800  # 1 week
