@@ -221,7 +221,7 @@ var MapsLib = {
     content += "<h4><img src='/images/icons/" + zone_icon + ".png' /> <a href='/zones#" + zone_class_link + "'>" + zone_class + " - " + district_title + "</a></h4>";
     //content += "<p><strong>" + ZoningDict[zone_type - 1] + "</strong>";
     content += "<p><strong>What's here?</strong> " + description;
-    content += "<br /><a href='/zone/" + zone_class_link + "'>Learn more &raquo;</a>";
+    content += "<br /><a href='/zones#" + zone_class_link + "'>Learn more &raquo;</a>";
     if (ordinance != "" && ordinance != undefined) 
       content += "<br /><br />Ordinance: " + ordinance
     if (ordinance_date != "" && ordinance_date != undefined) 
