@@ -57,7 +57,7 @@ module ChicagoZoning
       @current_menu = "zones"
       @zones = FT.execute("SELECT * FROM #{Zoning_code_summary_id} WHERE 'District type code' = '#{params[:zone_id]}';")
       unless @zones.length == 0
-        @zone = @zone.first
+        @zone = @zones.first
         @title = "#{@zone[:district_type_code]} - #{@zone[:district_title]}"
         haml :zone_detail
       else
