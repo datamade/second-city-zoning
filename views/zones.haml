@@ -11,37 +11,50 @@
   .span12
     %h1 Zoning districts
 
-    %p
-      There are nine different zoning classes in Chicago. They are:
+    .row-fluid
+      .span8
+        %p
+          %strong What is zoning?
+          Zoning basically makes sure a factory doesn't open next to a school.
+        %p
+          It consists of
+          %a{:href => 'https://s3.amazonaws.com/second-city-zoning/Chicago-Zoning-Ordinance.pdf'} regulations
+          that control how big of a building you can build on a property, 
+          what you can do inside it. You can't just build anything anywhere -
+          every property in Chicago lives in a zoning district of one kind or another. 
+          %a{:href => '/about#what-is-zoning'} Read more &raquo;
 
-    %ul.zone-legend.unstyled
-      %li
-        %img{:src => '/images/icons/residential.png', :alt=> 'Residential'} 
-        %a{:href => '#R'} R - Residential
-      %li
-        %img{:src => '/images/icons/commercial.png', :alt=> 'Commercial'} 
-        %a{:href => '#B'} B - Business
-      %li
-        %img{:src => '/images/icons/commercial.png', :alt=> 'Commercial'} 
-        %a{:href => '#C'} C - Commercial
-      %li
-        %img{:src => '/images/icons/commercial-residential.png', :alt=> 'Commercial'} 
-        %a{:href => '#D'} D - Downtown
-      %li
-        %img{:src => '/images/icons/industrial.png', :alt=> 'Manufacturing'} 
-        %a{:href => '#M'} M - Manufacturing
-      %li
-        %img{:src => '/images/icons/industrial.png', :alt=> 'Manufacturing'} 
-        %a{:href => '#PMD'} PMD - Planned Manufacturing Districts
-      %li
-        %img{:src => '/images/icons/government.png', :alt=> 'Planned Development'} 
-        %a{:href => '#PD'} PD - Planned Development
-      %li
-        %img{:src => '/images/icons/trains.png', :alt=> 'Transportation'} 
-        %a{:href => '#T'} T - Transportation
-      %li
-        %img{:src => '/images/icons/parks-entertainment.png', :alt=> 'Parks and Open Space'} 
-        %a{:href => '#POS'} POS - Parks and Open Space
+        %p
+          There are nine different zoning classes in Chicago. They are:
+
+        %ul.zone-legend.unstyled
+          %li
+            %img{:src => '/images/icons/residential.png', :alt=> 'Residential'} 
+            %a{:href => '#R'} R - Residential
+          %li
+            %img{:src => '/images/icons/commercial.png', :alt=> 'Commercial'} 
+            %a{:href => '#B'} B - Business
+          %li
+            %img{:src => '/images/icons/commercial.png', :alt=> 'Commercial'} 
+            %a{:href => '#C'} C - Commercial
+          %li
+            %img{:src => '/images/icons/commercial-residential.png', :alt=> 'Commercial'} 
+            %a{:href => '#D'} D - Downtown
+          %li
+            %img{:src => '/images/icons/industrial.png', :alt=> 'Manufacturing'} 
+            %a{:href => '#M'} M - Manufacturing
+          %li
+            %img{:src => '/images/icons/industrial.png', :alt=> 'Manufacturing'} 
+            %a{:href => '#PMD'} PMD - Planned Manufacturing Districts
+          %li
+            %img{:src => '/images/icons/government.png', :alt=> 'Planned Development'} 
+            %a{:href => '#PD'} PD - Planned Development
+          %li
+            %img{:src => '/images/icons/trains.png', :alt=> 'Transportation'} 
+            %a{:href => '#T'} T - Transportation
+          %li
+            %img{:src => '/images/icons/parks-entertainment.png', :alt=> 'Parks and Open Space'} 
+            %a{:href => '#POS'} POS - Parks and Open Space
 
     .clearfix
 

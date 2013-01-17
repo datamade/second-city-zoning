@@ -31,13 +31,13 @@ module ChicagoZoning
     end
     
     get "/" do
-      cache_control :public, max_age: 604800  # 1 week
+      cache_control :public, max_age: 86400  # 1 day
       @current_menu = "home"
       haml :index
     end
     
     get "/ordinances" do 
-      cache_control :public, max_age: 604800  # 1 week
+      cache_control :public, max_age: 86400  # 1 day
       @title = "Ordinances"
       @current_menu = "zones"
       @ordinances = FT.execute("SELECT ORDINANCE1, ORDINANCE_ FROM #{Zoning_map_id} WHERE ORDINANCE1 NOT EQUAL TO '' AND ORDINANCE_ NOT EQUAL TO '' ORDER BY ORDINANCE1 DESC LIMIT 100;")
@@ -45,7 +45,7 @@ module ChicagoZoning
     end
     
     get "/zones" do 
-      cache_control :public, max_age: 604800  # 1 week
+      cache_control :public, max_age: 86400  # 1 day
       @title = "Zoning districts"
       @current_menu = "zones"
       @zones = FT.execute("SELECT * FROM #{Zoning_code_summary_id};")
@@ -53,7 +53,7 @@ module ChicagoZoning
     end
 
     get "/zone/:zone_id" do
-      cache_control :public, max_age: 604800  # 1 week
+      cache_control :public, max_age: 86400  # 1 day
       @current_menu = "zones"
       @zones = FT.execute("SELECT * FROM #{Zoning_code_summary_id} WHERE 'District type code' = '#{params[:zone_id]}';")
       unless @zones.length == 0
@@ -68,7 +68,7 @@ module ChicagoZoning
     
     get "/:page" do
       begin
-        cache_control :public, max_age: 604800  # 1 week
+        cache_control :public, max_age: 86400  # 1 day
         @title = params[:page].capitalize.gsub(/[_-]/, " ")
         @current_menu = params[:page]
         haml params[:page].to_sym
