@@ -1,6 +1,6 @@
-# Second City Zoning
+# 2nd City Zoning
 
-Second City Zoning is an interactive map that lets you:
+2nd City Zoning is an interactive map that lets you:
 
 -   find out **how your building is zoned**
 -   learn **where to locate your business**
@@ -9,7 +9,7 @@ Second City Zoning is an interactive map that lets you:
 To make Chicago’s zoning code digestible by humans, we took inspiration
 from one of our favorite games: [Sim City 2000](http://en.wikipedia.org/wiki/SimCity_2000). It started with the color scheme and from there we got a little carried away. Graphics, sounds, music, oh my.
 
-Like all [Open City](http://opencityapps.org) apps, Second City Zoning is entirely [open
+Like all [Open City](http://opencityapps.org) apps, 2nd City Zoning is entirely [open
 source](http://secondcityzoning.org/about#code) and built with [open data](http://secondcityzoning.org/about#data).
 
 ## Installation
