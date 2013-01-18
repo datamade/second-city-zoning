@@ -133,12 +133,14 @@
       and
       %a{:href => "https://jpvelez.contently.com"} Juan-Pablo Velez
 
+      %a.simcopter{:href => "#"} .
+
+
 %audio#reticulating-splines{:src => 'https://s3.amazonaws.com/second-city-zoning/effects/reticulating+splines.mp3'}
 %audio#explosion{:src => 'https://s3.amazonaws.com/second-city-zoning/effects/explosion.mp3'}
 %audio#mouse-click{:src => 'https://s3.amazonaws.com/second-city-zoning/effects/click.mp3'}
 %audio#yay{:src => 'https://s3.amazonaws.com/second-city-zoning/effects/yay.mp3'}
-
-/%audio#simcopter-one{:src => 'https://s3.amazonaws.com/second-city-zoning/effects/simcopter-one.mp3'}
+%audio#simcopter-one{:src => 'https://s3.amazonaws.com/second-city-zoning/effects/simcopter one.mp3'}
 /%audio#zzt{:src => 'https://s3.amazonaws.com/second-city-zoning/effects/zzt.mp3'}
 /%audio#train{:src => 'https://s3.amazonaws.com/second-city-zoning/effects/train.mp3'}
 
@@ -204,6 +206,12 @@
               $('#btnSearch').click();
               return false;
           }
+      });
+
+      $('.simcopter').click(function(e){
+        console.log('simcopter!');
+        play_multi_sound("simcopter-one");
+        return false;
       });
 
       $('.yay-link').click(function(e){
