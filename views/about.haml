@@ -6,6 +6,8 @@
         %li
           %a{:href => "#what-is-this"} What is this?
         %li
+          %a{:href => "#press"} Press
+        %li
           %a{:href => "#what-is-zoning"} What is zoning?
         %li
           %a{:href => "#how-does-zoning-work"} How does zoning work in Chicago?
@@ -65,6 +67,34 @@
       and built with
       = succeed '.' do
         %a{:href => '#data'} open data
+
+    %hr
+    %h4#team Press
+
+    %p
+      Since launching in January 2013, we've gotten some great press coverage! Check it out:
+
+    %dl
+      %dt
+        = link_to "Sim City for the Second City", "http://nextcity.org/daily/entry/sim-city-meets-the-second-city"
+      %dd
+        By Juan-Pablo Velez on 
+        %cite Next City
+        | Feb 7, 2013
+
+      %dt
+        = link_to "App lifts veil on government policy for Chicagoans", "http://news.medill.northwestern.edu/chicago/news.aspx?id=214542"
+      %dd
+        By Conner Forrest on 
+        %cite Medill Reports - Chicago
+        | Jan 24, 2013
+
+      %dt
+        = link_to "Second City 2000", "http://chicagotonight.wttw.com/2013/01/23/second-city-2000"
+      %dd
+        By Michael Lipkin on 
+        %cite Chicago Tonight (WTTW)
+        | Jan 23, 2013
 
     %hr
     %h4#what-is-zoning What is zoning?
