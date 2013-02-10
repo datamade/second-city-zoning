@@ -35,6 +35,16 @@ module ChicagoZoning
       @current_menu = "home"
       haml :index
     end
+
+    # utility for flushing cache
+    get "/flush_cache" do
+      if memcache_servers = ENV["MEMCACHE_SERVERS"]
+        require 'dalli'
+        dc = Dalli::Client.new
+        dc.flush
+      end
+      redirect "/"
+    end
     
     get "/ordinances" do 
       cache_control :public, max_age: 86400  # 1 day
@@ -65,7 +75,7 @@ module ChicagoZoning
         haml :not_found
       end
     end
-    
+
     get "/:page" do
       begin
         cache_control :public, max_age: 86400  # 1 day
