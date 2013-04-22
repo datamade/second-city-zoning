@@ -51,3 +51,9 @@ Report it here: https://github.com/open-city/second-city-zoning/issues
 * Make your feature addition or bug fix.
 * Commit, do not mess with rakefile, version, or history.
 * Send a pull request. Bonus points for topic branches.
+
+## Copyright
+
+Copyright (c) 2013 Derek Eder and Juan-Pablo Velez of Open City. Released under the MIT License.
+
+[See LICENSE for details](https://github.com/open-city/second-city-zoning/blob/master/LICENSE)
