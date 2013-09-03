@@ -52,5 +52,5 @@
     = include_javascript :bootstrap
     = content :javascripts
 
-    = include_javascript :"jquery.ba-hashchange" if production?
-    = include_javascript :"analytics_lib" if production?
+    = include_javascript :"jquery.ba-hashchange" if settings.production?
+    = include_javascript :"analytics_lib" if settings.production?
