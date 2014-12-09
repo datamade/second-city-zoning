@@ -1,0 +1,165 @@
+---
+layout: default
+---
+
+<div class='row-fluid'>
+  <div class='span4'>
+    <div class='accordion' id='view_accordion'>
+      <div class='accordion-group'>
+        <div class='accordion-heading'>
+          <a class='accordion-toggle' data-parent='#view_accordion' data-toggle='collapse' href='#viewAbout' id='accordionAbout'>
+            What is this?
+          </a>
+        </div>
+        <div class='accordion-body collapse' id='viewAbout'>
+          <div class='accordion-inner'>
+            <p>2nd City Zoning is an interactive map that lets you:</p>
+            <ul>
+              <li>
+                find out <strong>how your building is zoned</strong>
+              </li>
+              <li>
+                learn <strong>where to locate your business</strong>
+              </li>
+              <li>
+                explore <strong>zoning patterns</strong> throughout the city
+              </li>
+            </ul>
+            <p>
+              To make Chicago's zoning code digestible by humans, we took inspiration from one of our favorite games: <a href="http://en.wikipedia.org/wiki/SimCity_2000">Sim City 2000</a>.
+            </p>
+            <p>
+              It started with the color scheme: <strong style='color: #7DD67D;'>green</strong>
+              for residential, <strong style='color: #7474D7;'>blue</strong>
+              for commercial and <strong style='color: #DCDC7F;'>yellow</strong>
+              for industrial. (This oversimplifies things a bit, <a href='/about#zoning-categories'>read the full story</a>.)
+            </p>
+            <p>From there we got a little carried away. Graphics, sounds, music, oh my.</p>
+            <p>We had a lot of fun making this, so dive in and explore!</p>
+            <p class='pull-right'>
+              <a class='btn btn-primary btn-small' href='#' id='closeAbout'>Ok, thanks!</a>
+              <a class='btn btn-small' href='/about'>Read more &raquo;</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='well'>
+      <h5>Find zone <small>(<a id='findMe' href='#'>find me</a>)</small></h5>
+      <input class='input-block-level' id='search_address' placeholder='Enter an address or an intersection' type='text'>
+      <input class='btn btn-primary' id='btnSearch' type='button' value='Search'>
+      <button class='btn' id='reset'>Reset</button>
+    </div>
+    <div class='well hidden-phone'>
+      <h5>
+        Zoning type
+        <small>(<a href='/zones'>huh?</a>)</small>
+      </h5>
+      <ul class='inputs-list unstyled zones'>
+        <li>
+          <label class='checkbox inline' data-content='Houses and apartment buildings. No stores, offices, or factories are allowed. Schools, churches, police stations and the like are ok, though.' data-original-title="&lt;img src='/images/icons/residential.png' /&gt; Residential (R)" data-placement='top' rel='popover'>
+            <input id='cbZone4' type='checkbox'>
+            <img alt='Residential' src='/images/icons/residential.png'>
+            Residential
+          </label>
+        </li>
+        <li>
+          <label class='checkbox inline' data-content='From bodegas to big boxes, these districts are for stores and offices. Above-ground floor apartments are usually allowed. Includes Business (B), Commercial (C) and most Downtown (D) districts.' data-original-title="&lt;img src='/images/icons/commercial.png' /&gt; Commercial (C,B,DX,DC,DS)" data-placement='top' rel='popover'>
+            <input id='cbZone1' type='checkbox'>
+            <img alt='Commercial' src='/images/icons/commercial.png'>
+            Commercial
+          </label>
+        </li>
+        <li>
+          <label class='checkbox inline' data-content="Factories, warehouses, freight, junkyards. All the heavy duty stuff in Chicago's industrial corridors, as well as fourteen special Planned Manufacturing Districts (PMD)." data-original-title="&lt;img src='/images/icons/industrial.png' /&gt; Industrial (M)" data-placement='top' rel='popover'>
+            <input id='cbZone3' type='checkbox'>
+            <img alt='Industrial' src='/images/icons/industrial.png'>
+            Industrial
+          </label>
+        </li>
+      </ul>
+      <h5>
+        Special Purpose Districts
+      </h5>
+      <ul class='inputs-list unstyled zones'>
+        <li>
+          <label class='checkbox inline' data-content='Tall buildings, hospital campuses, and other large developments that must be negotiated with city planners.' data-original-title="&lt;img src='/images/icons/government.png' /&gt; Planned Development (PD)" data-placement='top' rel='popover'>
+            <input id='cbZone5' type='checkbox'>
+            <img alt='Planned Development' src='/images/icons/government.png'>
+            Planned Development
+          </label>
+        </li>
+        <li>
+          <label class='checkbox inline' data-content='Bits of land designed to protect roads, bus ways, bike trails, and rail lines.' data-original-title="&lt;img src='/images/icons/trains.png' /&gt; Transportation (T)" data-placement='top' id='transit-zone' rel='popover'>
+            <input id='cbZone11' type='checkbox'>
+            <img alt='Transportation' src='/images/icons/trains.png'>
+            Transportation
+          </label>
+        </li>
+        <li>
+          <label class='checkbox inline' data-content='Protected land set side for public parks, open space, beaches, and cemeteries.' data-original-title="&lt;img src='/images/icons/parks-entertainment.png' /&gt; Parks and Open Space (POS)" data-placement='top' rel='popover'>
+            <input id='cbZone12' type='checkbox'>
+            <img alt='Parks and Open Space' src='/images/icons/parks-entertainment.png'>
+            Parks and Open Space
+          </label>
+        </li>
+      </ul>
+    </div>
+    <div class='well hidden-phone'>
+      <div id='jquery_jplayer'></div>
+      <!-- Using the cssSelectorAncestor option with the default cssSelector class names to enable control association of standard functions using built in features -->
+      <div id='jp_container'>
+        <h5>
+          Music
+          <small>
+            <a class='jp-play' href='#'>
+              <i class='icon-play'></i>
+            </a>
+            <a class='jp-pause' href='#'>
+              <i class='icon-pause'></i>
+            </a>
+            <a class='jp-stop' href='#'>
+              <i class='icon-stop'></i>
+            </a>
+            <span class='pull-right'>
+              <a href='/about#dear-maxis'>disclaimer</a>
+            </span>
+          </small>
+        </h5>
+        <ul class='nav nav-pills' id='jplayer-tracks'>
+          <li>
+            <a class='track track-default' href='https://s3.amazonaws.com/second-city-zoning/Sim+City+2000+-+Theme.mp3'>Sim City Theme</a>
+          </li>
+          <li>
+            <a class='track' href='https://s3.amazonaws.com/second-city-zoning/SimCity+2000+-+MoogyCit.mp3'>MoogyCit</a>
+          </li>
+          <li>
+            <a class='track' href='https://s3.amazonaws.com/second-city-zoning/SimCity+2000+-+City+Shimmy.mp3'>City Shimmy</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class='span8'>
+    <div id='mapCanvas'></div>
+    <span class='pull-right'>
+      An <a class='yay-link' href='http://opencityapps.org'>Open City</a> app by <a class='yay-link' href='http://derekeder.com'>Derek Eder</a>, and <a href='https://jpvelez.contently.com'>Juan-Pablo Velez</a><a class='simcopter' href='#'>.</a>
+    </span>
+  </div>
+</div>
+<audio id='reticulating-splines' src='https://s3.amazonaws.com/second-city-zoning/effects/reticulating+splines.mp3'></audio>
+<audio id='explosion' src='https://s3.amazonaws.com/second-city-zoning/effects/explosion.mp3'></audio>
+<audio id='mouse-click' src='https://s3.amazonaws.com/second-city-zoning/effects/click.mp3'></audio>
+<audio id='yay' src='https://s3.amazonaws.com/second-city-zoning/effects/yay.mp3'></audio>
+<audio id='simcopter-one' src='https://s3.amazonaws.com/second-city-zoning/effects/simcopter one.mp3'></audio>
+
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=places"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+<script type="text/javascript" src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
+<script type="text/javascript" src="/js/jquery.address.min.js"></script>
+<script type="text/javascript" src="/js/cartodb_lib.js"></script>
+<script type="text/javascript" src="/js/bootstrap-popover.js"></script>
+<script type="text/javascript" src="/js/bootstrap-modal.js"></script>
+<script type="text/javascript" src="/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="/js/jquery.jplayer.min.js"></script>
+<script type="text/javascript" src="/js/map.js"></script>

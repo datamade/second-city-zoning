@@ -1,0 +1,16 @@
+port:  5000
+markdown: kramdown
+name: 2nd City Zoning
+url: http://secondcityzoning.org
+description: "An interactive map that lets you find out how your building is zoned, learn where to locate your business and explore zoning patterns throughout Chicago."
+encoding: utf-8
+timezone: America/Chicago
+navigation:
+- text: Home
+  url: /index.html
+- text: About
+  url: /about/index.html
+- text: Zoning districts
+  url: /zones/index.html
+- text: Zoning rules
+  url: /zoning_rules/index.html

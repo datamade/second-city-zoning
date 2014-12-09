@@ -71,7 +71,7 @@ var CartoDbLib = {
 
   doSearch: function() {
     CartoDbLib.clearSearch();
-    var address = $("#txtSearchAddress").val();
+    var address = $("#search_address").val();
 
     //-----custom filters-------
     //-------end of custom filters--------
