@@ -19,17 +19,17 @@ $(function() {
   CartoDbLib.initialize();
   $(':checkbox').click(function(){
     play_multi_sound("mouse-click");
-    MapsLib.doSearch();
+    CartoDbLib.doSearch();
   });
 
   $('#btnSearch').click(function(){
     play_multi_sound("reticulating-splines");
-    MapsLib.doSearch();
+    CartoDbLib.doSearch();
   });
 
   $('#findMe').click(function(){
     play_multi_sound("reticulating-splines");
-    MapsLib.findMe();
+    CartoDbLib.findMe();
     return false;
   });
 
@@ -37,7 +37,7 @@ $(function() {
     play_multi_sound("explosion");
     $.address.parameter('address','');
     $.address.parameter('radius','');
-    MapsLib.initialize();
+    CartoDbLib.initialize();
     return false;
   });
 

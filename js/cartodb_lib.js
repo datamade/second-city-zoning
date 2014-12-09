@@ -25,6 +25,7 @@ var CartoDbLib = {
 
     //reset filters
     $("#search_address").val(CartoDbLib.convertToPlainString($.address.parameter('address')));
+    $(":checkbox").attr("checked", "checked");
 
     var sql = "SELECT * FROM " + CartoDbLib.tableName + "";
 
@@ -33,8 +34,6 @@ var CartoDbLib = {
       sql: sql,
       interactivity: 'cartodb_id, zone_type, zone_class, ordinance_'
     }
-
-    // console.log(sql);
 
     CartoDbLib.info = L.control({position: 'bottomright'});
 
@@ -74,6 +73,14 @@ var CartoDbLib = {
     var address = $("#search_address").val();
 
     //-----custom filters-------
+    // var searchType = "zone_type IN (-1,";
+    // if ( $("#cbZone1").is(':checked')) searchType += "1,2,7,8,10,";
+    // if ( $("#cbZone3").is(':checked')) searchType += "3,6,";
+    // if ( $("#cbZone4").is(':checked')) searchType += "4,9,";
+    // if ( $("#cbZone5").is(':checked')) searchType += "5,";
+    // if ( $("#cbZone11").is(':checked')) searchType += "11,";
+    // if ( $("#cbZone12").is(':checked')) searchType += "12,";
+    // whereClause += " AND " + searchType.slice(0, searchType.length - 1) + ")";
     //-------end of custom filters--------
     
     if (address != "") {
