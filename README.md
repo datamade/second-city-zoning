@@ -17,22 +17,19 @@ source](http://secondcityzoning.org/about#code) and built with [open data](http:
 <pre>
   $ git clone git@github.com:open-city/second-city-zoning.git
   $ cd site_template
-  $ gem install bundler
-  $ bundle
-  $ unicorn
-  navigate to http://localhost:8080/
+  $ gem install jekyll
+  $ jekyll serve -w
+  navigate to http://localhost:5000/
 </pre>
 
 ## Dependencies
 
-* [Ruby](http://www.ruby-lang.org/)
-* [Sinatra](http://sinatrarb.com)
-* [Heroku](http://heroku.com)
-* [Google Fusion Tables](http://www.google.com/fusiontables/Home)
-* [Google Maps API V3](https://developers.google.com/maps/documentation/javascript)
+* [Jekyll](http://jekyllrb.com)
+* [CartoDB](http://docs.cartodb.com/cartodb-platform/cartodb-js.html)
+* [Leaflet](http://leafletjs.com)
 * [jQuery](http://jquery.org)
 * [jQuery Address](http://www.asual.com/jquery/address)
-* [Twitter Bootstrap](http://twitter.github.com/bootstrap)
+* [Bootstrap](http://getbootstrap.com)
 
 ## Team
 
