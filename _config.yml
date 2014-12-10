@@ -12,5 +12,6 @@ navigation:
   url: /about/index.html
 - text: Zoning districts
   url: /zones/index.html
+  category: zones
 - text: Zoning rules
   url: /zoning_rules/index.html

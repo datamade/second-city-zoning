@@ -1,0 +1,22 @@
+---
+layout: 'zone'
+categories: 
+  - 'zones'
+title: 'RM-5.5'
+description: 'Residential Multi-Unit District'
+District_type_code: 'RM-5.5'
+Old_zoning_ordinance_code: 'n/a'
+Zone_Type: '4'
+Old_Description: 'Multi Unit (up to 5 stories)'
+Juan_Description: 'Medium to high-density apartment buildings. Two-flats, townhouses, and single family homes are also allowed.'
+District_Title: 'Residential Multi-Unit District'
+Zoning_Code_Section: '17-2-0104'
+Floor_Area_Ratio: '2.5'
+Maximum_Building_Height: '47 ft for residential buildings with lot frontage of less than 75 ft, 60 ft when lot front is over that. None for schools and churches.'
+Lot_Area_per_Unit: '400 sq ft/dwelling unit, 400 sq ft/efficiency unit, 200 sq ft/SRO unit'
+Front_Yard_Setback: '15ft, or 12% of lot depth, whichever is less. Alternatively, setback can be the average front yard depth of nearest 2 lots.'
+Side_Setback: 'Townhouses: complicated as hell, see 17-2-0500. All other buildings: Combined width of side setbacks must equal 20% of lot width, and neither setback can be less than 2 feet or 8% of lot width (whichever is greater.) But no setback is required to be wider than 5 feet.'
+Rear_Yard_Setback: 'For buildings with under 20 dwelling units, of which at least 33% are "accessible": 50 ft or 24% of lot depth, whichever is less. For other buildings: 50 ft or 30% of lot depth, whichever is less.'
+Rear_Yard_Open_Space: 'N/A'
+On_Site_Open_Space: 'All buildings with people living in them must have at least 36 sq ft of on-site open space per dwelling unit. (See 17-2-0308)'
+---

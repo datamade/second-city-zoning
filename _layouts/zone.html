@@ -1,0 +1,46 @@
+---
+layout: default
+---
+
+<div class='row-fluid'>
+  <div class='span8'>
+    <p>
+      <a href='/zones'>&laquo; Zoning districts</a>
+    </p>
+    <h2>
+      {{page.District_type_code}}
+      <small>
+        {{page.District_Title}}
+      </small>
+    </h2>
+    <p>
+      Zoning class:
+      
+    </p>
+    <p>
+      {{page.Juan_Description}}
+    </p>
+    <hr>
+    <h4>Specifications</h4>
+    <dl>
+      <dt>Floor area ratio</dt>
+      <dd>{{page.Floor_Area_Ratio}}</dd>
+      <dt>Maximum building height</dt>
+      <dd>{{page.Maximum_Building_Height}}</dd>
+      <dt>Lot area per unit (density)</dt>
+      <dd>{{Lot_Area_per_Unit}}</dd>
+    </dl>
+    <hr>
+    <h4>Setbacks</h4>
+    <dl>
+      <dt>Front yard</dt>
+      <dd>{{Front_Yard_Setback}}</dd>
+      <dt>Side</dt>
+      <dd>
+        {{Side_Setback}}
+      </dd>
+      <dt>Back yard</dt>
+      <dd>{{Rear_Yard_Setback}}</dd>
+    </dl>
+  </div>
+</div>
