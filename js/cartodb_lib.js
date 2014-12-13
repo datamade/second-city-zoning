@@ -59,19 +59,20 @@ var CartoDbLib = {
     CartoDbLib.dataLayer = cartodb.createLayer(CartoDbLib.map, CartoDbLib.layerUrl)
       .addTo(CartoDbLib.map)
       .on('done', function(layer) {
-        layer.getSubLayer(0)
-        .set(subLayerOptions)
-        .on('featureOver', function(e, latlng, pos, data, subLayerIndex) {
+        var sublayer = layer.getSubLayer(0);
+        sublayer.set(subLayerOptions)
+        sublayer.on('featureOver', function(e, latlng, pos, data, subLayerIndex) {
           $('#mapCanvas div').css('cursor','pointer');
           CartoDbLib.info.update(data);
         })
-        .on('featureOut', function(e, latlng, pos, data, subLayerIndex) {
+        sublayer.on('featureOut', function(e, latlng, pos, data, subLayerIndex) {
           $('#mapCanvas div').css('cursor','inherit');
           CartoDbLib.info.clear();
         })
-        .on('featureClick', function(e, pos, latlng, data){
+        sublayer.on('featureClick', function(e, pos, latlng, data){
           CartoDbLib.getOneZone(data['cartodb_id']);
-        });
+        })
+        sublayer.infowindow.set('template', $('#infowindow_template').html())
         
         window.setTimeout(function(){
           if($.address.parameter('id')){
@@ -97,10 +98,10 @@ var CartoDbLib = {
       CartoDbLib.lastClickedLayer = L.geoJson(shape);
       CartoDbLib.lastClickedLayer.addTo(CartoDbLib.map);
       CartoDbLib.lastClickedLayer.setStyle({weight: 2, fillOpacity: 0, color: '#000'});
-      CartoDbLib.map.setView(CartoDbLib.lastClickedLayer.getBounds().getCenter(), 14);
+      CartoDbLib.map.setView(CartoDbLib.lastClickedLayer.getBounds().getCenter(), 15);
       // CartoDbLib.selectParcel(shape.properties);
     }).error(function(e){console.log(e)});
-    // window.location.hash = 'browse';
+    //    window.location.hash = 'browse';
   },
 
   doSearch: function() {
