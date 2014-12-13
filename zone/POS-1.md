@@ -1,22 +1,23 @@
 ---
-layout: 'zone'
-categories: 
-  - 'zones'
-title: 'POS-1'
-description: 'Regional or Community Park'
-District_type_code: 'POS-1'
-Old_zoning_ordinance_code: ''
-Zone_Type: '12'
-Old_Description: 'Regional or CommunityParks'
-Juan_Description: 'Chicago's major parks, including Lincoln Park, Humboldt Park, and Washington Park.'
-District_Title: 'Regional or Community Park'
-Zoning_Code_Section: '17-6-0202-A'
-Floor_Area_Ratio: 'Size, location, and design of all buildings must be approved by whichever local government owns the park or open space.'
-Maximum_Building_Height: 'Size, location, and design of all buildings must be approved by whichever local government owns the park or open space.'
-Lot_Area_per_Unit: 'Size, location, and design of all buildings must be approved by whichever local government owns the park or open space.'
-Front_Yard_Setback: 'None, unless property borders R-zoned lot that faces the same street. Then, front setback must be at least 50% of R lot's front setback.'
-Side_Setback: '1 ft for each foot of building height.'
-Rear_Yard_Setback: '1 ft for each foot of building height.'
-Rear_Yard_Open_Space: 'N/A'
-On_Site_Open_Space: 'N/A'
+layout: zone
+category: zones
+title: POS-1
+description: Regional or Community Park
+front_yard_setback: "None, unless property borders R-zoned lot that faces the same street. Then, front setback must be at least 50% of R lot&#39;s front setback."
+rear_yard_setback: "1 ft for each foot of building height."
+on_site_open_space: "N/A"
+rear_yard_open_space: "N/A"
+floor_area_ratio: "Size, location, and design of all buildings must be approved by whichever local government owns the park or open space."
+old_description: "Regional or 
+Community
+Parks"
+district_type_code: "POS-1"
+juan_description: "Chicago&#39;s major parks, including Lincoln Park, Humboldt Park, and Washington Park."
+lot_area_per_unit: "Size, location, and design of all buildings must be approved by whichever local government owns the park or open space."
+old_zoning_ordinance_code: ""
+maximum_building_height: "Size, location, and design of all buildings must be approved by whichever local government owns the park or open space."
+district_title: "Regional or Community Park"
+zoning_code_section: "17-6-0202-A"
+side_setback: "1 ft for each foot of building height."
+zone_type: "12"
 ---

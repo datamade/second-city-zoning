@@ -8,39 +8,37 @@ layout: default
       <a href='/zones'>&laquo; Zoning districts</a>
     </p>
     <h2>
-      {{page.District_type_code}}
+      {{page.district_type_code}}
       <small>
-        {{page.District_Title}}
+        {{page.district_title}}
       </small>
     </h2>
     <p>
-      Zoning class:
+      Zoning class: {{page.zone_type}}
       
     </p>
     <p>
-      {{page.Juan_Description}}
+      {{page.juan_description}}
     </p>
     <hr>
     <h4>Specifications</h4>
     <dl>
       <dt>Floor area ratio</dt>
-      <dd>{{page.Floor_Area_Ratio}}</dd>
+      <dd>{{page.floor_area_ratio}}</dd>
       <dt>Maximum building height</dt>
-      <dd>{{page.Maximum_Building_Height}}</dd>
+      <dd>{{page.maximum_building_height}}</dd>
       <dt>Lot area per unit (density)</dt>
-      <dd>{{Lot_Area_per_Unit}}</dd>
+      <dd>{{page.lot_area_per_unit}}</dd>
     </dl>
     <hr>
     <h4>Setbacks</h4>
     <dl>
       <dt>Front yard</dt>
-      <dd>{{Front_Yard_Setback}}</dd>
+      <dd>{{page.front_yard_setback}}</dd>
       <dt>Side</dt>
-      <dd>
-        {{Side_Setback}}
-      </dd>
+      <dd>{{page.side_setback}}</dd>
       <dt>Back yard</dt>
-      <dd>{{Rear_Yard_Setback}}</dd>
+      <dd>{{page.rear_yard_setback}}</dd>
     </dl>
   </div>
 </div>

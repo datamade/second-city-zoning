@@ -5,6 +5,7 @@ url: http://secondcityzoning.org
 description: "An interactive map that lets you find out how your building is zoned, learn where to locate your business and explore zoning patterns throughout Chicago."
 encoding: utf-8
 timezone: America/Chicago
+permalink: pretty
 navigation:
 - text: Home
   url: /index.html

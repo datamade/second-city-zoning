@@ -1,22 +1,21 @@
 ---
-layout: 'zone'
-categories: 
-  - 'zones'
-title: 'PMD'
-description: 'Planned Manufacturing Districts'
-District_type_code: 'PMD'
-Old_zoning_ordinance_code: ''
-Zone_Type: '6'
-Old_Description: 'The planned manufacturing district zoning classification is intended to foster the city's industrial base.'
-Juan_Description: 'All kinds of manufacturing, warehouses, and waste disposal. Special service district - not technically a manufacturing district - intended to protect the city's industrial base.'
-District_Title: 'Planned Manufacturing Districts'
-Zoning_Code_Section: '17-6-0400'
-Floor_Area_Ratio: 'Varies by PMD (See 17-6-0405-E)'
-Maximum_Building_Height: 'None.'
-Lot_Area_per_Unit: 'None.'
-Front_Yard_Setback: 'None, except for industrial parks and properties bordering R-zoned lots (see 17-5-0405-A for details).'
-Side_Setback: 'None, except for industrial parks and properties bordering R-zoned lots (see 17-5-0405-A for details).'
-Rear_Yard_Setback: 'None, unless rear property line borders R-zoned lot's side or rear property line. Then the minimum setback is 30 ft.'
-Rear_Yard_Open_Space: 'N/A'
-On_Site_Open_Space: 'N/A'
+layout: zone
+category: zones
+title: PMD
+description: Planned Manufacturing Districts
+front_yard_setback: "None, except for industrial parks and properties bordering R-zoned lots (see 17-5-0405-A for details)."
+rear_yard_setback: "None, unless rear property line borders R-zoned lot&#39;s side or rear property line. Then the minimum setback is 30 ft."
+on_site_open_space: "N/A"
+rear_yard_open_space: "N/A"
+floor_area_ratio: "Varies by PMD (See 17-6-0405-E)"
+old_description: "The planned manufacturing district zoning classification is intended to foster the city&#39;s industrial base."
+district_type_code: "PMD"
+juan_description: "All kinds of manufacturing, warehouses, and waste disposal. Special service district - not technically a manufacturing district - intended to protect the city&#39;s industrial base."
+lot_area_per_unit: "None."
+old_zoning_ordinance_code: ""
+maximum_building_height: "None."
+district_title: "Planned Manufacturing Districts"
+zoning_code_section: "17-6-0400"
+side_setback: "None, except for industrial parks and properties bordering R-zoned lots (see 17-5-0405-A for details)."
+zone_type: "6"
 ---
