@@ -3,6 +3,7 @@ var CartoDbLib = {
 
   map_centroid:    [41.87811, -87.66677],
   defaultZoom:     11,
+  lastClickedLayer: null,
   locationScope:   "chicago",
   currentPinpoint: null,
   layerUrl: 'http://datamade.cartodb.com/api/v2/viz/1422db28-7eed-11e4-a731-0e4fddd5de28/viz.json',
@@ -49,6 +50,10 @@ var CartoDbLib = {
             props.zone_class : 'Hover over an area');
     };
 
+    CartoDbLib.info.clear = function(){
+      this._div.innerHTML = '';
+    };
+
     CartoDbLib.info.addTo(CartoDbLib.map);
 
     CartoDbLib.dataLayer = cartodb.createLayer(CartoDbLib.map, CartoDbLib.layerUrl)
@@ -57,15 +62,45 @@ var CartoDbLib = {
         layer.getSubLayer(0)
         .set(subLayerOptions)
         .on('featureOver', function(e, latlng, pos, data, subLayerIndex) {
+          $('#mapCanvas div').css('cursor','pointer');
           CartoDbLib.info.update(data);
+        })
+        .on('featureOut', function(e, latlng, pos, data, subLayerIndex) {
+          $('#mapCanvas div').css('cursor','inherit');
+          CartoDbLib.info.clear();
+        })
+        .on('featureClick', function(e, pos, latlng, data){
+          CartoDbLib.getOneZone(data['cartodb_id']);
         });
+        
+        window.setTimeout(function(){
+          if($.address.parameter('id')){
+            CartoDbLib.getOneZone($.address.parameter('id'))
+          }
+        }, 1000)
       }).on('error', function() {
         //log the error
     }); 
 
-    //CartoDbLib.hackLayer = cartodb.createLayer(CartoDbLib.map, CartoDbLib.vizHackUrl).addTo(CartoDbLib.map);
-
     CartoDbLib.doSearch();
+  },
+
+  getOneZone: function(cartodb_id){
+    if (CartoDbLib.lastClickedLayer){
+      CartoDbLib.map.removeLayer(CartoDbLib.lastClickedLayer);
+    }
+    $.address.parameter('id', cartodb_id);
+    var sql = new cartodb.SQL({user: 'datamade', format: 'geojson'});
+    sql.execute('select * from ' + CartoDbLib.tableName + ' where cartodb_id = {{cartodb_id}}', {cartodb_id:cartodb_id})
+    .done(function(data){
+      var shape = data.features[0];
+      CartoDbLib.lastClickedLayer = L.geoJson(shape);
+      CartoDbLib.lastClickedLayer.addTo(CartoDbLib.map);
+      CartoDbLib.lastClickedLayer.setStyle({weight: 2, fillOpacity: 0, color: '#000'});
+      CartoDbLib.map.setView(CartoDbLib.lastClickedLayer.getBounds().getCenter(), 14);
+      // CartoDbLib.selectParcel(shape.properties);
+    }).error(function(e){console.log(e)});
+    // window.location.hash = 'browse';
   },
 
   doSearch: function() {
