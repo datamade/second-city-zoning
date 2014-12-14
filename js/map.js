@@ -3,6 +3,8 @@ var ZoningDict = ["Business", "Commercial / Mixed-Use", "Manufacturing", "Reside
                       "Downtown Core", "Downtown Residential", "Downtown Service", 
                       "Transportation","Parks and Open Space"];
 
+var ZoningTable = {};
+
 $(window).resize(function () {
   var h = $(window).height(),
     offsetTop = 120; // Calculate the top offset
@@ -11,9 +13,16 @@ $(window).resize(function () {
 }).resize();
 
 $(function() {
-  $('label.checkbox.inline').popover(
-    {
-        delay: { show: 300, hide: 100 }
+  $('label.checkbox.inline').popover({
+    delay: { show: 300, hide: 100 }
+  });
+
+  // populate zoning table from CSV
+  $.when($.get("/resources/import/zoning-code-summary-district-types.csv")).then(
+    function(data){
+      $.each($.csv.toObjects(data), function(i, row){
+        ZoningTable[row['district_type_code']] = row;
+      });
     });
 
   CartoDbLib.initialize();

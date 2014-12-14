@@ -46,8 +46,16 @@ var CartoDbLib = {
 
     // method that we will use to update the control based on feature properties passed
     CartoDbLib.info.update = function (props) {
+      if (props) {
+        this._div.innerHTML = props.zone_class;
+      }
+      else {
+        this._div.innerHTML = 'Hover over an area';
+      }
+
+      
       this._div.innerHTML = '<h4>Zoned</h4>' +  (props ?
-            props.zone_class : 'Hover over an area');
+            props.zone_class : );
     };
 
     CartoDbLib.info.clear = function(){

@@ -162,6 +162,7 @@ layout: default
 <script type="text/javascript" src="/js/bootstrap-modal.js"></script>
 <script type="text/javascript" src="/js/jquery.cookie.js"></script>
 <script type="text/javascript" src="/js/jquery.jplayer.min.js"></script>
+<script type="text/javascript" src="/js/jquery.csv.min.js" ></script>
 <script type="text/javascript" src="/js/map.js"></script>
 
 {% raw %}
@@ -171,8 +172,8 @@ layout: default
      <div class="cartodb-popup-content-wrapper">
        <div class="cartodb-popup-content">
          <!-- content.data contains the field info -->
-         <h4>Zone: </h4>
-         <p>{{content.data.zone_type}}</p>
+          <h3>{{content.data.zone_class}} - Neighborhood Shopping District</h3>
+          <p>What's here? Retail storefronts on low-traffic streets. Apartments allowed above the ground floor. Learn more »</p>
        </div>
      </div>
      <div class="cartodb-popup-tip-container"></div>
