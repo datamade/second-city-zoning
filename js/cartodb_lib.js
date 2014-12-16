@@ -36,7 +36,7 @@ var CartoDbLib = {
       interactivity: 'cartodb_id, zone_type, zone_class, ordinance_'
     }
 
-    CartoDbLib.info = L.control({position: 'bottomright'});
+    CartoDbLib.info = L.control({position: 'bottomleft'});
 
     CartoDbLib.info.onAdd = function (map) {
         this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
@@ -47,15 +47,11 @@ var CartoDbLib = {
     // method that we will use to update the control based on feature properties passed
     CartoDbLib.info.update = function (props) {
       if (props) {
-        this._div.innerHTML = props.zone_class;
+        this._div.innerHTML = "<h4>Zoning type</h4>" + props.zone_class + " - " + CartoDbLib.getZoneInfo(props.zone_class).title;
       }
       else {
         this._div.innerHTML = 'Hover over an area';
       }
-
-      
-      this._div.innerHTML = '<h4>Zoned</h4>' +  (props ?
-            props.zone_class : );
     };
 
     CartoDbLib.info.clear = function(){
@@ -64,7 +60,7 @@ var CartoDbLib = {
 
     CartoDbLib.info.addTo(CartoDbLib.map);
 
-    CartoDbLib.dataLayer = cartodb.createLayer(CartoDbLib.map, CartoDbLib.layerUrl)
+    CartoDbLib.dataLayer = cartodb.createLayer(CartoDbLib.map, CartoDbLib.layerUrl, {cartodb_logo: false})
       .addTo(CartoDbLib.map)
       .on('done', function(layer) {
         var sublayer = layer.getSubLayer(0);
@@ -92,6 +88,26 @@ var CartoDbLib = {
     }); 
 
     CartoDbLib.doSearch();
+  },
+
+  getZoneInfo: function(zone_class) {
+    // PD and PMD have different numbers for each district. Fix for displaying generic title and link.
+    if (zone_class.substring(0, 'PMD'.length) === 'PMD') {
+      title = 'Planned Manufacturing District';
+      description = "All kinds of manufacturing, warehouses, and waste disposal. Special service district - not technically a manufacturing district - intended to protect the city's industrial base.";
+      link = "PMD";
+    }
+    else if (zone_class.substring(0, 'PD'.length) === 'PD') {
+      title = 'Planned Development';
+      description = "Tall buildings, campuses, and other large developments that must be negotiated with city planners. Developers gain freedom in building design, but must work with city to ensure project serves and integrates with surrounding neighborhood.";
+      link = "PD";
+    }
+    else {
+      title = ZoningTable[zone_class].district_title;
+      description = ZoningTable[zone_class].juan_description;
+      link = zone_class;
+    }
+    return {'title': title, 'description': description, 'link': link};
   },
 
   getOneZone: function(cartodb_id){
