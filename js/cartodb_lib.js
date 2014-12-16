@@ -65,19 +65,27 @@ var CartoDbLib = {
       .on('done', function(layer) {
         var sublayer = layer.getSubLayer(0);
         sublayer.set(subLayerOptions)
-        sublayer.on('featureOver', function(e, latlng, pos, data, subLayerIndex) {
-          $('#mapCanvas div').css('cursor','pointer');
-          CartoDbLib.info.update(data);
-        })
-        sublayer.on('featureOut', function(e, latlng, pos, data, subLayerIndex) {
-          $('#mapCanvas div').css('cursor','inherit');
-          CartoDbLib.info.clear();
-        })
+        // sublayer.on('featureOver', function(e, latlng, pos, data, subLayerIndex) {
+        //   $('#mapCanvas div').css('cursor','pointer');
+        //   CartoDbLib.info.update(data);
+        // })
+        // sublayer.on('featureOut', function(e, latlng, pos, data, subLayerIndex) {
+        //   $('#mapCanvas div').css('cursor','inherit');
+        //   CartoDbLib.info.clear();
+        // })
         sublayer.on('featureClick', function(e, pos, latlng, data){
           CartoDbLib.getOneZone(data['cartodb_id']);
         })
-        sublayer.infowindow.set('template', $('#infowindow_template').html())
-        
+        sublayer.infowindow.set('template', function(data) {
+          // console.log(data);
+          // if (data.zone_class) {
+            console.log(data.zone_class)
+            var zone_info = CartoDbLib.getZoneInfo(data.zone_class);
+            $('#zone-content').html("<h3>" + data.zone_class + " - " + zone_info.title + "</h3><strong>What's here?</strong> " + zone_info.description + " <a href='/zone/" + zone_info.link + "/'>Learn more »</a>");
+            console.log($('#zone-content').html());
+            return $('#infowindow_template').html();
+          // }
+        });
         window.setTimeout(function(){
           if($.address.parameter('id')){
             CartoDbLib.getOneZone($.address.parameter('id'))
@@ -91,6 +99,7 @@ var CartoDbLib = {
   },
 
   getZoneInfo: function(zone_class) {
+    console.log(zone_class);
     // PD and PMD have different numbers for each district. Fix for displaying generic title and link.
     if (zone_class.substring(0, 'PMD'.length) === 'PMD') {
       title = 'Planned Manufacturing District';
