@@ -77,14 +77,15 @@ var CartoDbLib = {
           CartoDbLib.getOneZone(data['cartodb_id']);
         })
         sublayer.infowindow.set('template', function(data) {
-          // console.log(data);
-          // if (data.zone_class) {
-            console.log(data.zone_class)
+          console.log(data);
+          if (data.hasOwnProperty('zone_class')) {
+            // console.log(data.zone_class);
             var zone_info = CartoDbLib.getZoneInfo(data.zone_class);
             $('#zone-content').html("<h3>" + data.zone_class + " - " + zone_info.title + "</h3><strong>What's here?</strong> " + zone_info.description + " <a href='/zone/" + zone_info.link + "/'>Learn more »</a>");
+            console.log("#zone-content:");
             console.log($('#zone-content').html());
-            return $('#infowindow_template').html();
-          // }
+          }
+          return $('#infowindow_template').html();
         });
         window.setTimeout(function(){
           if($.address.parameter('id')){
@@ -99,7 +100,7 @@ var CartoDbLib = {
   },
 
   getZoneInfo: function(zone_class) {
-    console.log(zone_class);
+    console.log("looking up zone_class: " + zone_class);
     // PD and PMD have different numbers for each district. Fix for displaying generic title and link.
     if (zone_class.substring(0, 'PMD'.length) === 'PMD') {
       title = 'Planned Manufacturing District';
