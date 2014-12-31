@@ -1,8 +1,8 @@
 ---
 layout: zone
 category: zones
-title: DR-5
-description: Downtown Residential District
+title: "DR-5 - Downtown Residential District"
+description: "High-rise apartment buildings, largely in the Gold Coast. Ground-floor stores are okay, offices aren't."
 zone_type_name: Downtown Residential
 on_site_open_space: "All buildings with people living in them must have at least 36 sq ft of on-site open space per dwelling unit. (See 17-4-0410-A)"
 rear_yard_setback: "For detached houses, 28% of lot depth or 50 feet (whichever is less.) For principal buildings, 30% of lot depth or 50 feet (whichever is less), but this only applies to parts of buildings 18 feet or more above grade."

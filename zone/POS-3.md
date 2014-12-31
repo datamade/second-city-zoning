@@ -1,8 +1,8 @@
 ---
 layout: zone
 category: zones
-title: POS-3
-description: Open Space or Natural Area
+title: "POS-3 - Open Space or Natural Area"
+description: "Vacant strips of open land in the Calumet industrial area that are are not in a manufacturing district."
 zone_type_name: Parks and Open Space
 on_site_open_space: "N/A"
 rear_yard_setback: "1 ft for each foot of building height."

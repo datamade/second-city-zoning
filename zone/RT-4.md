@@ -1,8 +1,8 @@
 ---
 layout: zone
 category: zones
-title: RT-4
-description: Residential Two-Flat, Townhouse and Multi-Unit District
+title: "RT-4 - Residential Two-Flat, Townhouse and Multi-Unit District"
+description: "Two-flats, townhouses, low-density apartment buildings, single family homes."
 zone_type_name: Residential
 on_site_open_space: "N/A"
 rear_yard_setback: "For buildings with under 20 dwelling units, of which at least 33% are &quot;accessible&quot;&#58; 50 ft or 24% of lot depth, whichever is less. For other buildings&#58; 50 ft or 30% of lot depth, whichever is less."

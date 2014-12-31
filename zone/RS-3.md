@@ -1,8 +1,8 @@
 ---
 layout: zone
 category: zones
-title: RS-3
-description: Residential Single-Unit District
+title: "RS-3 - Residential Single-Unit District"
+description: "Detached single family homes and two-flats."
 zone_type_name: Residential
 on_site_open_space: "N/A"
 rear_yard_setback: "50 ft or 28% of lot depth, whichever is less."

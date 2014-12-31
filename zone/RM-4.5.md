@@ -1,8 +1,8 @@
 ---
 layout: zone
 category: zones
-title: RM-4.5
-description: Residential Multi-Unit District
+title: "RM-4.5 - Residential Multi-Unit District"
+description: "Medium to high-density apartment buildings. Two-flats, townhouses, and single family homes are also allowed."
 zone_type_name: Residential
 on_site_open_space: "N/A"
 rear_yard_setback: "For buildings with under 20 dwelling units, of which at least 33% are &quot;accessible&quot;&#58; 50 ft or 24% of lot depth, whichever is less. For other buildings&#58; 50 ft or 30% of lot depth, whichever is less."

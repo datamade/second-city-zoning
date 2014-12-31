@@ -1,8 +1,8 @@
 ---
 layout: zone
 category: zones
-title: PD
-description: Planned Developments
+title: "PD - Planned Developments"
+description: "Tall buildings, campuses, and other large developments that must be negotiated with city planners. Developers gain freedom in building design, but must work with city to ensure project serves and integrates with surrounding neighborhood."
 zone_type_name: Planned Development
 on_site_open_space: "Must try to use whatever on-site open space standards the property had before the City approved the planned development."
 rear_yard_setback: "Must try to use whatever setbacks the property had before the City approved the planned development."

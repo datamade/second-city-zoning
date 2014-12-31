@@ -1,8 +1,8 @@
 ---
 layout: zone
 category: zones
-title: RM-6
-description: Residential Multi-Unit District
+title: "RM-6 - Residential Multi-Unit District"
+description: "Mid-rise and high-rise apartment buildings."
 zone_type_name: Residential
 on_site_open_space: "All buildings with people living in them must have at least 36 sq ft of on-site open space per dwelling unit. (See 17-2-0308)"
 rear_yard_setback: "For buildings with under 20 dwelling units, of which at least 33% are &quot;accessible&quot;&#58; 50 ft or 24% of lot depth, whichever is less. For other buildings&#58; 50 ft or 30% of lot depth, whichever is less."

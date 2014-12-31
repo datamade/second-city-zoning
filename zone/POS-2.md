@@ -1,8 +1,8 @@
 ---
 layout: zone
 category: zones
-title: POS-2
-description: Neighborhood Park, Mini-Park, or Playlot
+title: "POS-2 - Neighborhood Park, Mini-Park, or Playlot"
+description: "Small parks littered across the neighborhoods."
 zone_type_name: Parks and Open Space
 on_site_open_space: "N/A"
 rear_yard_setback: "1 ft for each foot of building height."

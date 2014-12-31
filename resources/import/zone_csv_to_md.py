@@ -24,8 +24,8 @@ with open('zoning-code-summary-district-types.csv', 'rb') as csvfile:
 layout: zone
 category: zones
 """
-      md = md + "title: " + e['district_type_code'] + "\n"
-      md = md + "description: " + e['district_title'] + "\n"
+      md = md + 'title: "' + e['district_type_code'] + ' - ' + e['district_title'] + '"\n'
+      md = md + 'description: "' + e['juan_description'] + '"\n'
       md = md + "zone_type_name: " + type_dict[int(e['zone_type']) - 1] + "\n"
 
       for key, val in e.items():

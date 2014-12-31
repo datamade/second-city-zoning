@@ -1,8 +1,8 @@
 ---
 layout: zone
 category: zones
-title: PMD
-description: Planned Manufacturing Districts
+title: "PMD - Planned Manufacturing Districts"
+description: "All kinds of manufacturing, warehouses, and waste disposal. Special service district - not technically a manufacturing district - intended to protect the city's industrial base."
 zone_type_name: Planned Manufacturing District
 on_site_open_space: "N/A"
 rear_yard_setback: "None, unless rear property line borders R-zoned lot&#39;s side or rear property line. Then the minimum setback is 30 ft."

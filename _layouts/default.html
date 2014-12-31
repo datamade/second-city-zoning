@@ -3,7 +3,7 @@
   <head>
     <title>
       {% if page.title %}
-        {{page.title}} - 
+        {{page.title}} -
       {% endif %}
       {{site.name}}
     </title>
@@ -17,7 +17,7 @@
     {% if page.title %}
       <meta content="{{ page.title }} - {{ site.title }}" property="og:title">
     {% else %}
-      <meta content="{{ site.title }} - {{ site.title }}" property="og:title">
+      <meta content="{{ site.title }}" property="og:title">
     {% endif %}
     {% if page.title %}
       <meta content="article" property="og:type">

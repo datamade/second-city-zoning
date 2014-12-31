@@ -1,8 +1,8 @@
 ---
 layout: zone
 category: zones
-title: T
-description: Transportation District
+title: "T - Transportation District"
+description: "Bits of land designed to protect roads, bus ways, bike trails, and rail lines."
 zone_type_name: Transportation
 on_site_open_space: "N/A"
 rear_yard_setback: "N/A"

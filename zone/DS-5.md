@@ -1,8 +1,8 @@
 ---
 layout: zone
 category: zones
-title: DS-5
-description: Downtown Service District
+title: "DS-5 - Downtown Service District"
+description: "Rail yards, warehouses, and small businesses on downtown's periphery."
 zone_type_name: Downtown Service
 on_site_open_space: "All buildings with people living in them must have at least 36 sq ft of on-site open space per dwelling unit. (See 17-4-0410-A)"
 rear_yard_setback: "30ft for floors containing dwelling units. All others, none."

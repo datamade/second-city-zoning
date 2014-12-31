@@ -1,8 +1,8 @@
 ---
 layout: zone
 category: zones
-title: POS-1
-description: Regional or Community Park
+title: "POS-1 - Regional or Community Park"
+description: "Chicago's major parks, including Lincoln Park, Humboldt Park, and Washington Park."
 zone_type_name: Parks and Open Space
 on_site_open_space: "N/A"
 rear_yard_setback: "1 ft for each foot of building height."
