@@ -16,6 +16,13 @@ h1,h2,h3{line-height:inherit;}
 
 h5 {margin-top: 0px ; margin-bottom: 2px;}
 
+.leaflet-google-layer{
+    z-index: 0 !important;
+}
+.leaflet-map-pane{
+    z-index: 100;
+}
+
 .navbar-inner {
   min-height:60px;
   background-color:#ddd;

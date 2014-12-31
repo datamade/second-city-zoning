@@ -20,9 +20,21 @@ var CartoDbLib = {
       });
     }
 
-    L.tileLayer('https://{s}.tiles.mapbox.com/v3/datamade.hn83a654/{z}/{x}/{y}.png', {
-      attribution: '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>'
-    }).addTo(CartoDbLib.map);
+    var googleLayer = new L.Google('ROADMAP', {animate: false});
+    CartoDbLib.map.addLayer(googleLayer);
+    
+    // CartoDbLib.map.on('zoomstart', function(e){
+    //   if (typeof CartoDbLib.dataLayer !== 'undefined')
+    //     CartoDbLib.dataLayer.hide();
+    // })
+    // google.maps.event.addListener(googleLayer._google, 'idle', function(e){
+    //   if (typeof CartoDbLib.dataLayer !== 'undefined')
+    //     CartoDbLib.dataLayer.show();
+    // })
+
+    // L.tileLayer('https://{s}.tiles.mapbox.com/v3/datamade.hn83a654/{z}/{x}/{y}.png', {
+    //   attribution: '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>'
+    // }).addTo(CartoDbLib.map);
 
     //reset filters
     $("#search_address").val(CartoDbLib.convertToPlainString($.address.parameter('address')));
@@ -67,7 +79,7 @@ var CartoDbLib = {
       ]
     }
 
-    cartodb.createLayer(CartoDbLib.map, layerOpts)
+    CartoDbLib.dataLayer = cartodb.createLayer(CartoDbLib.map, layerOpts)
       .addTo(CartoDbLib.map)
       .done(function(layer) {
         var sublayer = layer.getSubLayer(0);
