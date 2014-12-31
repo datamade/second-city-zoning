@@ -103,16 +103,21 @@ var CartoDbLib = {
       title = 'Planned Manufacturing District';
       description = "All kinds of manufacturing, warehouses, and waste disposal. Special service district - not technically a manufacturing district - intended to protect the city's industrial base.";
       zone_class_link = "PMD";
+      project_link = "https://gisapps.cityofchicago.org/gisimages/zoning_pds/" + zone_class.replace(" ","") + ".pdf"
     }
     else if (zone_class.substring(0, 'PD'.length) === 'PD') {
       title = 'Planned Development';
       description = "Tall buildings, campuses, and other large developments that must be negotiated with city planners. Developers gain freedom in building design, but must work with city to ensure project serves and integrates with surrounding neighborhood.";
       zone_class_link = "PD";
+      project_link = "https://gisapps.cityofchicago.org/gisimages/zoning_pds/" + zone_class.replace(" ","") + ".pdf"
+
+      //https://gisapps.cityofchicago.org/gisimages/zoning_pds/PD43.pdf
     }
     else {
       title = ZoningTable[zone_class].district_title;
       description = ZoningTable[zone_class].juan_description;
       zone_class_link = zone_class;
+      project_link = "";
     }
 
     zone_prefix = zone_class.replace( new RegExp("[^A-Z]","gm"),"");
@@ -141,7 +146,8 @@ var CartoDbLib = {
       'title': title, 
       'description': description, 
       'zone_class_link': zone_class_link, 
-      'zone_icon': zone_icon
+      'zone_icon': zone_icon,
+      'project_link': project_link
     };
   },
 
@@ -171,8 +177,11 @@ var CartoDbLib = {
         </h3>\
         <strong>What's here?</strong><br />\
         " + zone_info.description + "\
-        <a href='/zone/" + zone_info.zone_class_link + "/'>Learn more&nbsp;»</a>\
+        <a href='/zone/" + zone_info.zone_class_link + "/'>Learn&nbsp;more&nbsp;»</a>\
         ";
+
+      if (zone_info.project_link != "")
+        popup_content += "<br /><a target='_blank' href='" + zone_info.project_link + "'>Read the full development plan for " + props.zone_class + "&nbsp;»</a>"
 
       // var popup = L.popup()
       // .setLatLng(latlng)
