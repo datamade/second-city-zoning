@@ -80,7 +80,7 @@ var CartoDbLib = {
           $('#mapCanvas div').css('cursor','inherit');
           CartoDbLib.info.clear();
         })
-        sublayer.on('featureClick', function(e, pos, latlng, data){
+        sublayer.on('featureClick', function(e, latlng, pos, data){
           CartoDbLib.getOneZone(data['cartodb_id'], latlng);
         })
         window.setTimeout(function(){
@@ -163,7 +163,7 @@ var CartoDbLib = {
       CartoDbLib.lastClickedLayer = L.geoJson(shape);
       CartoDbLib.lastClickedLayer.addTo(CartoDbLib.map);
       CartoDbLib.lastClickedLayer.setStyle({weight: 2, fillOpacity: 0, color: '#000'});
-      CartoDbLib.map.setView(CartoDbLib.lastClickedLayer.getBounds().getCenter(), 15);
+      CartoDbLib.map.fitBounds(CartoDbLib.lastClickedLayer.getBounds(), {maxZoom: 15});
 
       // show custom popup
       var props = shape.properties;
@@ -175,21 +175,26 @@ var CartoDbLib = {
             <small>" + zone_info.title + "</small>\
           </a>\
         </h3>\
-        <strong>What's here?</strong><br />\
+        <p><strong>What's here?</strong><br />\
         " + zone_info.description + "\
-        <a href='/zone/" + zone_info.zone_class_link + "/'>Learn&nbsp;more&nbsp;»</a>\
+        <a href='/zone/" + zone_info.zone_class_link + "/'>Learn&nbsp;more&nbsp;»</a></p>\
         ";
 
       if (zone_info.project_link != "")
-        popup_content += "<br /><a target='_blank' href='" + zone_info.project_link + "'>Read the full development plan for " + props.zone_class + "&nbsp;»</a>"
+        popup_content += "<p><a target='_blank' href='" + zone_info.project_link + "'>Read the full development plan for " + props.zone_class + "&nbsp;»</a></p>"
 
-      // var popup = L.popup()
-      // .setLatLng(latlng)
-      // .setContent('<p>Hello world!<br />This is a nice popup.</p>')
-      // .openOn(map);
-
-      CartoDbLib.lastClickedLayer.bindPopup(popup_content);
-      CartoDbLib.lastClickedLayer.openPopup();
+      // console.log(click_latlng);
+      if (click_latlng) {
+        CartoDbLib.popup = L.popup()
+        .setContent(popup_content)
+        .setLatLng(click_latlng)
+        .addTo(CartoDbLib.map);
+        CartoDbLib.map.openPopup();
+      }
+      else {
+        CartoDbLib.lastClickedLayer.bindPopup(popup_content);
+        CartoDbLib.lastClickedLayer.openPopup();
+      }
 
     }).error(function(e){console.log(e)});
   },
@@ -201,18 +206,24 @@ var CartoDbLib = {
     if (address != "") {
       if (address.toLowerCase().indexOf(CartoDbLib.locationScope) == -1)
         address = address + " " + CartoDbLib.locationScope;
-  
+      
       geocoder.geocode( { 'address': address}, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
           CartoDbLib.currentPinpoint = [results[0].geometry.location.lat(), results[0].geometry.location.lng()];
           $.address.parameter('address', encodeURIComponent(address));
           CartoDbLib.map.setView(new L.LatLng( CartoDbLib.currentPinpoint[0], CartoDbLib.currentPinpoint[1] ), 16)
-          
           CartoDbLib.centerMark = new L.Marker(CartoDbLib.currentPinpoint, { icon: (new L.Icon({
             iconUrl: '/images/blue-pushpin.png',
             iconSize: [32, 32],
             iconAnchor: [10, 32]
           }))}).addTo(CartoDbLib.map);
+
+          var sql = new cartodb.SQL({user: 'datamade', format: 'geojson'});
+          sql.execute('select cartodb_id, the_geom from ' + CartoDbLib.tableName + ' where ST_Intersects( the_geom, ST_SetSRID(ST_POINT({{lng}}, {{lat}}) , 4326))', {lng:CartoDbLib.currentPinpoint[1], lat:CartoDbLib.currentPinpoint[0]})
+          .done(function(data){
+            // console.log(data);
+            CartoDbLib.getOneZone(data.features[0].properties.cartodb_id, CartoDbLib.currentPinpoint)
+          }).error(function(e){console.log(e)});
 
           // CartoDbLib.drawCircle(CartoDbLib.currentPinpoint);
         } 

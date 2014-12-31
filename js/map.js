@@ -50,7 +50,7 @@ $(function() {
     return false;
   });
 
-  $("#txtSearchAddress").keydown(function(e){
+  $("#search_address").keydown(function(e){
       var key =  e.keyCode ? e.keyCode : e.which;
       if(key == 13) {
           $('#btnSearch').click();
