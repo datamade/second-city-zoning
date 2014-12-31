@@ -53,26 +53,26 @@ layout: default
     <div class='well hidden-phone'>
       <h5>
         Zoning type
-        <small>(<a href='/zones'>huh?</a>)</small>
+        <small>(<a href='/zones'>what's that?</a>)</small>
       </h5>
       <ul class='inputs-list unstyled zones'>
         <li>
           <label class='checkbox inline' data-content='Houses and apartment buildings. No stores, offices, or factories are allowed. Schools, churches, police stations and the like are ok, though.' data-original-title="&lt;img src='/images/icons/residential.png' /&gt; Residential (R)" data-placement='top' rel='popover'>
-            <input id='cbZone4' type='checkbox'>
+            <!-- <input id='cbZone4' type='checkbox'> -->
             <img alt='Residential' src='/images/icons/residential.png'>
             Residential
           </label>
         </li>
         <li>
           <label class='checkbox inline' data-content='From bodegas to big boxes, these districts are for stores and offices. Above-ground floor apartments are usually allowed. Includes Business (B), Commercial (C) and most Downtown (D) districts.' data-original-title="&lt;img src='/images/icons/commercial.png' /&gt; Commercial (C,B,DX,DC,DS)" data-placement='top' rel='popover'>
-            <input id='cbZone1' type='checkbox'>
+            <!-- <input id='cbZone1' type='checkbox'> -->
             <img alt='Commercial' src='/images/icons/commercial.png'>
             Commercial
           </label>
         </li>
         <li>
           <label class='checkbox inline' data-content="Factories, warehouses, freight, junkyards. All the heavy duty stuff in Chicago's industrial corridors, as well as fourteen special Planned Manufacturing Districts (PMD)." data-original-title="&lt;img src='/images/icons/industrial.png' /&gt; Industrial (M)" data-placement='top' rel='popover'>
-            <input id='cbZone3' type='checkbox'>
+            <!-- <input id='cbZone3' type='checkbox'> -->
             <img alt='Industrial' src='/images/icons/industrial.png'>
             Industrial
           </label>
@@ -84,21 +84,21 @@ layout: default
       <ul class='inputs-list unstyled zones'>
         <li>
           <label class='checkbox inline' data-content='Tall buildings, hospital campuses, and other large developments that must be negotiated with city planners.' data-original-title="&lt;img src='/images/icons/government.png' /&gt; Planned Development (PD)" data-placement='top' rel='popover'>
-            <input id='cbZone5' type='checkbox'>
+            <!-- <input id='cbZone5' type='checkbox'> -->
             <img alt='Planned Development' src='/images/icons/government.png'>
             Planned Development
           </label>
         </li>
         <li>
           <label class='checkbox inline' data-content='Bits of land designed to protect roads, bus ways, bike trails, and rail lines.' data-original-title="&lt;img src='/images/icons/trains.png' /&gt; Transportation (T)" data-placement='top' id='transit-zone' rel='popover'>
-            <input id='cbZone11' type='checkbox'>
+            <!-- <input id='cbZone11' type='checkbox'> -->
             <img alt='Transportation' src='/images/icons/trains.png'>
             Transportation
           </label>
         </li>
         <li>
           <label class='checkbox inline' data-content='Protected land set side for public parks, open space, beaches, and cemeteries.' data-original-title="&lt;img src='/images/icons/parks-entertainment.png' /&gt; Parks and Open Space (POS)" data-placement='top' rel='popover'>
-            <input id='cbZone12' type='checkbox'>
+            <!-- <input id='cbZone12' type='checkbox'> -->
             <img alt='Parks and Open Space' src='/images/icons/parks-entertainment.png'>
             Parks and Open Space
           </label>
@@ -153,6 +153,51 @@ layout: default
 <audio id='yay' src='/resources/audio/effects/yay.mp3'></audio>
 <audio id='simcopter-one' src='/resources/audio/effects/simcopter_one.mp3'></audio>
 
+<style id='second-city-zoning-styles'>
+  #city_of_chicago_zoning{
+    polygon-fill: #eee;
+    polygon-opacity: 0.35;
+    line-color: #666;
+    line-width: 1;
+    line-opacity: .5;
+    [zoom<=9] { line-width: 0.1; }
+    [zoom=10] { line-width: .2; }
+    [zoom=11] { line-width: .3; }
+    [zoom=12] { line-width: .4; }
+    [zoom=13] { line-width: .5; }
+  }
+
+  #city_of_chicago_zoning{
+    [zoom>=14][zone_class=~".*1"] { polygon-opacity: 0.15; }
+    [zoom>=14][zone_class=~".*1.5"] { polygon-opacity: 0.15; }
+    [zoom>=14][zone_class=~".*2"] { polygon-opacity: 0.25; }
+    [zoom>=14][zone_class=~".*3"] { polygon-opacity: 0.35; }
+    [zoom>=14][zone_class=~".*3.5"] { polygon-opacity: 0.45; }
+    [zoom>=14][zone_class=~".*4"] { polygon-opacity: 0.45; }
+    [zoom>=14][zone_class=~".*4.5"] { polygon-opacity: 0.55; }
+    [zoom>=14][zone_class=~".*5"] { polygon-opacity: 0.55; }
+    [zoom>=14][zone_class=~".*5.5"] { polygon-opacity: 0.6; }
+    [zoom>=14][zone_class=~".*6.*"] { polygon-opacity: 0.6; }
+    [zoom>=14][zone_class=~".*7.*"] { polygon-opacity: 0.6; }
+    [zoom>=14][zone_class=~".*12.*"] { polygon-opacity: 0.65; }
+    [zoom>=14][zone_class=~".*16.*"] { polygon-opacity: 0.65; }
+    [zoom>=14][zone_class=~"P.*"] { polygon-opacity: 0.35; }
+  }
+
+  #city_of_chicago_zoning[zone_type= 1] { polygon-fill: #0000ff; }
+  #city_of_chicago_zoning[zone_type= 2] { polygon-fill: #0000ff; }
+  #city_of_chicago_zoning[zone_type= 3] { polygon-fill: #ffff00; }
+  #city_of_chicago_zoning[zone_type= 4] { polygon-fill: #00ff00; }
+  #city_of_chicago_zoning[zone_type= 5] { polygon-fill: #ff0000; }
+  #city_of_chicago_zoning[zone_type= 6] { polygon-fill: #ffff00; }
+  #city_of_chicago_zoning[zone_type= 7] { polygon-fill: #0000ff; }
+  #city_of_chicago_zoning[zone_type= 8] { polygon-fill: #0000ff; }
+  #city_of_chicago_zoning[zone_type= 9] { polygon-fill: #00ff00; }
+  #city_of_chicago_zoning[zone_type=10] { polygon-fill: #0000ff; }
+  #city_of_chicago_zoning[zone_type=11] { polygon-fill: #666666; }
+  #city_of_chicago_zoning[zone_type=12] { polygon-fill: #38761d; }
+</style>
+
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=places"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 <script type="text/javascript" src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
@@ -164,18 +209,3 @@ layout: default
 <script type="text/javascript" src="/js/jquery.jplayer.min.js"></script>
 <script type="text/javascript" src="/js/jquery.csv.min.js" ></script>
 <script type="text/javascript" src="/js/map.js"></script>
-
-{% raw %}
-<script type="infowindow/html" id="infowindow_template">
-  <div class="cartodb-popup">
-    <a href="#close" class="cartodb-popup-close-button close">x</a>
-     <div class="cartodb-popup-content-wrapper">
-       <div class="cartodb-popup-content">
-         <!-- content.data contains the field info -->
-         <div id='zone-content'></div>
-       </div>
-     </div>
-     <div class="cartodb-popup-tip-container"></div>
-  </div>
-</script>
-{% endraw %}

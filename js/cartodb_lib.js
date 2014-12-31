@@ -28,14 +28,6 @@ var CartoDbLib = {
     $("#search_address").val(CartoDbLib.convertToPlainString($.address.parameter('address')));
     $(":checkbox").attr("checked", "checked");
 
-    var sql = "SELECT * FROM " + CartoDbLib.tableName + "";
-
-    // change the query for the first layer
-    var subLayerOptions = {
-      sql: sql,
-      interactivity: 'cartodb_id, zone_type, zone_class, ordinance_'
-    }
-
     CartoDbLib.info = L.control({position: 'bottomleft'});
 
     CartoDbLib.info.onAdd = function (map) {
@@ -47,7 +39,8 @@ var CartoDbLib = {
     // method that we will use to update the control based on feature properties passed
     CartoDbLib.info.update = function (props) {
       if (props) {
-        this._div.innerHTML = "<h4>Zoning type</h4>" + props.zone_class + " - " + CartoDbLib.getZoneInfo(props.zone_class).title;
+        var zone_info = CartoDbLib.getZoneInfo(props.zone_class);
+        this._div.innerHTML = "<img src='/images/icons/" + zone_info.zone_icon + ".png' /> " + props.zone_class + " - " + zone_info.title;
       }
       else {
         this._div.innerHTML = 'Hover over an area';
@@ -60,67 +53,99 @@ var CartoDbLib = {
 
     CartoDbLib.info.addTo(CartoDbLib.map);
 
-    CartoDbLib.dataLayer = cartodb.createLayer(CartoDbLib.map, CartoDbLib.layerUrl, {cartodb_logo: false})
+    var fields = "cartodb_id, zone_type, zone_class, ordinance_"
+    var layerOpts = {
+      user_name: 'datamade',
+      type: 'cartodb',
+      cartodb_logo: false,
+      sublayers: [
+        {
+          sql: "select * from " + CartoDbLib.tableName,
+          cartocss: $('#second-city-zoning-styles').html().trim(),
+          interactivity: fields
+        }
+      ]
+    }
+
+    cartodb.createLayer(CartoDbLib.map, layerOpts)
       .addTo(CartoDbLib.map)
-      .on('done', function(layer) {
+      .done(function(layer) {
         var sublayer = layer.getSubLayer(0);
-        sublayer.set(subLayerOptions)
-        // sublayer.on('featureOver', function(e, latlng, pos, data, subLayerIndex) {
-        //   $('#mapCanvas div').css('cursor','pointer');
-        //   CartoDbLib.info.update(data);
-        // })
-        // sublayer.on('featureOut', function(e, latlng, pos, data, subLayerIndex) {
-        //   $('#mapCanvas div').css('cursor','inherit');
-        //   CartoDbLib.info.clear();
-        // })
-        sublayer.on('featureClick', function(e, pos, latlng, data){
-          CartoDbLib.getOneZone(data['cartodb_id']);
+        sublayer.setInteraction(true);
+        sublayer.on('featureOver', function(e, latlng, pos, data, subLayerIndex) {
+          $('#mapCanvas div').css('cursor','pointer');
+          CartoDbLib.info.update(data);
         })
-        sublayer.infowindow.set('template', function(data) {
-          console.log(data);
-          if (data.hasOwnProperty('zone_class')) {
-            // console.log(data.zone_class);
-            var zone_info = CartoDbLib.getZoneInfo(data.zone_class);
-            $('#zone-content').html("<h3>" + data.zone_class + " - " + zone_info.title + "</h3><strong>What's here?</strong> " + zone_info.description + " <a href='/zone/" + zone_info.link + "/'>Learn more »</a>");
-            console.log("#zone-content:");
-            console.log($('#zone-content').html());
-          }
-          return $('#infowindow_template').html();
-        });
+        sublayer.on('featureOut', function(e, latlng, pos, data, subLayerIndex) {
+          $('#mapCanvas div').css('cursor','inherit');
+          CartoDbLib.info.clear();
+        })
+        sublayer.on('featureClick', function(e, pos, latlng, data){
+          CartoDbLib.getOneZone(data['cartodb_id'], latlng);
+        })
         window.setTimeout(function(){
           if($.address.parameter('id')){
             CartoDbLib.getOneZone($.address.parameter('id'))
           }
-        }, 1000)
-      }).on('error', function() {
-        //log the error
-    }); 
+        }, 500)
+      }).error(function(e) {
+        //console.log('ERROR')
+        //console.log(e)
+      }); 
 
     CartoDbLib.doSearch();
   },
 
   getZoneInfo: function(zone_class) {
-    console.log("looking up zone_class: " + zone_class);
+    // console.log("looking up zone_class: " + zone_class);
     // PD and PMD have different numbers for each district. Fix for displaying generic title and link.
     if (zone_class.substring(0, 'PMD'.length) === 'PMD') {
       title = 'Planned Manufacturing District';
       description = "All kinds of manufacturing, warehouses, and waste disposal. Special service district - not technically a manufacturing district - intended to protect the city's industrial base.";
-      link = "PMD";
+      zone_class_link = "PMD";
     }
     else if (zone_class.substring(0, 'PD'.length) === 'PD') {
       title = 'Planned Development';
       description = "Tall buildings, campuses, and other large developments that must be negotiated with city planners. Developers gain freedom in building design, but must work with city to ensure project serves and integrates with surrounding neighborhood.";
-      link = "PD";
+      zone_class_link = "PD";
     }
     else {
       title = ZoningTable[zone_class].district_title;
       description = ZoningTable[zone_class].juan_description;
-      link = zone_class;
+      zone_class_link = zone_class;
     }
-    return {'title': title, 'description': description, 'link': link};
+
+    zone_prefix = zone_class.replace( new RegExp("[^A-Z]","gm"),"");
+
+    var zone_icon = '';
+    switch(zone_prefix) {
+      case 'B'   : zone_icon = 'commercial'; break;
+      case 'C'   : zone_icon = 'commercial'; break;
+      case 'M'   : zone_icon = 'industrial'; break;
+      case 'R'   : zone_icon = 'residential'; break;
+      case 'RS'  : zone_icon = 'residential'; break;
+      case 'RT'  : zone_icon = 'residential'; break;
+      case 'RTA' : zone_icon = 'residential'; break;
+      case 'RM'  : zone_icon = 'residential'; break;
+      case 'PD'  : zone_icon = 'government'; break;
+      case 'PMD' : zone_icon = 'industrial'; break;
+      case 'DX'  : zone_icon = 'commercial'; break;
+      case 'DC'  : zone_icon = 'commercial'; break;
+      case 'DR'  : zone_icon = 'residential'; break;
+      case 'DS'  : zone_icon = 'commercial'; break;
+      case 'T'   : zone_icon = 'trains'; break;
+      case 'POS' : zone_icon = 'parks-entertainment'; break;
+    }
+
+    return {
+      'title': title, 
+      'description': description, 
+      'zone_class_link': zone_class_link, 
+      'zone_icon': zone_icon
+    };
   },
 
-  getOneZone: function(cartodb_id){
+  getOneZone: function(cartodb_id, click_latlng){
     if (CartoDbLib.lastClickedLayer){
       CartoDbLib.map.removeLayer(CartoDbLib.lastClickedLayer);
     }
@@ -133,25 +158,36 @@ var CartoDbLib = {
       CartoDbLib.lastClickedLayer.addTo(CartoDbLib.map);
       CartoDbLib.lastClickedLayer.setStyle({weight: 2, fillOpacity: 0, color: '#000'});
       CartoDbLib.map.setView(CartoDbLib.lastClickedLayer.getBounds().getCenter(), 15);
-      // CartoDbLib.selectParcel(shape.properties);
+
+      // show custom popup
+      var props = shape.properties;
+      var zone_info = CartoDbLib.getZoneInfo(props.zone_class);
+      var popup_content = "\
+        <h3>\
+          <img src='/images/icons/" + zone_info.zone_icon + ".png' />\
+          <a href='/zone/" + zone_info.zone_class_link + "/'>" + props.zone_class + "\
+            <small>" + zone_info.title + "</small>\
+          </a>\
+        </h3>\
+        <strong>What's here?</strong><br />\
+        " + zone_info.description + "\
+        <a href='/zone/" + zone_info.zone_class_link + "/'>Learn more&nbsp;»</a>\
+        ";
+
+      // var popup = L.popup()
+      // .setLatLng(latlng)
+      // .setContent('<p>Hello world!<br />This is a nice popup.</p>')
+      // .openOn(map);
+
+      CartoDbLib.lastClickedLayer.bindPopup(popup_content);
+      CartoDbLib.lastClickedLayer.openPopup();
+
     }).error(function(e){console.log(e)});
-    //    window.location.hash = 'browse';
   },
 
   doSearch: function() {
     CartoDbLib.clearSearch();
     var address = $("#search_address").val();
-
-    //-----custom filters-------
-    // var searchType = "zone_type IN (-1,";
-    // if ( $("#cbZone1").is(':checked')) searchType += "1,2,7,8,10,";
-    // if ( $("#cbZone3").is(':checked')) searchType += "3,6,";
-    // if ( $("#cbZone4").is(':checked')) searchType += "4,9,";
-    // if ( $("#cbZone5").is(':checked')) searchType += "5,";
-    // if ( $("#cbZone11").is(':checked')) searchType += "11,";
-    // if ( $("#cbZone12").is(':checked')) searchType += "12,";
-    // whereClause += " AND " + searchType.slice(0, searchType.length - 1) + ")";
-    //-------end of custom filters--------
     
     if (address != "") {
       if (address.toLowerCase().indexOf(CartoDbLib.locationScope) == -1)
@@ -182,8 +218,6 @@ var CartoDbLib = {
   },
 
   clearSearch: function(){
-    if (CartoDbLib.dataLayer)
-      CartoDbLib.map.removeLayer( CartoDbLib.dataLayer );
     if (CartoDbLib.centerMark)
       CartoDbLib.map.removeLayer( CartoDbLib.centerMark );
     if (CartoDbLib.circle)
