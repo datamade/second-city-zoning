@@ -20,8 +20,24 @@ var CartoDbLib = {
       });
     }
 
-    var googleLayer = new L.Google('ROADMAP', {animate: false});
-    CartoDbLib.map.addLayer(googleLayer);
+    CartoDbLib.google = new L.Google('ROADMAP', {animate: false});
+      
+    CartoDbLib.satellite = L.tileLayer('https://{s}.tiles.mapbox.com/v3/datamade.k92mcmc8/{z}/{x}/{y}.png', {
+      attribution: '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>',
+      detectRetina: true
+    });
+      
+    CartoDbLib.buildings = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+      detectRetina: true
+    });
+
+    CartoDbLib.baseMaps = {"Streets": CartoDbLib.google, "Building addresses": CartoDbLib.buildings, "Satellite": CartoDbLib.satellite};
+    CartoDbLib.map.addLayer(CartoDbLib.google);
+    //CartoDbLib.google.addTo(CartoDbLib.map);
+
+    // var googleLayer = new L.Google('ROADMAP', {animate: false});
+    // CartoDbLib.map.addLayer(googleLayer);
 
     // L.tileLayer('https://{s}.tiles.mapbox.com/v3/datamade.hn83a654/{z}/{x}/{y}.png', {
     //   attribution: '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>'
@@ -87,13 +103,15 @@ var CartoDbLib = {
           CartoDbLib.getOneZone(data['cartodb_id'], latlng);
         })
 
-        CartoDbLib.map.on('zoomstart', function(e){
-          sublayer.hide();
-        })
-        google.maps.event.addListener(googleLayer._google, 'idle', function(e){
-          sublayer.show();
-        })
+        // after layer is loaded, add the layer toggle control
+        L.control.layers(CartoDbLib.baseMaps, {"Zoning": layer}, { collapsed: false, autoZIndex: true }).addTo(CartoDbLib.map);
 
+        // CartoDbLib.map.on('zoomstart', function(e){
+        //   sublayer.hide();
+        // })
+        // google.maps.event.addListener(CartoDbLib.google._google, 'idle', function(e){
+        //   sublayer.show();
+        // })
 
         window.setTimeout(function(){
           if($.address.parameter('id')){
