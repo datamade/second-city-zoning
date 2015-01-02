@@ -3,15 +3,6 @@ body {
   font-size:14px;
 }
 
-input,button,select,textarea {
-  font-family:Chicago,Verdana,sans-serif;
-}
-
-label,input,button,select,textarea {
-  font-size:14px;
-  line-height:1.2em;
-}
-
 h1,h2,h3{line-height:inherit;}
 
 h5 {margin-top: 0px ; margin-bottom: 2px;}
@@ -23,54 +14,17 @@ h5 {margin-top: 0px ; margin-bottom: 2px;}
     z-index: 100;
 }
 
-.navbar-inner {
-  min-height:60px;
-  background-color:#ddd;
-  background-image: -moz-linear-gradient(top, #eee, #ddd);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#eee), to(#ddd));
-  background-image: -webkit-linear-gradient(top, #eee, #ddd);
-  background-image: -o-linear-gradient(top, #eee, #ddd);
-  background-image: linear-gradient(to bottom, #eee, #ddd);
-  background-repeat: repeat-x;
-  border: 1px solid #333333;
-  -webkit-border-radius: 4px;
-     -moz-border-radius: 4px;
-          border-radius: 4px;
-  filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ffeeeeee', endColorstr='#ffdddddd', GradientType=0);
-  *zoom: 1;
-  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
-     -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
-          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+.navbar {
+  margin-bottom: 10px;
 }
 
 .navbar .brand {
   padding: 10px 0 7px 15px;
 }
 
-.navbar .nav>.active>a,
-.navbar .nav>.active>a:hover,
-.navbar .nav>.active>a:focus {
-  color:#9c0001;
-  text-decoration:none;
-  background-color:transparent;
-  -webkit-box-shadow:none;
-  -moz-box-shadow:none;
-  box-shadow:none;
-}
-
 .navbar .navbar-text {
   margin-bottom:0;
   line-height:60px;
-}
-
-.navbar .nav li {
-  margin-bottom:0;
-  line-height:53px;
-}
-
-.nav-pills li.active>a,
-.nav-pills li.active>a:hover {
-  background-color:#ddd;
 }
 
 .well {

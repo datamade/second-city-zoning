@@ -78,7 +78,6 @@
     <link href='/favicon.ico' rel='shortcut icon'>
     <!-- Styles -->
     <link rel="stylesheet" href="/css/bootstrap.readable.min.css"/>
-    <link rel="stylesheet" href="/css/bootstrap-responsive.css"/>
     <link rel="stylesheet" href="/css/custom.css"/>
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css"/>
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
@@ -92,45 +91,45 @@
         <link rel="stylesheet" href="http://libs.cartodb.com/cartodb.js/v3/themes/css/cartodb.ie.css" />
     <![endif]-->
 
-    <script type="text/javascript" src="/js/jquery.js"></script>
-    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 
   </head>
   <body>
-    <div class='navbar'>
-      <div class='navbar-inner'>
-        <div class='container'>
-          <a class='btn btn-navbar' data-target='.nav-collapse' data-toggle='collapse'>
-            <span class='icon-bar'></span>
-            <span class='icon-bar'></span>
-            <span class='icon-bar'></span>
-          </a>
-          <a class='brand' href='/'>
-            <img alt='2nd City Zoning' src='/images/logo.png'>
-          </a>
+
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/"><img alt='2nd City Zoning' src='/images/logo.png'></a>
           <p class='navbar-text pull-left'>
             An <a class='yay-link' href='http://opencityapps.org'>Open City</a> app
           </p>
-          <div class='container nav-collapse'>
-            <ul class='nav pull-right'>
-              {% for link in site.navigation %}
-                {% assign current = nil %}
-                {% if page.url == link.url or (page.categories != nil and page.categories.first == link.category) %}
-                  {% assign current = 'active' %}
-                {% endif %}
-                <li class="{{ current }}">
-                  <a href="{{ link.url }}">{{ link.text }}</a>
-                </li>
-              {% endfor %}
-            </ul>
-          </div>
         </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav pull-right">
+            {% for link in site.navigation %}
+              {% assign current = nil %}
+              {% if page.url == link.url or (page.categories != nil and page.categories.first == link.category) %}
+                {% assign current = 'active' %}
+              {% endif %}
+              <li class="{{ current }}">
+                <a href="{{ link.url }}">{{ link.text }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div><!--/.nav-collapse -->
       </div>
-    </div>
+    </nav>
+
     <div class='container-fluid'>
       {{content}}
     </div>
-    <script type="text/javascript" src="/js/jquery.ba-hashchange.js"></script>
     <script type="text/javascript" src="/js/analytics_lib.js"></script>
   </body>
 </html>

@@ -3,8 +3,8 @@ layout: default
 title: Home
 ---
 
-<div class='row-fluid'>
-  <div class='span4'>
+<div class='row'>
+  <div class='col-md-4'>
     <div class='accordion' id='view_accordion'>
       <div class='accordion-group'>
         <div class='accordion-heading'>
@@ -39,25 +39,33 @@ title: Home
             <p>From there we got a little carried away. Graphics, sounds, music, oh my.</p>
             <p>We had a lot of fun making this, so dive in and explore!</p>
             <p class='pull-right'>
-              <a class='btn btn-primary btn-small' href='#' id='closeAbout'>Ok, thanks!</a>
-              <a class='btn btn-small' href='/about'>Read more &raquo;</a>
+              <a class='btn btn-danger btn-sm' href='#' id='closeAbout'>Ok, thanks!</a>
+              <a class='btn btn-sm' href='/about'>Read more &raquo;</a>
             </p>
           </div>
         </div>
       </div>
     </div>
     <div class='well'>
-      <h5>Find zone <small>(<a id='findMe' href='#'>find me</a>)</small></h5>
-      <input class='input-block-level' id='search_address' placeholder='Enter an address or an intersection' type='text'>
-      <input class='btn btn-primary' id='btnSearch' type='button' value='Search'>
-      <button class='btn' id='reset'>Reset</button>
+      <div class="form-group">
+        <h5>Find zone <small>(<a id='findMe' href='#'>find me</a>)</small></h5>
+        <input class='form-control' id='search_address' placeholder='Enter an address or an intersection' type='text'>
+      </div>
+      <button class='btn btn-danger btn-sm' id='btnSearch' type='button'>
+        <i class='fa fa-search'></i>
+        Search
+      </button>
+      <button class='btn btn-default btn-sm' id='reset'>
+        <i class='fa fa-refresh'></i>
+        Reset
+      </button>
     </div>
     <div class='well hidden-phone'>
       <h5>
         Zoning type
         <small>(<a href='/zones'>what's that?</a>)</small>
       </h5>
-      <ul class='inputs-list unstyled zones'>
+      <ul class='inputs-list list-unstyled zones'>
         <li>
           <label class='checkbox inline' data-content='Houses and apartment buildings. No stores, offices, or factories are allowed. Schools, churches, police stations and the like are ok, though.' data-original-title="&lt;img src='/images/icons/residential.png' /&gt; Residential (R)" data-placement='top' rel='popover'>
             <!-- <input id='cbZone4' type='checkbox'> -->
@@ -83,7 +91,7 @@ title: Home
       <h5>
         Special Purpose Districts
       </h5>
-      <ul class='inputs-list unstyled zones'>
+      <ul class='inputs-list list-unstyled zones'>
         <li>
           <label class='checkbox inline' data-content='Tall buildings, hospital campuses, and other large developments that must be negotiated with city planners.' data-original-title="&lt;img src='/images/icons/government.png' /&gt; Planned Development (PD)" data-placement='top' rel='popover'>
             <!-- <input id='cbZone5' type='checkbox'> -->
@@ -111,38 +119,40 @@ title: Home
       <div id='jquery_jplayer'></div>
       <!-- Using the cssSelectorAncestor option with the default cssSelector class names to enable control association of standard functions using built in features -->
       <div id='jp_container'>
-        <h5>
+        <h4>
           Music
           <small>
             <a class='jp-play' href='#'>
-              <i class='icon-play'></i>
+              <i class='fa fa-play'></i>
             </a>
             <a class='jp-pause' href='#'>
-              <i class='icon-pause'></i>
+              <i class='fa fa-pause'></i>
             </a>
             <a class='jp-stop' href='#'>
-              <i class='icon-stop'></i>
+              <i class='fa fa-stop'></i>
             </a>
             <span class='pull-right'>
               <a href='/about#dear-maxis'>disclaimer</a>
             </span>
           </small>
-        </h5>
-        <ul class='nav nav-pills' id='jplayer-tracks'>
-          <li>
-            <a class='track track-default' href='/resources/audio/sim_city_2000_theme.mp3'>Sim City Theme</a>
-          </li>
-          <li>
-            <a class='track' href='/resources/audio/sim_city_2000_moogycity.mp3'>MoogyCit</a>
-          </li>
-          <li>
-            <a class='track' href='/resources/audio/sim_city_2000_city_shimmy.mp3'>City Shimmy</a>
-          </li>
-        </ul>
+        </h4>
+        <small>
+          <ul class='nav nav-pills' id='jplayer-tracks'>
+            <li>
+              <a class='track track-default' href='/resources/audio/sim_city_2000_theme.mp3'>Sim City Theme</a>
+            </li>
+            <li>
+              <a class='track' href='/resources/audio/sim_city_2000_moogycity.mp3'>MoogyCit</a>
+            </li>
+            <li>
+              <a class='track' href='/resources/audio/sim_city_2000_city_shimmy.mp3'>City Shimmy</a>
+            </li>
+          </ul>
+        </small>
       </div>
     </div>
   </div>
-  <div class='span8'>
+  <div class='col-md-8'>
     <div id='mapCanvas'></div>
     <span class='pull-right'>
       Data accurate as of October 2014. An <a class='yay-link' href='http://opencityapps.org'>Open City</a> app by <a class='yay-link' href='http://derekeder.com'>Derek Eder</a>, and <a href='https://jpvelez.contently.com'>Juan-Pablo Velez</a><a class='simcopter' href='#'>.</a>
@@ -206,8 +216,6 @@ title: Home
 <script type="text/javascript" src="/js/leaflet-google.js" ></script>
 <script type="text/javascript" src="/js/jquery.address.js"></script>
 <script type="text/javascript" src="/js/cartodb_lib.js"></script>
-<script type="text/javascript" src="/js/bootstrap-popover.js"></script>
-<script type="text/javascript" src="/js/bootstrap-modal.js"></script>
 <script type="text/javascript" src="/js/jquery.cookie.js"></script>
 <script type="text/javascript" src="/js/jquery.jplayer.min.js"></script>
 <script type="text/javascript" src="/js/jquery.csv.min.js" ></script>
