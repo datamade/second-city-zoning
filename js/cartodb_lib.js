@@ -8,6 +8,7 @@ var CartoDbLib = {
   currentPinpoint: null,
   layerUrl: 'http://datamade.cartodb.com/api/v2/viz/1422db28-7eed-11e4-a731-0e4fddd5de28/viz.json',
   tableName: 'city_of_chicago_zoning',
+  maptiks_tracking_code: '4814c97d-062f-4959-a2a0-67992c25f541',
 
   initialize: function(){
     geocoder = new google.maps.Geocoder();
@@ -16,7 +17,9 @@ var CartoDbLib = {
     if (!CartoDbLib.map) {
       CartoDbLib.map = new L.Map('mapCanvas', { 
         center: CartoDbLib.map_centroid,
-        zoom: CartoDbLib.defaultZoom
+        zoom: CartoDbLib.defaultZoom,
+        track_id: CartoDbLib.maptiks_tracking_code,
+        sa_id: '2nd City Zoning'
       });
     }
 
@@ -24,24 +27,18 @@ var CartoDbLib = {
       
     CartoDbLib.satellite = L.tileLayer('https://{s}.tiles.mapbox.com/v3/datamade.k92mcmc8/{z}/{x}/{y}.png', {
       attribution: '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>',
-      detectRetina: true
+      detectRetina: true,
+      sa_id: 'satellite'
     });
       
     CartoDbLib.buildings = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-      detectRetina: true
+      detectRetina: true,
+      sa_id: 'buildings'
     });
 
     CartoDbLib.baseMaps = {"Streets": CartoDbLib.google, "Building addresses": CartoDbLib.buildings, "Satellite": CartoDbLib.satellite};
     CartoDbLib.map.addLayer(CartoDbLib.google);
-    //CartoDbLib.google.addTo(CartoDbLib.map);
-
-    // var googleLayer = new L.Google('ROADMAP', {animate: false});
-    // CartoDbLib.map.addLayer(googleLayer);
-
-    // L.tileLayer('https://{s}.tiles.mapbox.com/v3/datamade.hn83a654/{z}/{x}/{y}.png', {
-    //   attribution: '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>'
-    // }).addTo(CartoDbLib.map);
 
     //reset filters
     $("#search_address").val(CartoDbLib.convertToPlainString($.address.parameter('address')));
@@ -193,7 +190,7 @@ var CartoDbLib = {
       CartoDbLib.lastClickedLayer = L.geoJson(shape);
       CartoDbLib.lastClickedLayer.addTo(CartoDbLib.map);
       CartoDbLib.lastClickedLayer.setStyle({weight: 2, fillOpacity: 0, color: '#000'});
-      CartoDbLib.map.fitBounds(CartoDbLib.lastClickedLayer.getBounds(), {maxZoom: 15});
+      CartoDbLib.map.fitBounds(CartoDbLib.lastClickedLayer.getBounds(), {maxZoom: 16});
 
       // show custom popup
       var props = shape.properties;

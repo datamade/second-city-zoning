@@ -14,6 +14,7 @@ L.Google = L.Class.extend({
     opacity: 1,
     continuousWorld: false,
     noWrap: false,
+    sa_id: 'google'
   },
 
   // Possible types: SATELLITE, ROADMAP, HYBRID
