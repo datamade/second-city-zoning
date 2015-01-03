@@ -26,6 +26,8 @@ $(function() {
     });
 
   CartoDbLib.initialize();
+  var autocomplete = new google.maps.places.Autocomplete(document.getElementById('search_address'));
+
   $(':checkbox').click(function(){
     play_multi_sound("mouse-click");
     CartoDbLib.doSearch();

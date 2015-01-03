@@ -22,6 +22,8 @@ label { font-weight: normal;}
   margin-bottom: 10px;
 }
 
+.navbar-inverse { background-color: #F7F7F7;}
+
 .navbar .brand {
   padding: 10px 0 7px 15px;
 }
