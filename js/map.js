@@ -46,6 +46,7 @@ $(function() {
     play_multi_sound("explosion");
     $.address.parameter('address','');
     $.address.parameter('radius','');
+    $.address.parameter('id','');
     CartoDbLib.initialize();
     return false;
   });
@@ -76,13 +77,15 @@ $(function() {
 
   //$('#welcome-modal').modal('show');
   if ($.cookie("show-welcome") != "read") {
-    $('#accordionAbout').click();
+    $('#a_info_accordion').click();
     $.cookie("show-welcome", "read", { expires: 7 });
   }
 
-  $('#closeAbout').click(function(){
-    $('#accordionAbout').click();
+  $('#close_info').click(function(){
+    $('#a_info_accordion').click();
   });
+
+  $('.zones label').popover({trigger: "hover", placement: "top"})
 
   //---------music player---------------
   // Local copy of jQuery selectors, for performance.

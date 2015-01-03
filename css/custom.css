@@ -7,6 +7,10 @@ h1,h2,h3{line-height:inherit;}
 
 h5 {margin-top: 0px ; margin-bottom: 2px;}
 
+a { color: #D9534F; }
+
+label { font-weight: normal;}
+
 .leaflet-google-layer{
     z-index: 0 !important;
 }
@@ -27,8 +31,15 @@ h5 {margin-top: 0px ; margin-bottom: 2px;}
   line-height:60px;
 }
 
+.navbar-nav > li > a {
+  padding-top: 28px;
+}
+
 .well {
   padding:10px 15px;
+}
+
+.well, .panel-group {
   margin-bottom: 10px;
 }
 
@@ -85,10 +96,6 @@ h5 {margin-top: 0px ; margin-bottom: 2px;}
 .zone-POS-text{ color: #869b7c; }
 
 .zone-legend li {font-weight: bold;}
-
-.zones .checkbox.inline {
-  display: inherit;
-}
 
 #jplayer-tracks {
   margin-bottom: 0;

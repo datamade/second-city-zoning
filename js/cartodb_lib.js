@@ -199,12 +199,12 @@ var CartoDbLib = {
       var props = shape.properties;
       var zone_info = CartoDbLib.getZoneInfo(props.zone_class);
       var popup_content = "\
-        <h3>\
+        <h4>\
           <img src='/images/icons/" + zone_info.zone_icon + ".png' />\
           <a href='/zone/" + zone_info.zone_class_link + "/'>" + props.zone_class + "\
             <small>" + zone_info.title + "</small>\
           </a>\
-        </h3>\
+        </h4>\
         <p><strong>What's here?</strong><br />\
         " + zone_info.description + "\
         <a href='/zone/" + zone_info.zone_class_link + "/'>Learn&nbsp;more&nbsp;»</a></p>\
