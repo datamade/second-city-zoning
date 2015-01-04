@@ -88,6 +88,9 @@ $(function() {
 
   $('.zones label').popover({trigger: "hover", placement: "top"})
 
+  if ($.cookie("sound-effects") == 'on')
+    $('#sound_effects_toggle').click();
+
   $('#sound_effects_toggle').click(function(e){
     e.preventDefault();
     if ($.cookie("sound-effects") == 'on') {
