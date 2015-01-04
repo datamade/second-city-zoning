@@ -89,7 +89,7 @@ $(function() {
   $('.zones label').popover({trigger: "hover", placement: "top"})
 
   if ($.cookie("sound-effects") == 'on')
-    $('#sound_effects_toggle').click();
+    $('#sound_effects_toggle').html('<i class="fa fa-volume-up"></i> On');
 
   $('#sound_effects_toggle').click(function(e){
     e.preventDefault();
