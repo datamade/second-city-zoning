@@ -11,12 +11,7 @@ a { color: #D9534F; }
 
 label { font-weight: normal;}
 
-.leaflet-google-layer{
-    z-index: 0 !important;
-}
-.leaflet-map-pane{
-    z-index: 100;
-}
+.nav-pills > li.active > a { color: #D9534F; background-color: #FFF; }
 
 .navbar {
   margin-bottom: 10px;
@@ -101,6 +96,12 @@ label { font-weight: normal;}
 
 #jplayer-tracks {
   margin-bottom: 0;
+  margin-top: 10px;
+  font-size: 0.8em;
+}
+
+#jp_container {
+  margin-top: 10px;
 }
 
 #jp_container a:hover {
@@ -111,6 +112,13 @@ label { font-weight: normal;}
 .district-list td{
   font-size: 0.9em;
   color: #333;
+}
+
+.leaflet-google-layer{
+    z-index: 0 !important;
+}
+.leaflet-map-pane{
+    z-index: 100;
 }
 
 .info {

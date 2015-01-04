@@ -9,11 +9,11 @@ timezone: America/Chicago
 permalink: pretty
 navigation:
 - text: Home
-  url: /index.html
+  url: /
 - text: About
-  url: /about/index.html
+  url: /about/
 - text: Zoning districts
-  url: /zones/index.html
+  url: /zones/
   category: zones
 - text: Zoning rules
-  url: /zoning_rules/index.html
+  url: /zoning_rules/

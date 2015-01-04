@@ -11,6 +11,11 @@ var CartoDbLib = {
   maptiks_tracking_code: '4814c97d-062f-4959-a2a0-67992c25f541',
 
   initialize: function(){
+
+    //reset filters
+    $("#search_address").val(CartoDbLib.convertToPlainString($.address.parameter('address')));
+    $(":checkbox").attr("checked", "checked");
+
     geocoder = new google.maps.Geocoder();
 
     // initiate leaflet map
@@ -21,104 +26,100 @@ var CartoDbLib = {
         track_id: CartoDbLib.maptiks_tracking_code,
         sa_id: '2nd City Zoning'
       });
-    }
 
-    CartoDbLib.google = new L.Google('ROADMAP', {animate: false});
-      
-    CartoDbLib.satellite = L.tileLayer('https://{s}.tiles.mapbox.com/v3/datamade.k92mcmc8/{z}/{x}/{y}.png', {
-      attribution: '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>',
-      detectRetina: true,
-      sa_id: 'satellite'
-    });
-      
-    CartoDbLib.buildings = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-      detectRetina: true,
-      sa_id: 'buildings'
-    });
+      CartoDbLib.google = new L.Google('ROADMAP', {animate: false});
+        
+      CartoDbLib.satellite = L.tileLayer('https://{s}.tiles.mapbox.com/v3/datamade.k92mcmc8/{z}/{x}/{y}.png', {
+        attribution: '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>',
+        detectRetina: true,
+        sa_id: 'satellite'
+      });
+        
+      CartoDbLib.buildings = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+        detectRetina: true,
+        sa_id: 'buildings'
+      });
 
-    CartoDbLib.baseMaps = {"Streets": CartoDbLib.google, "Building addresses": CartoDbLib.buildings, "Satellite": CartoDbLib.satellite};
-    CartoDbLib.map.addLayer(CartoDbLib.google);
+      CartoDbLib.baseMaps = {"Streets": CartoDbLib.google, "Building addresses": CartoDbLib.buildings, "Satellite": CartoDbLib.satellite};
+      CartoDbLib.map.addLayer(CartoDbLib.google);
 
-    //reset filters
-    $("#search_address").val(CartoDbLib.convertToPlainString($.address.parameter('address')));
-    $(":checkbox").attr("checked", "checked");
+      CartoDbLib.info = L.control({position: 'bottomleft'});
 
-    CartoDbLib.info = L.control({position: 'bottomleft'});
+      CartoDbLib.info.onAdd = function (map) {
+          this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+          this.update();
+          return this._div;
+      };
 
-    CartoDbLib.info.onAdd = function (map) {
-        this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
-        this.update();
-        return this._div;
-    };
-
-    // method that we will use to update the control based on feature properties passed
-    CartoDbLib.info.update = function (props) {
-      if (props) {
-        var zone_info = CartoDbLib.getZoneInfo(props.zone_class);
-        this._div.innerHTML = "<img src='/images/icons/" + zone_info.zone_icon + ".png' /> " + props.zone_class + " - " + zone_info.title;
-      }
-      else {
-        this._div.innerHTML = 'Hover over an area';
-      }
-    };
-
-    CartoDbLib.info.clear = function(){
-      this._div.innerHTML = '';
-    };
-
-    CartoDbLib.info.addTo(CartoDbLib.map);
-
-    var fields = "cartodb_id, zone_type, zone_class, ordinance_"
-    var layerOpts = {
-      user_name: 'datamade',
-      type: 'cartodb',
-      cartodb_logo: false,
-      sublayers: [
-        {
-          sql: "select * from " + CartoDbLib.tableName,
-          cartocss: $('#second-city-zoning-styles').html().trim(),
-          interactivity: fields
+      // method that we will use to update the control based on feature properties passed
+      CartoDbLib.info.update = function (props) {
+        if (props) {
+          var zone_info = CartoDbLib.getZoneInfo(props.zone_class);
+          this._div.innerHTML = "<img src='/images/icons/" + zone_info.zone_icon + ".png' /> " + props.zone_class + " - " + zone_info.title;
         }
-      ]
-    }
+        else {
+          this._div.innerHTML = 'Hover over an area';
+        }
+      };
 
-    CartoDbLib.dataLayer = cartodb.createLayer(CartoDbLib.map, layerOpts)
-      .addTo(CartoDbLib.map)
-      .done(function(layer) {
-        var sublayer = layer.getSubLayer(0);
-        sublayer.setInteraction(true);
-        sublayer.on('featureOver', function(e, latlng, pos, data, subLayerIndex) {
-          $('#mapCanvas div').css('cursor','pointer');
-          CartoDbLib.info.update(data);
-        })
-        sublayer.on('featureOut', function(e, latlng, pos, data, subLayerIndex) {
-          $('#mapCanvas div').css('cursor','inherit');
-          CartoDbLib.info.clear();
-        })
-        sublayer.on('featureClick', function(e, latlng, pos, data){
-          CartoDbLib.getOneZone(data['cartodb_id'], latlng);
-        })
+      CartoDbLib.info.clear = function(){
+        this._div.innerHTML = '';
+      };
 
-        // after layer is loaded, add the layer toggle control
-        L.control.layers(CartoDbLib.baseMaps, {"Zoning": layer}, { collapsed: false, autoZIndex: true }).addTo(CartoDbLib.map);
+      CartoDbLib.info.addTo(CartoDbLib.map);
 
-        // CartoDbLib.map.on('zoomstart', function(e){
-        //   sublayer.hide();
-        // })
-        // google.maps.event.addListener(CartoDbLib.google._google, 'idle', function(e){
-        //   sublayer.show();
-        // })
-
-        window.setTimeout(function(){
-          if($.address.parameter('id')){
-            CartoDbLib.getOneZone($.address.parameter('id'))
+      var fields = "cartodb_id, zone_type, zone_class, ordinance_"
+      var layerOpts = {
+        user_name: 'datamade',
+        type: 'cartodb',
+        cartodb_logo: false,
+        sublayers: [
+          {
+            sql: "select * from " + CartoDbLib.tableName,
+            cartocss: $('#second-city-zoning-styles').html().trim(),
+            interactivity: fields
           }
-        }, 500)
-      }).error(function(e) {
-        //console.log('ERROR')
-        //console.log(e)
-      }); 
+        ]
+      }
+
+      CartoDbLib.dataLayer = cartodb.createLayer(CartoDbLib.map, layerOpts)
+        .addTo(CartoDbLib.map)
+        .done(function(layer) {
+          var sublayer = layer.getSubLayer(0);
+          sublayer.setInteraction(true);
+          sublayer.on('featureOver', function(e, latlng, pos, data, subLayerIndex) {
+            $('#mapCanvas div').css('cursor','pointer');
+            CartoDbLib.info.update(data);
+          })
+          sublayer.on('featureOut', function(e, latlng, pos, data, subLayerIndex) {
+            $('#mapCanvas div').css('cursor','inherit');
+            CartoDbLib.info.clear();
+          })
+          sublayer.on('featureClick', function(e, latlng, pos, data){
+            CartoDbLib.getOneZone(data['cartodb_id'], latlng);
+          })
+
+          // after layer is loaded, add the layer toggle control
+          L.control.layers(CartoDbLib.baseMaps, {"Zoning": layer}, { collapsed: false, autoZIndex: true }).addTo(CartoDbLib.map);
+
+          // CartoDbLib.map.on('zoomstart', function(e){
+          //   sublayer.hide();
+          // })
+          // google.maps.event.addListener(CartoDbLib.google._google, 'idle', function(e){
+          //   sublayer.show();
+          // })
+
+          window.setTimeout(function(){
+            if($.address.parameter('id')){
+              CartoDbLib.getOneZone($.address.parameter('id'))
+            }
+          }, 500)
+        }).error(function(e) {
+          //console.log('ERROR')
+          //console.log(e)
+        }); 
+      }
 
     CartoDbLib.doSearch();
   },

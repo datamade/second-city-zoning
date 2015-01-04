@@ -77,7 +77,6 @@ $(function() {
     e.preventDefault();
   });
 
-  //$('#welcome-modal').modal('show');
   if ($.cookie("show-welcome") != "read") {
     $('#a_info_accordion').click();
     $.cookie("show-welcome", "read", { expires: 7 });
@@ -88,6 +87,18 @@ $(function() {
   });
 
   $('.zones label').popover({trigger: "hover", placement: "top"})
+
+  $('#sound_effects_toggle').click(function(e){
+    e.preventDefault();
+    if ($.cookie("sound-effects") == 'on') {
+      $.cookie("sound-effects", "off", { expires: 7 });
+      $(this).html('<i class="fa fa-volume-off"></i> Off');
+    }
+    else {
+      $.cookie("sound-effects", "on", { expires: 7 });
+      $(this).html('<i class="fa fa-volume-up"></i> On');
+    }
+  });
 
   //---------music player---------------
   // Local copy of jQuery selectors, for performance.
@@ -138,14 +149,16 @@ $(function() {
     audiochannels[a]['finished'] = -1;              // expected end time for this channel
   }
   function play_multi_sound(s) {
-    for (a=0;a<audiochannels.length;a++) {
-      thistime = new Date();
-      if (audiochannels[a]['finished'] < thistime.getTime()) {      // is this channel finished?
-        audiochannels[a]['finished'] = thistime.getTime() + document.getElementById(s).duration*1000;
-        audiochannels[a]['channel'].src = document.getElementById(s).src;
-        audiochannels[a]['channel'].load();
-        audiochannels[a]['channel'].play();
-        break;
+    if ($.cookie("sound-effects") == "on") {
+      for (a=0;a<audiochannels.length;a++) {
+        thistime = new Date();
+        if (audiochannels[a]['finished'] < thistime.getTime()) {      // is this channel finished?
+          audiochannels[a]['finished'] = thistime.getTime() + document.getElementById(s).duration*1000;
+          audiochannels[a]['channel'].src = document.getElementById(s).src;
+          audiochannels[a]['channel'].load();
+          audiochannels[a]['channel'].play();
+          break;
+        }
       }
     }
   }
