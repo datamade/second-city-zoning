@@ -269,6 +269,9 @@ var CartoDbLib = {
   },
 
   clearSearch: function(){
+    if (CartoDbLib.lastClickedLayer) {
+      CartoDbLib.map.removeLayer(CartoDbLib.lastClickedLayer);
+    }
     if (CartoDbLib.centerMark)
       CartoDbLib.map.removeLayer( CartoDbLib.centerMark );
     if (CartoDbLib.circle)
