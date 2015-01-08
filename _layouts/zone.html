@@ -8,37 +8,156 @@ layout: default
       <a href='/zones'>&laquo; Zoning districts</a>
     </p>
     <h2>
+      <span id='zone_icon'></span>
       {{page.district_type_code}}
       <small>
         {{page.district_title}}
       </small>
     </h2>
     <p>
-      Zoning class: {{page.zone_type_name}}
-      
+      {{page.description}}
     </p>
-    <p>
-      {{page.juan_description}}
-    </p>
+
+    {% if page.district_type_code == 'PMD' %}
+      <hr>
+      <h4>Districts established</h4>
+      <p>Chicago has 15 Planned Manufacturing Districts. They are:</p>
+      <table class='table'>
+        <tbody>
+          <tr>
+               <td>1 </td>
+               <td>Clybourn Corridor</td>
+               <td><a href='https://gisapps.cityofchicago.org/gisimages/zoning_pds/PMD1.pdf' target='_blank'>Development plan for PMD 1</a></td>
+          </tr>
+          <tr>
+               <td>2 </td>
+               <td>Elston Corridor</td>
+               <td><a href='https://gisapps.cityofchicago.org/gisimages/zoning_pds/PMD2.pdf' target='_blank'>Development plan for PMD 2</a></td>
+          </tr>
+          <tr>
+               <td>3 </td>
+               <td>Goose Island</td>
+               <td><a href='https://gisapps.cityofchicago.org/gisimages/zoning_pds/PMD3.pdf' target='_blank'>Development plan for PMD 3</a></td>
+          </tr>
+          <tr>
+               <td>4 </td>
+               <td>Kinzie Corridor</td>
+               <td><a href='https://gisapps.cityofchicago.org/gisimages/zoning_pds/PMD4.pdf' target='_blank'>Development plan for PMD 4</a></td>
+          </tr>
+          <tr>
+               <td>5 </td>
+               <td>Chicago/Halsted Corridor</td>
+               <td><a href='https://gisapps.cityofchicago.org/gisimages/zoning_pds/PMD5.pdf' target='_blank'>Development plan for PMD 5</a></td>
+          </tr>
+          <tr>
+               <td>6 </td>
+               <td>Lake Calumet</td>
+               <td><a href='https://gisapps.cityofchicago.org/gisimages/zoning_pds/PMD6.pdf' target='_blank'>Development plan for PMD 6</a></td>
+          </tr>
+          <tr>
+               <td>7 </td>
+               <td>Western/Ogden</td>
+               <td><a href='https://gisapps.cityofchicago.org/gisimages/zoning_pds/PMD7.pdf' target='_blank'>Development plan for PMD 7</a></td>
+          </tr>
+          <tr>
+               <td>8 </td>
+               <td>Stockyards</td>
+               <td><a href='https://gisapps.cityofchicago.org/gisimages/zoning_pds/PMD8.pdf' target='_blank'>Development plan for PMD 8</a></td>
+          </tr>
+          <tr>
+               <td>9 </td>
+               <td>Northwest</td>
+               <td><a href='https://gisapps.cityofchicago.org/gisimages/zoning_pds/PMD9.pdf' target='_blank'>Development plan for PMD 9</a></td>
+          </tr>
+          <tr>
+               <td>10</td>
+               <td> West Pullman</td>
+               <td><a href='https://gisapps.cityofchicago.org/gisimages/zoning_pds/PMD10.pdf' target='_blank'>Development plan for PMD 10</a></td>
+          </tr>
+          <tr>
+               <td>11</td>
+               <td> Pilsen</td>
+               <td><a href='https://gisapps.cityofchicago.org/gisimages/zoning_pds/PMD11.pdf' target='_blank'>Development plan for PMD 11</a></td>
+          </tr>
+          <tr>
+               <td>12</td>
+               <td> Harlem</td>
+               <td><a href='https://gisapps.cityofchicago.org/gisimages/zoning_pds/PMD12.pdf' target='_blank'>Development plan for PMD 12</a></td>
+          </tr>
+          <tr>
+               <td>13</td>
+               <td> Greater Southwest</td>
+               <td><a href='https://gisapps.cityofchicago.org/gisimages/zoning_pds/PMD13.pdf' target='_blank'>Development plan for PMD 13</a></td>
+          </tr>
+          <tr>
+               <td>14</td>
+               <td> Kennedy</td>
+               <td><a href='https://gisapps.cityofchicago.org/gisimages/zoning_pds/PMD14.pdf' target='_blank'>Development plan for PMD 14</a></td>
+          </tr>
+          <tr>
+               <td>15</td>
+               <td> Armitage</td>
+               <td><a href='https://gisapps.cityofchicago.org/gisimages/zoning_pds/PMD1.pdf' target='_blank'>Development plan for PMD 15</a></td>
+          </tr>
+        </tbody>
+      </table>
+    {% endif %}
+
     <hr>
     <h4>Specifications</h4>
-    <dl>
-      <dt>Floor area ratio</dt>
-      <dd>{{page.floor_area_ratio}}</dd>
-      <dt>Maximum building height</dt>
-      <dd>{{page.maximum_building_height}}</dd>
-      <dt>Lot area per unit (density)</dt>
-      <dd>{{page.lot_area_per_unit}}</dd>
-    </dl>
+
+    <table class='table'>
+      <tbody>
+        <tr>
+          <td>Zoning Ordinance reference</td>
+          <td>
+            § {{page.zoning_code_section}}<br />
+            <small><a href='/resources/Chicago-Zoning-Ordinance.pdf' target='_blank'><i class='fa fa-external-link'></i> Open the Chicago Zoning Ordinance (PDF)</a></small>
+          </td>
+        </tr>
+        <tr>
+          <td>Floor area ratio</td>
+          <td>{{page.floor_area_ratio}}</td>
+        </tr>
+        <tr>
+          <td>Maximum building height</td>
+          <td>{{page.maximum_building_height}}</td>
+        </tr>
+        <tr>
+          <td>Lot area per unit (density)</td>
+          <td>{{page.lot_area_per_unit}}</td>
+        </tr>
+        <tr>
+          <td>On-site open space</td>
+          <td>{{page.on_site_open_space}}</td>
+        </tr>
+      </tbody>
+    </table>
     <hr>
     <h4>Setbacks</h4>
-    <dl>
-      <dt>Front yard</dt>
-      <dd>{{page.front_yard_setback}}</dd>
-      <dt>Side</dt>
-      <dd>{{page.side_setback}}</dd>
-      <dt>Back yard</dt>
-      <dd>{{page.rear_yard_setback}}</dd>
-    </dl>
+
+    <table class='table'>
+      <tbody>
+        <tr>
+          <td>Front yard</td>
+          <td>{{page.front_yard_setback}}</td>
+        </tr>
+        <tr>
+          <td>Side</td>
+          <td>{{page.side_setback}}</td>
+        </tr>
+        <tr>
+          <td>Back yard</td>
+          <td>{{page.rear_yard_setback}}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
+
+
+
+<script type="text/javascript" src="/js/cartodb_lib.js"></script>
+<script>
+  $("#zone_icon").html("<img src='/images/icons/" + CartoDbLib.getZoneIcon('{{page.district_type_code}}') + ".png' />");
+</script>

@@ -148,7 +148,17 @@ var CartoDbLib = {
       project_link = "";
     }
 
-    zone_prefix = zone_class.replace( new RegExp("[^A-Z]","gm"),"");
+    return {
+      'title': title, 
+      'description': description, 
+      'zone_class_link': zone_class_link, 
+      'zone_icon': CartoDbLib.getZoneIcon(zone_class),
+      'project_link': project_link
+    };
+  },
+
+  getZoneIcon: function(zone_class) {
+    var zone_prefix = zone_class.replace( new RegExp("[^A-Z]","gm"),"");
 
     var zone_icon = '';
     switch(zone_prefix) {
@@ -170,13 +180,7 @@ var CartoDbLib = {
       case 'POS' : zone_icon = 'parks-entertainment'; break;
     }
 
-    return {
-      'title': title, 
-      'description': description, 
-      'zone_class_link': zone_class_link, 
-      'zone_icon': zone_icon,
-      'project_link': project_link
-    };
+    return zone_icon;
   },
 
   getOneZone: function(cartodb_id, click_latlng){

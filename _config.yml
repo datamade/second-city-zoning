@@ -10,10 +10,10 @@ permalink: pretty
 navigation:
 - text: Home
   url: /
-- text: About
-  url: /about/
 - text: Zoning districts
   url: /zones/
   category: zones
 - text: Zoning rules
   url: /zoning_rules/
+- text: About
+  url: /about/
