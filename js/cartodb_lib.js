@@ -6,9 +6,8 @@ var CartoDbLib = {
   lastClickedLayer: null,
   locationScope:   "chicago",
   currentPinpoint: null,
-  layerUrl: 'http://datamade.cartodb.com/api/v2/viz/1422db28-7eed-11e4-a731-0e4fddd5de28/viz.json',
-  tableName: 'city_of_chicago_zoning',
-  maptiks_tracking_code: '9474d15e-b1b4-4868-b5d8-9b03805af16e',
+  layerUrl: 'https://datamade.cartodb.com/api/v2/viz/7d3b444e-b35b-11e5-b55f-0ea31932ec1d/viz.json',
+  tableName: 'city_of_chicago_zoning_2015',
 
   initialize: function(){
 
