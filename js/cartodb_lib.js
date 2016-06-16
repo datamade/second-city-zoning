@@ -82,7 +82,7 @@ var CartoDbLib = {
         ]
       }
 
-      CartoDbLib.dataLayer = cartodb.createLayer(CartoDbLib.map, layerOpts)
+      CartoDbLib.dataLayer = cartodb.createLayer(CartoDbLib.map, layerOpts, { https: true })
         .addTo(CartoDbLib.map)
         .done(function(layer) {
           var sublayer = layer.getSubLayer(0);
