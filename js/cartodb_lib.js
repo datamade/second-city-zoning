@@ -34,7 +34,7 @@ var CartoDbLib = {
         sa_id: 'satellite'
       });
         
-      CartoDbLib.buildings = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      CartoDbLib.buildings = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
         detectRetina: true,
         sa_id: 'buildings'
