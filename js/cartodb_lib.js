@@ -7,7 +7,7 @@ var CartoDbLib = {
   locationScope:   "chicago",
   currentPinpoint: null,
   layerUrl: 'https://datamade.cartodb.com/api/v2/viz/1362b06a-3345-11e6-9b44-0ef7f98ade21/viz.json',
-  tableName: 'city_of_chicago_zoning_2015',
+  tableName: 'zoning_asof_19may2016',
 
   initialize: function(){
 
