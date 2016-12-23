@@ -1,3 +1,5 @@
+![second city zoning](http://i.imgur.com/J6oFuK7.gif)
+
 # 2nd City Zoning
 
 2nd City Zoning is an interactive map that lets you:
