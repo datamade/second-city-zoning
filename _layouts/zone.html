@@ -127,6 +127,12 @@ layout: default
           <td>Lot area per unit (density)</td>
           <td>{{page.lot_area_per_unit}}</td>
         </tr>
+        {% if page.minimum_lot_area %}
+          <tr>
+            <td>Minimum lot area</td>
+            <td>{{page.minimum_lot_area}}</td>
+          </tr>
+        {% endif %}
         <tr>
           <td>On-site open space</td>
           <td>{{page.on_site_open_space}}</td>
