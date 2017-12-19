@@ -1,6 +1,7 @@
 ---
 layout: default
 title: About
+description: "2nd City Zoning is an interactive map that lets you find out how your building is zoned, learn where to locate your business and explore zoning patterns throughout the city."
 ---
 
 <div class='row'>
@@ -10,12 +11,6 @@ title: About
       <ol>
         <li>
           <a href='#what-is-this'>What is this?</a>
-        </li>
-        <li>
-          <a href='#version-2'>Version 2.0!</a>
-        </li>
-        <li>
-          <a href='#press'>Press</a>
         </li>
         <li>
           <a href='#what-is-zoning'>What is zoning?</a>
@@ -40,6 +35,9 @@ title: About
         </li>
         <li>
           <a href='#code'>Code</a>
+        </li>
+        <li>
+          <a href='#press'>Press</a>
         </li>
         <li>
           <a href='#contact-us'>Contact us</a>
@@ -88,86 +86,6 @@ title: About
       <a href='#data'>open data</a>.
     </p>
 
-    <hr>
-    <h4 id='version-2'>Version 2.0!</h4>
-    <p>In January 2015, we launched a new and improved version of 2nd City Zoning!</p>
-
-    <p>Features include:</p>
-
-    <ol>
-      <li><p>Switched our mapping platform from <a href='https://sites.google.com/site/fusiontablestalks/stories'>Google Fusion Tables</a> to <a href='http://cartodb.com/'>CartoDB</a>. No more disappearing polygons, enhanced interactions and hovering, deep linking to selected areas.</p></li>
-      <li>
-        <p>Devised a more detailed color scheme at higher zoom levels. For Residential, Industrial and Commercial zones, darker areas indicate denser zoning.</p>
-        <p><img class='img-thumbnail img-responsive' alt='New zoning colors' src='/images/v2-zoning-colors.png'><br /><em>New zoning map colors for 2nd City Zoning</em></p>
-      </li>
-      <li><p>Ported the code from <a href='http://www.sinatrarb.com/'>Ruby and Sinatra</a> over to <a href='http://jekyllrb.com/'>Jekyll</a> and hosting the website on <a href='https://pages.github.com/'>GitHub pages</a>.</p></li>
-      <li><p>For Planned Manufacturing District (<a href='/zone/PMD/'>PMD</a>) and Planned Development (<a href='/zone/PD/'>PD</a>) zones, we provide links directly to the approved development plans. For example, <a href=''>here’s the plan for Navy Pier</a> at <a href=''>600 E Grand Ave</a>.</p></li>
-      <li>
-        <p>The map now lets you toggle the base map between streets, buildings and satellite layers.</p>
-        <p><img class='img-thumbnail img-responsive' alt='Satellite: enhance!' src='/images/v2-zoning-satellite.png'><br /><em>Satellite mode: enhance!</em></p>
-      </li>
-      <li><p>For those of you who think the sound effects are annoying (who dares!), they are now disabled by default. Don't worry, you can still turn them on.</p></li>
-      <li><p>We're using <a href='https://developers.google.com/places/'>Google Places autocomplete</a> to help out when searching for an address.</p></li>
-      <li><p>Upgraded to the latest version of <a href='http://getbootstrap.com'>Bootstrap 3</a>. Ah, a nice, flat, responsive and refreshing facelift!</p></li>
-    </ol>
-
-    <p>We hope you enjoy it! <a href='#contact-us'>Contact us</a> if you notice any bugs or have feature requests.</p>
-
-    <hr>
-    <h4 id='team'>Press</h4>
-    <p>
-      Since launching in January 2013, we've gotten some great press coverage! Check it out:
-    </p>
-    <dl>
-      <dt>
-        <a href="http://www.theatlanticcities.com/politics/2013/02/simcity-reference-day-chicago-zoning-map/4685/">SimCity Reference of the Day: Chicago Zoning Map</a>
-      </dt>
-      <dd>
-        By Henry Grabar on
-        <cite>Atlantic Cities</cite>
-        | Feb 12, 2013
-      </dd>
-      <dt>
-        <a href="http://www.reddit.com/r/SimCity/comments/186k38/map_of_chicago_with_simcity_zoning/">Map of Chicago with SimCity zoning</a>
-      </dt>
-      <dd>
-        By awinsalot on
-        <cite>Reddit /r/SimCity</cite>
-        | Feb 9, 2013
-      </dd>
-      <dt>
-        <a href="http://wbezdata.tumblr.com/post/42592720990/app-by-opengov-group-simplifies-chicagos-complex">App by OpenGov group simplifies Chicago’s complex zoning — Sim City style</a>
-      </dt>
-      <dd>
-        By Elliott Ramos on
-        <cite>Day x Datum on WBEZ</cite>
-        | Feb 8, 2013
-      </dd>
-      <dt>
-        <a href="http://nextcity.org/daily/entry/sim-city-meets-the-second-city">Sim City for the Second City</a>
-      </dt>
-      <dd>
-        By Juan-Pablo Velez on
-        <cite>Next City</cite>
-        | Feb 7, 2013
-      </dd>
-      <dt>
-        <a href="http://news.medill.northwestern.edu/chicago/news.aspx?id=214542">App lifts veil on government policy for Chicagoans</a>
-      </dt>
-      <dd>
-        By Conner Forrest on
-        <cite>Medill Reports - Chicago</cite>
-        | Jan 24, 2013
-      </dd>
-      <dt>
-        <a href="http://chicagotonight.wttw.com/2013/01/23/second-city-2000">Second City 2000</a>
-      </dt>
-      <dd>
-        By Michael Lipkin on
-        <cite>Chicago Tonight (WTTW)</cite>
-        | Jan 23, 2013
-      </dd>
-    </dl>
     <hr>
     <h4 id='what-is-zoning'>What is zoning?</h4>
     <p>
@@ -460,16 +378,16 @@ title: About
     </ul>
     <p>
       We love that the City of Chicago has opened their data for citizens to use. This site represents just one example of what can be done with it. We hope it inspires others to dive in to zoning (and other) datasets the
-      <a href='http://data.cityofchicago.org/'>City</a>,
-      <a href='http://data.cookcountyil.gov/'>County</a>
+      <a href='https://data.cityofchicago.org/'>City</a>,
+      <a href='https://data.cookcountyil.gov/'>County</a>
       and
-      <a href='http://data.il.gov'>State</a>
+      <a href='https://data.illinois.gov/'>State</a>
       have released.
     </p>
     <hr>
     <h4 id='code'>Code</h4>
     <p>
-      All the code for this site is open source. It was built with Jekyll, Bootstrap, CartoDB and Leaflet. The data is hosted in CartoDB and was provided by the <a href='http://data.cityofchicago.org/'>City of Chicago Data Portal</a>.
+      All the code for this site is open source. It was built with Jekyll, Bootstrap, CartoDB and Leaflet.
     </p>
     <p>Technologies used:</p>
     <ul>
@@ -493,6 +411,63 @@ title: About
       All the code for this project is up on
       <a href='https://github.com/datamade/second-city-zoning'>GitHub</a>.
     </p>
+
+    <hr>
+    <h4 id='team'>Press</h4>
+    <p>
+      Since launching in January 2013, we've gotten some great press coverage! Check it out:
+    </p>
+    <dl>
+      <dt>
+        <a href="http://www.theatlanticcities.com/politics/2013/02/simcity-reference-day-chicago-zoning-map/4685/">SimCity Reference of the Day: Chicago Zoning Map</a>
+      </dt>
+      <dd>
+        By Henry Grabar on
+        <cite>Atlantic Cities</cite>
+        | Feb 12, 2013
+      </dd>
+      <dt>
+        <a href="http://www.reddit.com/r/SimCity/comments/186k38/map_of_chicago_with_simcity_zoning/">Map of Chicago with SimCity zoning</a>
+      </dt>
+      <dd>
+        By awinsalot on
+        <cite>Reddit /r/SimCity</cite>
+        | Feb 9, 2013
+      </dd>
+      <dt>
+        <a href="http://wbezdata.tumblr.com/post/42592720990/app-by-opengov-group-simplifies-chicagos-complex">App by OpenGov group simplifies Chicago’s complex zoning — Sim City style</a>
+      </dt>
+      <dd>
+        By Elliott Ramos on
+        <cite>Day x Datum on WBEZ</cite>
+        | Feb 8, 2013
+      </dd>
+      <dt>
+        <a href="http://nextcity.org/daily/entry/sim-city-meets-the-second-city">Sim City for the Second City</a>
+      </dt>
+      <dd>
+        By Juan-Pablo Velez on
+        <cite>Next City</cite>
+        | Feb 7, 2013
+      </dd>
+      <dt>
+        <a href="http://news.medill.northwestern.edu/chicago/news.aspx?id=214542">App lifts veil on government policy for Chicagoans</a>
+      </dt>
+      <dd>
+        By Conner Forrest on
+        <cite>Medill Reports - Chicago</cite>
+        | Jan 24, 2013
+      </dd>
+      <dt>
+        <a href="http://chicagotonight.wttw.com/2013/01/23/second-city-2000">Second City 2000</a>
+      </dt>
+      <dd>
+        By Michael Lipkin on
+        <cite>Chicago Tonight (WTTW)</cite>
+        | Jan 23, 2013
+      </dd>
+    </dl>
+
     <hr>
     <h4 id='contact-us'>Contact us</h4>
     <p>

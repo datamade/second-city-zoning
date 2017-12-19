@@ -8,7 +8,7 @@ encoding: utf-8
 timezone: America/Chicago
 permalink: pretty
 navigation:
-- text: "<i class='fa fa-fw fa-map-marker'></i> Map"
+- text: "<i class='fa fa-fw fa-map-marker'></i> Zoning map"
   url: /
 - text: "<i class='fa fa-fw fa-list'></i> Zoning districts"
   url: /zones/
@@ -17,3 +17,5 @@ navigation:
   url: /zoning_rules/
 - text: "<i class='fa fa-fw fa-info-circle'></i> About"
   url: /about/
+- text: "<i class='fa fa-fw fa-sticky-note'></i> Get the poster!"
+  url: "/poster/"
