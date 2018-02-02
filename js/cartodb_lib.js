@@ -6,8 +6,8 @@ var CartoDbLib = {
   lastClickedLayer: null,
   locationScope:   "chicago",
   currentPinpoint: null,
-  layerUrl: 'https://datamade.cartodb.com/api/v2/viz/1362b06a-3345-11e6-9b44-0ef7f98ade21/viz.json',
-  tableName: 'zoning_asof_19may2016',
+  layerUrl: 'https://datamade.carto.com/api/v2/viz/371a8f63-ce3b-49d6-8feb-c194053227af/viz.json',
+  tableName: 'zoning_asof_11sep2017',
 
   initialize: function(){
 
@@ -22,7 +22,6 @@ var CartoDbLib = {
       CartoDbLib.map = new L.Map('mapCanvas', { 
         center: CartoDbLib.map_centroid,
         zoom: CartoDbLib.defaultZoom,
-        track_id: CartoDbLib.maptiks_tracking_code,
         sa_id: '2nd City Zoning'
       });
 

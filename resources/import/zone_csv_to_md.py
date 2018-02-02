@@ -14,11 +14,11 @@ type_dict = ["Business", "Commercial / Mixed-Use", "Manufacturing", "Residential
                       "Transportation","Parks and Open Space"];
 
 
-with open('zoning-code-summary-district-types.csv', 'rb') as csvfile:
+with open('zoning-code-summary-district-types.csv', 'r') as csvfile:
     csvreader = csv.DictReader(csvfile)
     for e in csvreader:
 
-      print e
+      print(e)
 
       md = """---
 layout: zone
@@ -34,7 +34,7 @@ category: zones
       md = md + "---\n"
 
       md_title = e['district_type_code'] + ".md"
-      print "writing to " + md_title
+      print("writing to " + md_title)
       
       with open("../../zone/" + md_title, 'w') as f:
         f.write(md)
