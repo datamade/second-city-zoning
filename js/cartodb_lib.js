@@ -6,8 +6,8 @@ var CartoDbLib = {
   lastClickedLayer: null,
   locationScope:   "chicago",
   currentPinpoint: null,
-  layerUrl: 'https://datamade.carto.com/api/v2/viz/371a8f63-ce3b-49d6-8feb-c194053227af/viz.json',
-  tableName: 'zoning_asof_11sep2017',
+  layerUrl: 'https://datamade.carto.com/api/v2/viz/31554d24-24a1-4951-b572-a8a0fa7a52d3/viz.json',
+  tableName: 'second_city_zoning_feb_27_2020',
 
   initialize: function(){
 
@@ -67,7 +67,7 @@ var CartoDbLib = {
 
       CartoDbLib.info.addTo(CartoDbLib.map);
 
-      var fields = "cartodb_id, zone_type, zone_class, ordinance_"
+      var fields = "cartodb_id, zone_type, zone_class, ordinance_num"
       var layerOpts = {
         user_name: 'datamade',
         type: 'cartodb',
