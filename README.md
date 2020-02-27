@@ -53,6 +53,6 @@ Report it here: https://github.com/datamade/second-city-zoning/issues
 
 ## Copyright
 
-Copyright (c) 2013 Derek Eder and Juan-Pablo Velez of Open City. Released under the MIT License.
+Copyright (c) 2013-2020 Derek Eder and Juan-Pablo Velez of Open City. Released under the MIT License.
 
 [See LICENSE for details](https://github.com/datamade/second-city-zoning/blob/master/LICENSE)
