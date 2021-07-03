@@ -101,7 +101,13 @@ L.Google = L.Class.extend({
               { saturation: -100 },
               { lightness: 40 }
             ]
-          }
+          },
+          { 
+            "featureType": "poi", 
+            "stylers": [ 
+              { "visibility": "off" } 
+            ] 
+          } 
         ]
     });
 
