@@ -17,5 +17,3 @@ navigation:
   url: /zoning_rules/
 - text: "<i class='fa fa-fw fa-info-circle'></i> About"
   url: /about/
-- text: "<i class='fa fa-fw fa-sticky-note'></i> Get the poster!"
-  url: "/poster/"
