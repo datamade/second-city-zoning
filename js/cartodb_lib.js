@@ -6,8 +6,8 @@ var CartoDbLib = {
   lastClickedLayer: null,
   locationScope:   "chicago",
   currentPinpoint: null,
-  layerUrl: 'https://datamade.carto.com/api/v2/viz/64bf3ae9-6822-4273-b5be-04c583a9af41/viz.json',
-  tableName: 'second_city_zoning_2022_06_07',
+  layerUrl: 'https://datamade.carto.com/api/v2/viz/eb3d95da-4490-42e8-9f80-ed43b3f82cd6/viz.json',
+  tableName: 'second_city_zoning_2023_10_25',
 
   initialize: function(){
 
@@ -25,7 +25,11 @@ var CartoDbLib = {
         sa_id: '2nd City Zoning'
       });
 
-      CartoDbLib.google = new L.Google('ROADMAP', {animate: false});
+      CartoDbLib.streets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v11/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZGF0YW1hZGUiLCJhIjoiaXhhVGNrayJ9.0yaccougI3vSAnrKaB00vA', {
+        attribution: '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>',
+        detectRetina: true,
+        sa_id: 'streets'
+      });
         
       CartoDbLib.satellite = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v12/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZGF0YW1hZGUiLCJhIjoiaXhhVGNrayJ9.0yaccougI3vSAnrKaB00vA', {
         attribution: '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>',
@@ -39,8 +43,8 @@ var CartoDbLib = {
         sa_id: 'buildings'
       });
 
-      CartoDbLib.baseMaps = {"Streets": CartoDbLib.google, "Building addresses": CartoDbLib.buildings, "Satellite": CartoDbLib.satellite};
-      CartoDbLib.map.addLayer(CartoDbLib.google);
+      CartoDbLib.baseMaps = {"Streets": CartoDbLib.streets, "Building addresses": CartoDbLib.buildings, "Satellite": CartoDbLib.satellite};
+      CartoDbLib.map.addLayer(CartoDbLib.streets);
 
       CartoDbLib.info = L.control({position: 'bottomleft'});
 
@@ -67,7 +71,7 @@ var CartoDbLib = {
 
       CartoDbLib.info.addTo(CartoDbLib.map);
 
-      var fields = "cartodb_id, zone_type, zone_class, ordinance_"
+      var fields = "cartodb_id, zone_type, zone_class, ordinance_num"
       var layerOpts = {
         user_name: 'datamade',
         type: 'cartodb',
@@ -100,13 +104,6 @@ var CartoDbLib = {
 
           // after layer is loaded, add the layer toggle control
           L.control.layers(CartoDbLib.baseMaps, {"Zoning": layer}, { collapsed: false, autoZIndex: true }).addTo(CartoDbLib.map);
-
-          // CartoDbLib.map.on('zoomstart', function(e){
-          //   sublayer.hide();
-          // })
-          // google.maps.event.addListener(CartoDbLib.google._google, 'idle', function(e){
-          //   sublayer.show();
-          // })
 
           window.setTimeout(function(){
             if($.address.parameter('id')){
