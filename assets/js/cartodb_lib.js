@@ -76,7 +76,7 @@ var CartoDbLib = {
         if (props) {
           var zone_info = CartoDbLib.getZoneInfo(props.zone_class);
           this._div.innerHTML =
-            "<img src='/images/icons/" +
+            "<img src='/assets/images/icons/" +
             zone_info.zone_icon +
             ".png' /> " +
             props.zone_class +
@@ -284,7 +284,7 @@ var CartoDbLib = {
         var popup_content =
           "\
         <h4>\
-          <img src='/images/icons/" +
+          <img src='/assets/images/icons/" +
           zone_info.zone_icon +
           ".png' />\
           <a href='/zone/" +
@@ -354,7 +354,7 @@ var CartoDbLib = {
           );
           CartoDbLib.centerMark = new L.Marker(CartoDbLib.currentPinpoint, {
             icon: new L.Icon({
-              iconUrl: "/images/blue-pushpin.png",
+              iconUrl: "/assets/images/blue-pushpin.png",
               iconSize: [32, 32],
               iconAnchor: [10, 32],
             }),
