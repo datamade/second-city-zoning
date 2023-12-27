@@ -3,9 +3,9 @@ body {
   font-size:14px;
 }
 
-h1,h2,h3{line-height:inherit;}
+h1, .h1, h2, .h2, h3, .h3 {line-height:inherit;}
 
-h5 {margin-top: 0px ; margin-bottom: 2px;}
+h5, .h5 {margin-top: 0px ; margin-bottom: 2px;}
 
 a { color: #D9534F; }
 

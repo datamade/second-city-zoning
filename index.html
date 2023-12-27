@@ -52,8 +52,11 @@ layout: default
 
     <div class='well'>
       <div class="form-group">
-        <h5>Find zone <small>(<a id='findMe' href='#'>find me</a>)</small></h5>
-        <input class='form-control' id='search_address' placeholder='Enter an address or an intersection' type='text'>
+        <div class="zone-header">
+          <label class="h5" for="search_address">Find a Chicago address's zoning</label>
+          <small>(<a id='findMe' href='#'>find me</a>)</small>
+        </div>
+        <input class='form-control' id='search_address' placeholder='121 N La Salle St. #107, Chicago, IL 60602' type='text'>
       </div>
       <button class='btn btn-danger btn-sm' id='btnSearch' type='button'>
         <i class='fa fa-search'></i>
