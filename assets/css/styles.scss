@@ -1,13 +1,9 @@
 ---
 ---
 
+@import "variables";
 @import "bootstrap";
 @import "bootswatch";
-
-body {
-  font-family: Chicago, Verdana, sans-serif;
-  font-size: 14px;
-}
 
 h1,
 h2,
@@ -20,16 +16,11 @@ h5 {
   margin-bottom: 2px;
 }
 
-a {
-  color: #d9534f;
-}
-
 label {
   font-weight: normal;
 }
 
 .nav-pills > li.active > a {
-  color: #d9534f;
   background-color: #fff;
 }
 
