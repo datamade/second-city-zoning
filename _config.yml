@@ -19,6 +19,7 @@ navigation:
   url: /about/
 sass:
   style: compressed
+  sourcemap: always
 
 # Exclude these files from production site
 exclude:
