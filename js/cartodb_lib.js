@@ -6,8 +6,7 @@ var CartoDbLib = {
   lastClickedLayer: null,
   locationScope:   "chicago",
   currentPinpoint: null,
-  layerUrl: 'https://datamade.carto.com/api/v2/viz/eb3d95da-4490-42e8-9f80-ed43b3f82cd6/viz.json',
-  tableName: 'second_city_zoning_2023_10_25',
+  tableName: 'second_city_zoning_2024_10_21',
 
   initialize: function(){
 
