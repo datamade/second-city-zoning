@@ -26,16 +26,21 @@ $(function() {
     });
 
   CartoDbLib.initialize();
+
+  MapLibreDbLib.initialize();
+
   var autocomplete = new google.maps.places.Autocomplete(document.getElementById('search_address'));
 
   $(':checkbox').click(function(){
     play_multi_sound("mouse-click");
     CartoDbLib.doSearch();
+    MapLibreDbLib.doSearch();
   });
 
   $('#btnSearch').click(function(){
     play_multi_sound("reticulating-splines");
     CartoDbLib.doSearch();
+    MapLibreDbLib.doSearch();
   });
 
   $('#findMe').click(function(){
@@ -50,6 +55,7 @@ $(function() {
     $.address.parameter('radius','');
     $.address.parameter('id','');
     CartoDbLib.initialize();
+    MapLibreDbLib.initialize();
     return false;
   });
 

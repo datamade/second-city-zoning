@@ -130,3 +130,12 @@ label { font-weight: normal;}
     margin: 0 0 5px;
     color: #777;
 }
+
+.marker {
+  background-image: url('/images/blue-pushpin.png');
+  background-size: cover;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  cursor: pointer;
+}
