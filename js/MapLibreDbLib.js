@@ -1,3 +1,5 @@
+var geocoder
+
 async function loadFromGzip(url) {
   const response = await fetch(url)
   const arrayBuffer = await response.arrayBuffer()
@@ -77,14 +79,13 @@ class LayerToggleControl {
 
 var MapLibreDbLib = {
   map_centroid: [41.87811, -87.66677],
-  defaultZoom: 11,
-  lastClickedLayer: null,
+  defaultZoom: 14,
   locationScope: 'chicago',
-  currentPinpoint: null,
-  tableName: 'second_city_zoning_2024_10_21',
   lastClickedFeatureId: null,
 
   initialize: function() {
+    geocoder = new google.maps.Geocoder()
+    
     MapLibreDbLib.map = new maplibregl.Map({
       container: 'map',
       style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
@@ -359,87 +360,6 @@ var MapLibreDbLib = {
     return zone_icon
   },
 
-  getOneZone: function(cartodb_id, click_latlng) {
-    if (MapLibreDbLib.lastClickedLayer) {
-      MapLibreDbLib.map.removeLayer(MapLibreDbLib.lastClickedLayer)
-    }
-    $.address.parameter('id', cartodb_id)
-    var sql = new cartodb.SQL({ user: 'datamade', format: 'geojson' })
-    sql
-      .execute(
-        'select * from ' +
-        MapLibreDbLib.tableName +
-        ' where cartodb_id = {{cartodb_id}}',
-        { cartodb_id: cartodb_id }
-      )
-      .done(function(data) {
-        var shape = data.features[0]
-        MapLibreDbLib.lastClickedLayer = L.geoJson(shape)
-        MapLibreDbLib.lastClickedLayer.addTo(MapLibreDbLib.map)
-        MapLibreDbLib.lastClickedLayer.setStyle({
-          weight: 2,
-          fillOpacity: 0,
-          color: '#000',
-        })
-        MapLibreDbLib.map.fitBounds(
-          MapLibreDbLib.lastClickedLayer.getBounds(),
-          {
-            maxZoom: 16,
-          }
-        )
-
-        // show custom popup
-        var props = shape.properties
-        var zone_info = MapLibreDbLib.getZoneInfo(props.zone_class)
-        var popup_content =
-          "\
-        <h4>\
-          <img src='/images/icons/" +
-          zone_info.zone_icon +
-          ".png' />\
-          <a href='/zone/" +
-          zone_info.zone_class_link +
-          "/'>" +
-          props.zone_class +
-          '\
-            <small>' +
-          zone_info.title +
-          "</small>\
-          </a>\
-        </h4>\
-        <p><strong>What's here?</strong><br />\
-        " +
-          zone_info.description +
-          "\
-        <a href='/zone/" +
-          zone_info.zone_class_link +
-          "/'>Learn&nbsp;more&nbsp;»</a></p>\
-        "
-
-        if (zone_info.project_link != '')
-          popup_content +=
-            "<p><a target='_blank' href='" +
-            zone_info.project_link +
-            "'>Read the full development plan for " +
-            props.zone_class +
-            '&nbsp;»</a></p>'
-
-        // console.log(click_latlng);
-        if (click_latlng) {
-          MapLibreDbLib.popup = L.popup()
-            .setContent(popup_content)
-            .setLatLng(click_latlng)
-            .openOn(MapLibreDbLib.map)
-        } else {
-          MapLibreDbLib.lastClickedLayer.bindPopup(popup_content)
-          MapLibreDbLib.lastClickedLayer.openPopup()
-        }
-      })
-      .error(function(e) {
-        console.log(e)
-      })
-  },
-
   doSearch: function() {
     MapLibreDbLib.clearSearch()
     var address = $('#search_address').val()
@@ -450,68 +370,49 @@ var MapLibreDbLib = {
 
       geocoder.geocode({ address: address }, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
-          MapLibreDbLib.currentPinpoint = [
-            results[0].geometry.location.lat(),
+          let lng_lat_point = [
             results[0].geometry.location.lng(),
+            results[0].geometry.location.lat(),
           ]
-          $.address.parameter('address', encodeURIComponent(address))
-          // MapLibreDbLib.map.setView(
-          //   new L.LatLng(
-          //     MapLibreDbLib.currentPinpoint[0],
-          //     MapLibreDbLib.currentPinpoint[1]
-          //   ),
-          //   16
-          // )
 
-          const point = [
-            MapLibreDbLib.currentPinpoint[1],
-            MapLibreDbLib.currentPinpoint[0],
-          ]
+          $.address.parameter('address', encodeURIComponent(address))
 
           MapLibreDbLib.map
             .flyTo({
-              center: point,
-              zoom: 13,
+              center: lng_lat_point,
+              zoom: 15,
+              speed: 2,
             })
             .once('moveend', () => {
-              console.log('finished moving')
-
               const matches = MapLibreDbLib.map.queryRenderedFeatures(
-                [
-                  MapLibreDbLib.currentPinpoint[1],
-                  MapLibreDbLib.currentPinpoint[0],
-                ],
                 { target: { layerId: 'zoning' } }
               )
 
-              try {
-                console.log(matches[0])
-                const centroid = turf.centroid(matches[0].geometry)
-                const zoneClass = matches[0].properties.zone_class
-                const coordinates = centroid.geometry.coordinates
-                const popupContent = MapLibreDbLib.getPopupContent(zoneClass)
+              const turf_point = turf.point([lng_lat_point[0], lng_lat_point[1]])
 
-                console.log(centroid, zoneClass, coordinates, popupContent)
-
-                while (Math.abs(point[1] - coordinates[0]) > 180) {
-                  coordinates[0] += point[1] > coordinates[0] ? 360 : -360
+              let found_match
+              for (const feature of matches) {
+                if (turf.booleanPointInPolygon(turf_point, feature)) {
+                  found_match = feature
+                  break
                 }
-
-                // create a HTML element for each feature
-                const el = document.createElement('div')
-                el.className = 'marker'
-
-                new maplibregl.Marker(el)
-                  .setLngLat(coordinates)
-                  .addTo(MapLibreDbLib.map)
-
-                new maplibregl.Popup()
-                  .setLngLat(coordinates)
-                  .setHTML(popupContent)
-                  .addTo(MapLibreDbLib.map)
-              } catch (error) {
-                console.log(error)
               }
+
+              const zoneClass = found_match.properties.zone_class
+              const popupContent = MapLibreDbLib.getPopupContent(zoneClass)
+
+              // create a HTML element for each feature
+              const el = document.createElement('div')
+              el.className = 'marker'
+
+              new maplibregl.Marker(el)
+                .setLngLat(lng_lat_point)
+                .addTo(MapLibreDbLib.map)
+
+              new maplibregl.Popup()
+                .setLngLat(lng_lat_point)
+                .setHTML(popupContent)
+                .addTo(MapLibreDbLib.map)
             })
         } else {
           alert('We could not find your address: ' + status)
