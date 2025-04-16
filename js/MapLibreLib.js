@@ -34,62 +34,30 @@ class InfoControl {
   }
 }
 
-class LayerToggleControl {
-  constructor() {
-    this.layerIds = layerIds
-    this.container = this.createContainer()
-  }
-
-  createContainer() {
-    const container = document.createElement('div')
-    container.className = 'radio-group'
-
-    this.layerIds.forEach((layerId) => {
-      const label = document.createElement('label')
-      const radio = document.createElement('input')
-      radio.type = 'radio'
-      radio.name = 'layerToggle'
-      radio.value = layerId
-      radio.onclick = () => this.toggleLayer(layerId)
-      label.appendChild(radio)
-      label.appendChild(document.createTextNode(layerId))
-      container.appendChild(label)
-    })
-
-    return container
-  }
-
-  toggleLayer(selectedLayer) {
-    this.layerIds.forEach((layerId) => {
-      const visibility = layerId === selectedLayer ? 'visible' : 'none'
-      map.setLayoutProperty(layerId, 'visibility', visibility)
-    })
-  }
-
-  onAdd(map) {
-    this.map = map
-    return this.container
-  }
-
-  onRemove() {
-    this.container.parentNode.removeChild(this.container)
-    this.map = undefined
-  }
-}
-
 var MapLibreLib = {
   map_centroid: [-87.667, 41.840],
   defaultZoom: 10,
   locationScope: 'chicago',
   lastClickedFeatureId: null,
 
-  initialize: function() {
+  baseMaplayers: {
+    "Streets": "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json",
+    "Buildings": "https://raw.githubusercontent.com/go2garret/maps/main/src/assets/json/openStreetMap.json",
+    "Satellite": "https://raw.githubusercontent.com/go2garret/maps/main/src/assets/json/arcgis_hybrid.json"
+  },
+
+  initialize: function(baseLayer) {
     geocoder = new google.maps.Geocoder()
     $("#search_address").val(MapLibreLib.convertToPlainString($.address.parameter('address')))
     
+    let baseStyle = MapLibreLib.baseMaplayers["Streets"]
+    if (baseLayer != null) {
+      baseStyle = MapLibreLib.baseMaplayers[baseLayer]
+    }
+
     MapLibreLib.map = new maplibregl.Map({
       container: 'map',
-      style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
+      style: baseStyle,
       projection: 'globe',
       zoom: MapLibreLib.defaultZoom,
       center: MapLibreLib.map_centroid,
@@ -98,77 +66,35 @@ var MapLibreLib = {
     MapLibreLib.infoControl = new InfoControl()
     MapLibreLib.map.addControl(MapLibreLib.infoControl, 'bottom-left')
 
-    MapLibreLib.map.on('load', () => {
-      loadFromGzip('/data/chicago-zoning-2024-10-21-simple.geojson.gz').then(
-        (d) => {
-          MapLibreLib.map.addSource('zoning-data', {
-            type: 'geojson',
-            data: d,
-            generateId: true,
-          })
-
-          MapLibreLib.map.addControl(
-            new maplibregl.NavigationControl({
-              visualizePitch: true,
-              visualizeRoll: true,
-              showZoom: true,
-              showCompass: true,
+    // initialize is called in multiple places - only load data if we dont have it yet
+    if (MapLibreLib.map.getSource('zoning-data') == null) {
+      MapLibreLib.map.on('load', () => {
+        loadFromGzip('/data/chicago-zoning-2024-10-21-simple.geojson.gz').then(
+          (d) => {
+            MapLibreLib.map.addSource('zoning-data', {
+              type: 'geojson',
+              data: d,
+              generateId: true,
             })
-          )
-
-          zoningStyles.forEach((s) => MapLibreLib.map.addLayer({ ...s }))
-
-          MapLibreLib.map.on('click', 'zoning', MapLibreLib.onClick)
-        }
-      )
-    })
+  
+            MapLibreLib.map.addControl(
+              new maplibregl.NavigationControl({
+                visualizePitch: true,
+                visualizeRoll: true,
+                showZoom: true,
+                showCompass: true,
+              })
+            )
+  
+            zoningStyles.forEach((s) => MapLibreLib.map.addLayer({ ...s }))
+  
+            MapLibreLib.map.on('click', 'zoning', MapLibreLib.onClick)
+          }
+        )
+      })
+    }
 
     MapLibreLib.map.on('mousemove', 'zoning', MapLibreLib.onMouseMove)
-    MapLibreLib.map.on('idle', () => {
-      // If these two layers were not added to the map, abort
-      // if (!map.getLayer('zoning')) {
-      //   return
-      // }
-
-      // Enumerate ids of the layers.
-      const toggleableLayerIds = ['zoning']
-
-      // Set up the corresponding toggle button for each layer.
-      for (const id of toggleableLayerIds) {
-        // Skip layers that already have a button set up.
-        if (document.getElementById(id)) {
-          continue
-        }
-
-        // Create a link.
-        const link = document.createElement('a')
-        link.id = id
-        link.href = '#'
-        link.textContent = id
-        link.className = 'active'
-
-        // Show or hide layer when the toggle is clicked.
-        link.onclick = function(e) {
-          const clickedLayer = this.textContent
-          e.preventDefault()
-          e.stopPropagation()
-
-          const visibility = map.getLayoutProperty(clickedLayer, 'visibility')
-
-          // Toggle layer visibility by changing the layout object's visibility property.
-          if (visibility === 'visible') {
-            map.setLayoutProperty(clickedLayer, 'visibility', 'none')
-            this.className = ''
-          } else {
-            this.className = 'active'
-            map.setLayoutProperty(clickedLayer, 'visibility', 'visible')
-          }
-        }
-
-        // const layers = document.getElementById('menu')
-        // layers.appendChild(link)
-      }
-    })
 
     // search if there is an address saved in the URL
     MapLibreLib.doSearch()
@@ -194,7 +120,7 @@ var MapLibreLib = {
       MapLibreLib.infoControl.updateInfo(null)
     }
   },
-
+  
   onClick: function(e) {
     if (e.features.length > 0) {
       // Clear old selected feature state
@@ -383,29 +309,35 @@ var MapLibreLib = {
 
               const turf_point = turf.point([lng_lat_point[0], lng_lat_point[1]])
 
-              let found_match
-              for (const feature of matches) {
-                if (turf.booleanPointInPolygon(turf_point, feature)) {
-                  found_match = feature
-                  break
+              try {
+                let found_match
+                for (const feature of matches) {
+                  if (turf.booleanPointInPolygon(turf_point, feature)) {
+                    found_match = feature
+                    break
+                  }
                 }
+
+                const zoneClass = found_match.properties.zone_class
+                const popupContent = MapLibreLib.getPopupContent(zoneClass)
+
+                // create a HTML element for each feature
+                const el = document.createElement('div')
+                el.className = 'marker'
+
+                new maplibregl.Marker(el)
+                  .setLngLat(lng_lat_point)
+                  .addTo(MapLibreLib.map)
+
+                new maplibregl.Popup()
+                  .setLngLat(lng_lat_point)
+                  .setHTML(popupContent)
+                  .addTo(MapLibreLib.map)
+              
+                } catch(error) {
+                console.log(error)
+                alert('Could not find zoning data for this address: ' + address)
               }
-
-              const zoneClass = found_match.properties.zone_class
-              const popupContent = MapLibreLib.getPopupContent(zoneClass)
-
-              // create a HTML element for each feature
-              const el = document.createElement('div')
-              el.className = 'marker'
-
-              new maplibregl.Marker(el)
-                .setLngLat(lng_lat_point)
-                .addTo(MapLibreLib.map)
-
-              new maplibregl.Popup()
-                .setLngLat(lng_lat_point)
-                .setHTML(popupContent)
-                .addTo(MapLibreLib.map)
             })
         } else {
           alert('We could not find your address: ' + status)
@@ -427,7 +359,6 @@ var MapLibreLib = {
 
   findMe: function() {
     // Try W3C Geolocation (Preferred)
-    console.log('findMe')
     var foundLocation
 
     if (navigator.geolocation) {

@@ -41,6 +41,7 @@ $(function() {
 
   $('#findMe').click(function(){
     play_multi_sound("reticulating-splines")
+    MapLibreLib.findMe()
     return false
   })
 
@@ -59,6 +60,16 @@ $(function() {
           $('#btnSearch').click()
           return false
       }
+  })
+
+  $('#map-layers .layer').click(function(e){
+    let el = $(e.target)
+    $('#map-layers').children('li').attr('class', '')
+    el.parent().attr('class', 'active')
+
+    play_multi_sound("reticulating-splines")
+    MapLibreLib.initialize(el.attr('value'))
+    return false
   })
 
   $('.simcopter').click(function(e){
