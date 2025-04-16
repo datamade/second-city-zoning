@@ -91,13 +91,13 @@ var MapLibreLib = {
             MapLibreLib.map.on('click', 'zoning', MapLibreLib.onClick)
           }
         )
+
+        // search if there is an address saved in the URL
+        MapLibreLib.doSearch()
       })
     }
 
     MapLibreLib.map.on('mousemove', 'zoning', MapLibreLib.onMouseMove)
-
-    // search if there is an address saved in the URL
-    MapLibreLib.doSearch()
   },
 
   onMouseMove: function(e) {
