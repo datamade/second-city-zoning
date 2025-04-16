@@ -1,6 +1,6 @@
 body {
   font-family:Chicago,Verdana,sans-serif;
-  font-size:14px;
+  font-size:16px;
 }
 
 h1, .h1, h2, .h2, h3, .h3 {line-height:inherit;}
@@ -9,7 +9,11 @@ h5, .h5 {margin-top: 0px ; margin-bottom: 2px;}
 
 a { color: #D9534F; }
 
-label { font-weight: normal;}
+label { font-weight: normal; }
+
+h4 small {
+  color: #4f4f4f;
+}
 
 .nav-pills > li.active > a { color: #D9534F; background-color: #FFF; }
 

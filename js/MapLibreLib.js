@@ -78,8 +78,8 @@ class LayerToggleControl {
 }
 
 var MapLibreLib = {
-  map_centroid: [41.87811, -87.66677],
-  defaultZoom: 14,
+  map_centroid: [-87.667, 41.840],
+  defaultZoom: 10,
   locationScope: 'chicago',
   lastClickedFeatureId: null,
 
@@ -91,8 +91,8 @@ var MapLibreLib = {
       container: 'map',
       style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
       projection: 'globe',
-      zoom: 11,
-      center: [-87.66677, 41.87811],
+      zoom: MapLibreLib.defaultZoom,
+      center: MapLibreLib.map_centroid,
     })
 
     MapLibreLib.infoControl = new InfoControl()
@@ -355,7 +355,6 @@ var MapLibreLib = {
   },
 
   doSearch: function() {
-    MapLibreLib.clearSearch()
     var address = $('#search_address').val()
 
     if (address != '') {
@@ -414,25 +413,21 @@ var MapLibreLib = {
       })
     } else {
       //search without geocoding callback
-      MapLibreLib.map.setView(
-        new L.LatLng(
-          MapLibreLib.map_centroid[0],
-          MapLibreLib.map_centroid[1]
-        ),
-        MapLibreLib.defaultZoom
-      )
+      MapLibreLib.clearSearch()
     }
   },
 
   clearSearch: function() {
     MapLibreLib.map.flyTo({
-      center: [MapLibreLib.map_centroid[0], MapLibreLib.map_centroid[1]],
+      center: MapLibreLib.map_centroid,
       zoom: MapLibreLib.defaultZoom,
+      speed: 2,
     })
   },
 
   findMe: function() {
     // Try W3C Geolocation (Preferred)
+    console.log('findMe')
     var foundLocation
 
     if (navigator.geolocation) {
