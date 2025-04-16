@@ -25,18 +25,18 @@ $(function() {
       })
     })
 
-  MapLibreDbLib.initialize()
+  MapLibreLib.initialize()
 
   var autocomplete = new google.maps.places.Autocomplete(document.getElementById('search_address'))
 
   $(':checkbox').click(function(){
     play_multi_sound("mouse-click")
-    MapLibreDbLib.doSearch()
+    MapLibreLib.doSearch()
   })
 
   $('#btnSearch').click(function(){
     play_multi_sound("reticulating-splines")
-    MapLibreDbLib.doSearch()
+    MapLibreLib.doSearch()
   })
 
   $('#findMe').click(function(){
@@ -49,7 +49,7 @@ $(function() {
     $.address.parameter('address','')
     $.address.parameter('radius','')
     $.address.parameter('id','')
-    MapLibreDbLib.initialize()
+    MapLibreLib.initialize()
     return false
   })
 

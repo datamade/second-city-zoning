@@ -77,7 +77,7 @@ class LayerToggleControl {
   }
 }
 
-var MapLibreDbLib = {
+var MapLibreLib = {
   map_centroid: [41.87811, -87.66677],
   defaultZoom: 14,
   locationScope: 'chicago',
@@ -85,8 +85,9 @@ var MapLibreDbLib = {
 
   initialize: function() {
     geocoder = new google.maps.Geocoder()
+    $("#search_address").val(MapLibreLib.convertToPlainString($.address.parameter('address')))
     
-    MapLibreDbLib.map = new maplibregl.Map({
+    MapLibreLib.map = new maplibregl.Map({
       container: 'map',
       style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
       projection: 'globe',
@@ -94,19 +95,19 @@ var MapLibreDbLib = {
       center: [-87.66677, 41.87811],
     })
 
-    MapLibreDbLib.infoControl = new InfoControl()
-    MapLibreDbLib.map.addControl(MapLibreDbLib.infoControl, 'bottom-left')
+    MapLibreLib.infoControl = new InfoControl()
+    MapLibreLib.map.addControl(MapLibreLib.infoControl, 'bottom-left')
 
-    MapLibreDbLib.map.on('load', () => {
+    MapLibreLib.map.on('load', () => {
       loadFromGzip('/data/chicago-zoning-2024-10-21-simple.geojson.gz').then(
         (d) => {
-          MapLibreDbLib.map.addSource('zoning-data', {
+          MapLibreLib.map.addSource('zoning-data', {
             type: 'geojson',
             data: d,
             generateId: true,
           })
 
-          MapLibreDbLib.map.addControl(
+          MapLibreLib.map.addControl(
             new maplibregl.NavigationControl({
               visualizePitch: true,
               visualizeRoll: true,
@@ -115,15 +116,15 @@ var MapLibreDbLib = {
             })
           )
 
-          zoningStyles.forEach((s) => MapLibreDbLib.map.addLayer({ ...s }))
+          zoningStyles.forEach((s) => MapLibreLib.map.addLayer({ ...s }))
 
-          MapLibreDbLib.map.on('click', 'zoning', MapLibreDbLib.onClick)
+          MapLibreLib.map.on('click', 'zoning', MapLibreLib.onClick)
         }
       )
     })
 
-    MapLibreDbLib.map.on('mousemove', 'zoning', MapLibreDbLib.onMouseMove)
-    MapLibreDbLib.map.on('idle', () => {
+    MapLibreLib.map.on('mousemove', 'zoning', MapLibreLib.onMouseMove)
+    MapLibreLib.map.on('idle', () => {
       // If these two layers were not added to the map, abort
       // if (!map.getLayer('zoning')) {
       //   return
@@ -168,16 +169,19 @@ var MapLibreDbLib = {
         // layers.appendChild(link)
       }
     })
+
+    // search if there is an address saved in the URL
+    MapLibreLib.doSearch()
   },
 
   onMouseMove: function(e) {
-    const features = MapLibreDbLib.map.queryRenderedFeatures(e.point, {
+    const features = MapLibreLib.map.queryRenderedFeatures(e.point, {
       layers: ['zoning'],
     })
 
     if (features.length) {
       const feature = features[0]
-      const zone_info = MapLibreDbLib.getZoneInfo(feature.properties.zone_class)
+      const zone_info = MapLibreLib.getZoneInfo(feature.properties.zone_class)
       const content =
         "<img src='/images/icons/" +
         zone_info.zone_icon +
@@ -185,44 +189,44 @@ var MapLibreDbLib = {
         feature.properties.zone_class +
         ' - ' +
         zone_info.title
-      MapLibreDbLib.infoControl.updateInfo(content)
+      MapLibreLib.infoControl.updateInfo(content)
     } else {
-      MapLibreDbLib.infoControl.updateInfo(null)
+      MapLibreLib.infoControl.updateInfo(null)
     }
   },
 
   onClick: function(e) {
     if (e.features.length > 0) {
       // Clear old selected feature state
-      if (MapLibreDbLib.lastClickedFeatureId !== null) {
-        MapLibreDbLib.map.setFeatureState(
+      if (MapLibreLib.lastClickedFeatureId !== null) {
+        MapLibreLib.map.setFeatureState(
           {
             source: 'zoning-data',
-            id: MapLibreDbLib.lastClickedFeatureId,
+            id: MapLibreLib.lastClickedFeatureId,
           },
           { clicked: false }
         )
       }
 
       // Set feature state of clicked feature
-      MapLibreDbLib.map.setFeatureState(
+      MapLibreLib.map.setFeatureState(
         { source: 'zoning-data', id: e.features[0].id },
         { clicked: true }
       )
-      MapLibreDbLib.lastClickedFeatureId = e.features[0].id
+      MapLibreLib.lastClickedFeatureId = e.features[0].id
     }
 
     const centroid = turf.centroid(e.features[0].geometry)
     const zoneClass = e.features[0].properties.zone_class
     const coordinates = centroid.geometry.coordinates
-    const popupContent = MapLibreDbLib.getPopupContent(zoneClass)
+    const popupContent = MapLibreLib.getPopupContent(zoneClass)
 
     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
       coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
     }
 
     // Center the map on the clicked feature
-    MapLibreDbLib.map.flyTo({
+    MapLibreLib.map.flyTo({
       center: centroid.geometry.coordinates,
       zoom: 13.5,
     })
@@ -231,35 +235,25 @@ var MapLibreDbLib = {
     new maplibregl.Popup()
       .setLngLat(coordinates)
       .setHTML(popupContent)
-      .addTo(MapLibreDbLib.map)
+      .addTo(MapLibreLib.map)
   },
 
   getPopupContent: function(zoneClass) {
-    const zoneClassInfo = MapLibreDbLib.getZoneInfo(zoneClass)
+    const zoneClassInfo = MapLibreLib.getZoneInfo(zoneClass)
     return (
-      "\
-        <h4>\
-          <img src='/images/icons/" +
-      zoneClassInfo.zone_icon +
-      ".png' />\
-          <a href='/zone/" +
-      zoneClassInfo.zone_class_link +
-      "/'>" +
-      zoneClass +
-      '\
-            <small>' +
-      zoneClassInfo.title +
-      "</small>\
-          </a>\
-        </h4>\
-        <p><strong>What's here?</strong><br />\
-        " +
-      zoneClassInfo.description +
-      "\
-        <a href='/zone/" +
-      zoneClassInfo.zone_class_link +
-      "/'>Learn&nbsp;more&nbsp;»</a></p>\
-        "
+      `
+      <h4>
+        <img src='/images/icons/${zoneClassInfo.zone_icon}.png' />
+        <a href='/zone/${zoneClassInfo.zone_class_link}/'>
+          ${zoneClass}<br />
+          <small>${zoneClassInfo.title}</small>
+        </a>
+      </h4>
+      <p>
+        <strong>What's here?</strong><br />
+        ${zoneClassInfo.description}
+        <a href='/zone/${zoneClassInfo.zone_class_link}/'>Learn&nbsp;more&nbsp;»</a>
+      </p>`
     )
   },
 
@@ -297,7 +291,7 @@ var MapLibreDbLib = {
       title: title,
       description: description,
       zone_class_link: zone_class_link,
-      zone_icon: MapLibreDbLib.getZoneIcon(zone_class),
+      zone_icon: MapLibreLib.getZoneIcon(zone_class),
       project_link: project_link,
     }
   },
@@ -361,12 +355,12 @@ var MapLibreDbLib = {
   },
 
   doSearch: function() {
-    MapLibreDbLib.clearSearch()
+    MapLibreLib.clearSearch()
     var address = $('#search_address').val()
 
     if (address != '') {
-      if (address.toLowerCase().indexOf(MapLibreDbLib.locationScope) == -1)
-        address = address + ' ' + MapLibreDbLib.locationScope
+      if (address.toLowerCase().indexOf(MapLibreLib.locationScope) == -1)
+        address = address + ' ' + MapLibreLib.locationScope
 
       geocoder.geocode({ address: address }, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
@@ -377,14 +371,14 @@ var MapLibreDbLib = {
 
           $.address.parameter('address', encodeURIComponent(address))
 
-          MapLibreDbLib.map
+          MapLibreLib.map
             .flyTo({
               center: lng_lat_point,
               zoom: 15,
               speed: 2,
             })
             .once('moveend', () => {
-              const matches = MapLibreDbLib.map.queryRenderedFeatures(
+              const matches = MapLibreLib.map.queryRenderedFeatures(
                 { target: { layerId: 'zoning' } }
               )
 
@@ -399,7 +393,7 @@ var MapLibreDbLib = {
               }
 
               const zoneClass = found_match.properties.zone_class
-              const popupContent = MapLibreDbLib.getPopupContent(zoneClass)
+              const popupContent = MapLibreLib.getPopupContent(zoneClass)
 
               // create a HTML element for each feature
               const el = document.createElement('div')
@@ -407,12 +401,12 @@ var MapLibreDbLib = {
 
               new maplibregl.Marker(el)
                 .setLngLat(lng_lat_point)
-                .addTo(MapLibreDbLib.map)
+                .addTo(MapLibreLib.map)
 
               new maplibregl.Popup()
                 .setLngLat(lng_lat_point)
                 .setHTML(popupContent)
-                .addTo(MapLibreDbLib.map)
+                .addTo(MapLibreLib.map)
             })
         } else {
           alert('We could not find your address: ' + status)
@@ -420,20 +414,20 @@ var MapLibreDbLib = {
       })
     } else {
       //search without geocoding callback
-      MapLibreDbLib.map.setView(
+      MapLibreLib.map.setView(
         new L.LatLng(
-          MapLibreDbLib.map_centroid[0],
-          MapLibreDbLib.map_centroid[1]
+          MapLibreLib.map_centroid[0],
+          MapLibreLib.map_centroid[1]
         ),
-        MapLibreDbLib.defaultZoom
+        MapLibreLib.defaultZoom
       )
     }
   },
 
   clearSearch: function() {
-    MapLibreDbLib.map.flyTo({
-      center: [MapLibreDbLib.map_centroid[0], MapLibreDbLib.map_centroid[1]],
-      zoom: MapLibreDbLib.defaultZoom,
+    MapLibreLib.map.flyTo({
+      center: [MapLibreLib.map_centroid[0], MapLibreLib.map_centroid[1]],
+      zoom: MapLibreLib.defaultZoom,
     })
   },
 
@@ -447,7 +441,7 @@ var MapLibreDbLib = {
           position.coords.latitude,
           position.coords.longitude
         )
-        MapLibreDbLib.addrFromLatLng(foundLocation)
+        MapLibreLib.addrFromLatLng(foundLocation)
       }, null)
     } else {
       alert('Sorry, we could not find your location.')
@@ -460,7 +454,7 @@ var MapLibreDbLib = {
         if (results[1]) {
           $('#search_address').val(results[1].formatted_address)
           $('.hint').focus()
-          MapLibreDbLib.doSearch()
+          MapLibreLib.doSearch()
         }
       } else {
         alert('Geocoder failed due to: ' + status)
