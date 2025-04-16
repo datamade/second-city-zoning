@@ -40,6 +40,11 @@ label { font-weight: normal;}
   margin-bottom: 10px;
 }
 
+#map {
+  width:100%; 
+  height:800px;
+}
+
 #map img {
   max-width: none;
 }
