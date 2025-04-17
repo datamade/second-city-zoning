@@ -280,6 +280,41 @@ var MapLibreLib = {
     return zone_icon
   },
 
+  toggleZoningLayer: function(toggle) {
+
+    if (toggle == 'on') {
+      MapLibreLib.map.setLayoutProperty('zoning', 'visibility', 'visible')
+      MapLibreLib.map.setLayoutProperty('zoning-outline', 'visibility', 'visible')
+    } else {
+      MapLibreLib.map.setLayoutProperty('zoning', 'visibility', 'none')
+      MapLibreLib.map.setLayoutProperty('zoning-outline', 'visibility', 'none')
+    }
+  },
+
+  changeBaseLayer: function(baseLayer) {
+    // from https://github.com/maplibre/maplibre-gl-js/issues/2587#issuecomment-1997263712  
+    MapLibreLib.map.setStyle(MapLibreLib.baseMaplayers[baseLayer], {
+      transformStyle: (previousStyle, nextStyle) => {
+        var custom_layers = previousStyle.layers.filter(layer => {
+          return layer.id.startsWith('zoning')
+        })
+        var layers = nextStyle.layers.concat(custom_layers)
+    
+        var sources = nextStyle.sources
+        for (const [key, value] of Object.entries(previousStyle.sources)) {
+          if (key.startsWith('zoning')) {
+            sources[key] = value
+          }
+        }
+        return {
+          ...nextStyle,
+          sources: sources,
+          layers: layers
+        }
+      }
+    })
+  },
+
   doSearch: function() {
     var address = $('#search_address').val()
 

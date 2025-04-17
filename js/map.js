@@ -68,7 +68,21 @@ $(function() {
     el.parent().attr('class', 'active')
 
     play_multi_sound("reticulating-splines")
-    MapLibreLib.initialize(el.attr('value'))
+    MapLibreLib.changeBaseLayer(el.attr('value'))
+    return false
+  })
+
+  $('#zoning-layer .layer').click(function(e){
+    play_multi_sound("reticulating-splines")
+    
+    let el = $(e.target)
+    if (el.parent().attr('class') == 'active') {
+      el.parent().attr('class', '')
+      MapLibreLib.toggleZoningLayer('off')
+    } else {
+      el.parent().attr('class', 'active')
+      MapLibreLib.toggleZoningLayer('on')
+    }
     return false
   })
 

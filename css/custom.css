@@ -15,7 +15,7 @@ h4 small {
   color: #4f4f4f;
 }
 
-.nav-pills > li.active > a { color: #D9534F; background-color: #FFF; }
+/* .nav-pills > li.active > a { color: #D9534F; background-color: #ccc; } */
 
 .navbar {
   margin-bottom: 10px;
@@ -103,7 +103,7 @@ h4 small {
 
 .zone-legend li {font-weight: bold;}
 
-#jplayer-tracks {
+#jplayer-tracks, #map-layers, #zoning-layer {
   margin-bottom: 0;
   margin-top: 10px;
   font-size: 0.8em;
