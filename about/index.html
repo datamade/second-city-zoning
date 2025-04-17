@@ -363,14 +363,14 @@ description: "2nd City Zoning is an interactive map that lets you find out how y
       This site was originally built with
       <a href='https://data.cityofchicago.org/Community-Economic-Development/Boundaries-Zoning-Districts-current-/7cve-jgbp'>zoning shapefiles</a>
       from the City of Chicago
-      <a href='https://data.cityofchicago.org/'>Data Portal</a>. However, this data is out of date and we now pull directly from the <a href='http://gisapps.cityofchicago.org/arcgis/rest/services/ExternalApps/Zoning/MapServer/1'>City of Chicago's ArcGIS REST Services Directory</a>.
+      <a href='https://data.cityofchicago.org/'>Data Portal</a>. However, this data is out of date and we now pull directly from the <a href='https://gisapps.cityofchicago.org/arcgis/rest/services/ExternalApps/Zoning/MapServer/1'>City of Chicago's ArcGIS REST Services Directory</a>.
     </p>
     <p>
-      Everyting is stored in CartoDB and CSV files and are open for anyone to use:
+      Everyting is stored in `GeoJSON` files and are open for anyone to use:
     </p>
     <ul>
       <li>
-        <a href='https://datamade.carto.com/tables/second_city_zoning_2023_10_25/public'>Zoning districts map</a>
+        <a href='https://github.com/datamade/second-city-zoning/tree/main/data'>Zoning districts GeoJSON</a>
       </li>
       <li>
         <a href='/resources/import/zoning-code-summary-district-types.csv'>Zoning descriptions</a>
@@ -387,7 +387,7 @@ description: "2nd City Zoning is an interactive map that lets you find out how y
     <hr>
     <h4 id='code'>Code</h4>
     <p>
-      All the code for this site is open source. It was built with Jekyll, Bootstrap, CartoDB and Leaflet.
+      All the code for this site is open source. It was built with Jekyll, Bootstrap and MapLibre-GL JS.
     </p>
     <p>Technologies used:</p>
     <ul>
@@ -401,10 +401,7 @@ description: "2nd City Zoning is an interactive map that lets you find out how y
         <a href='http://jquery.com'>jQuery</a>
       </li>
       <li>
-        <a href='http://docs.cartodb.com/cartodb-platform/cartodb-js.html'>CartoDB-js</a>
-      </li>
-      <li>
-        <a href='http://leafletjs.com'>Leaflet</a>
+        <a href='https://maplibre.org/maplibre-gl-js/docs/'>MapLibre-GL JS</a>
       </li>
     </ul>
     <p>
