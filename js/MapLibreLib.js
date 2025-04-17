@@ -154,7 +154,7 @@ var MapLibreLib = {
     // Center the map on the clicked feature
     MapLibreLib.map.flyTo({
       center: centroid.geometry.coordinates,
-      zoom: 13.5,
+      zoom: 15,
     })
 
     // Display info popup
@@ -166,6 +166,17 @@ var MapLibreLib = {
 
   getPopupContent: function(zoneClass) {
     const zoneClassInfo = MapLibreLib.getZoneInfo(zoneClass)
+    
+    let project_link = ''
+    if (zoneClassInfo.project_link != '') {
+      project_link = `
+      <p>
+        <a href='${zoneClassInfo.project_link}'>
+          Read the full development plan for ${zoneClass} &raquo;
+        </a>
+      </p>`
+    }
+
     return (
       `
       <h4>
@@ -179,23 +190,14 @@ var MapLibreLib = {
         <strong>What's here?</strong><br />
         ${zoneClassInfo.description}
         <a href='/zone/${zoneClassInfo.zone_class_link}/'>Learn&nbsp;more&nbsp;»</a>
-      </p>`
+      </p>
+      ${project_link}
+      `
     )
   },
 
   getZoneInfo: function(zone_class) {
-    // console.log("looking up zone_class: " + zone_class);
-    // PD and PMD have different numbers for each district. Fix for displaying generic title and link.
-    if (zone_class.substring(0, 'PMD'.length) === 'PMD') {
-      title = 'Planned Manufacturing District'
-      description =
-        "All kinds of manufacturing, warehouses, and waste disposal. Special service district - not technically a manufacturing district - intended to protect the city's industrial base."
-      zone_class_link = 'PMD'
-      project_link =
-        'https://gisapps.cityofchicago.org/gisimages/zoning_pds/' +
-        zone_class.replace(' ', '') +
-        '.pdf'
-    } else if (zone_class.substring(0, 'PD'.length) === 'PD') {
+    if (zone_class.substring(0, 'PD'.length) === 'PD') {
       title = 'Planned Development'
       description =
         'Tall buildings, campuses, and other large developments that must be negotiated with city planners. Developers gain freedom in building design, but must work with city to ensure project serves and integrates with surrounding neighborhood.'
@@ -204,8 +206,6 @@ var MapLibreLib = {
         'https://gisapps.cityofchicago.org/gisimages/zoning_pds/' +
         zone_class.replace(' ', '') +
         '.pdf'
-
-      //https://gisapps.cityofchicago.org/gisimages/zoning_pds/PD43.pdf
     } else {
       title = ZoningTable[zone_class].district_title
       description = ZoningTable[zone_class].juan_description
