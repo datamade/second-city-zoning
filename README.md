@@ -14,29 +14,41 @@ from one of our favorite games: [Sim City 2000](http://en.wikipedia.org/wiki/Sim
 2nd City Zoning is entirely [open
 source](http://secondcityzoning.org/about#code) and built with [open data](http://secondcityzoning.org/about#data).
 
-## Installation
+## Running locally
 
-<pre>
-  $ git clone git@github.com:datamade/second-city-zoning.git
-  $ cd site_template
-  $ gem install jekyll
-  $ jekyll serve -w
-  navigate to http://localhost:5000/
-</pre>
+```bash
+git clone git@github.com:datamade/second-city-zoning.git
+cd site_template
+gem install jekyll
+jekyll serve -w
+  
+```
+
+Then navigate to http://localhost:5000/
+
+### Run in a Docker container
+
+If you have Docker installed, can avoid some of the hassle of installing Jekyll and/or Ruby by pulling from the offical Jekyll image, installing dependancies, and serving locally. 
+
+This is especially handy if you're on Windows machine:
+
+```bash
+docker compose up
+```
 
 ## Dependencies
 
 * [Jekyll](http://jekyllrb.com)
-* [CartoDB](http://docs.cartodb.com/cartodb-platform/cartodb-js.html)
-* [Leaflet](http://leafletjs.com)
+* [MapLibre-GL JS](https://maplibre.org/maplibre-gl-js/docs/)
 * [jQuery](http://jquery.org)
 * [jQuery Address](http://www.asual.com/jquery/address)
 * [Bootstrap](http://getbootstrap.com)
 
 ## Team
 
-* [Derek Eder](mailto:derek.eder+git@gmail.com)
-* [Juan-Pablo Velez](mailto:jpvelez@gmail.com)
+* Derek Eder
+* Juan-Pablo Velez
+* Monkruman St. Jules
 
 ## Errors / Bugs
 
@@ -53,6 +65,6 @@ Report it here: https://github.com/datamade/second-city-zoning/issues
 
 ## Copyright
 
-Copyright (c) 2013-2020 Derek Eder and Juan-Pablo Velez of Open City. Released under the MIT License.
+Copyright (c) 2013-2025 Derek Eder and Juan-Pablo Velez of Open City. Released under the MIT License.
 
 [See LICENSE for details](https://github.com/datamade/second-city-zoning/blob/master/LICENSE)
