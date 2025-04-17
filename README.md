@@ -44,6 +44,16 @@ docker compose up
 * [jQuery Address](http://www.asual.com/jquery/address)
 * [Bootstrap](http://getbootstrap.com)
 
+## Updating Zoning data
+
+The City of Chicago publishes its latest Zoning information on an ArcGIS server. Here's the steps to update this site, which we do annualy:
+
+1. Setup and install [`pyesridump`](https://github.com/openaddresses/pyesridump)
+2. Run `esri2geojson https://gisapps.cityofchicago.org/arcgis/rest/services/ExternalApps/Zoning/MapServer/1 chicago-zoning.geojson
+3. Use `ogr2ogr` to simplify the geometries and reduce the size. This can be done via the command line or with QGIS.
+4. Use https://open-innovations.github.io/geojson-minify/ to remove properties we don't use. We only make use of `zone_type`, `zone_class`, and `ordinance_num`
+5. `gzip` the GeoJSON file and place in the `/data` folder.
+
 ## Team
 
 * Derek Eder

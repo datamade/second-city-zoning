@@ -69,7 +69,7 @@ var MapLibreLib = {
     // initialize is called in multiple places - only load data if we dont have it yet
     if (MapLibreLib.map.getSource('zoning-data') == null) {
       MapLibreLib.map.on('load', () => {
-        loadFromGzip('/data/chicago-zoning-2024-10-21-simple.geojson.gz').then(
+        loadFromGzip('/data/chicago-zoning-2025-04-17-simple.geojson.gz').then(
           (d) => {
             MapLibreLib.map.addSource('zoning-data', {
               type: 'geojson',
