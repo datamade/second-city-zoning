@@ -37,7 +37,7 @@
       <meta content="{{ page.date | date_to_xmlschema }}" property="article:published_time">
       <meta content="{{ site.url }}/about-us/" property="article:author">
     {% endif %}
-    <meta content="{{ site.url }}/images/screenshot.jpg" property="og:image">
+    <meta content="{{ site.url }}/images/social-preview.jpg" property="og:image">
     {% if page.categories %}
       {% for category in page.categories limit:1 %}
       <meta content="{{ category }}" property="article:section">
@@ -66,7 +66,7 @@
     {% else %}
       <meta name="twitter:description" content="{{ site.description }}">
     {% endif %}
-    <meta name="twitter:image:src" content="{{ site.url }}/images/screenshot.jpg">
+    <meta name="twitter:image:src" content="{{ site.url }}/images/social-preview.jpg">
 
     <link href='/favicon.ico' rel='shortcut icon'>
     <!-- Styles -->

@@ -1,4 +1,4 @@
-![second city zoning](http://i.imgur.com/J6oFuK7.gif)
+![second city zoning](https://raw.githubusercontent.com/datamade/second-city-zoning/main/images/screenshot-1.png)
 
 # 2nd City Zoning
 
