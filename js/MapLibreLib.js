@@ -105,7 +105,7 @@ var MapLibreLib = {
       layers: ['zoning'],
     })
 
-    if (features.length) {
+    if (features.length > 0) {
       const feature = features[0]
       const zone_info = MapLibreLib.getZoneInfo(feature.properties.zone_class)
       const content =
@@ -206,6 +206,11 @@ var MapLibreLib = {
         'https://gisapps.cityofchicago.org/gisimages/zoning_pds/' +
         zone_class.replace(' ', '') +
         '.pdf'
+    } else if (zone_class.substring(0, 'PMD'.length) === 'PMD') {
+      title = 'Planned Manufacturing District';
+      description = "All kinds of manufacturing, warehouses, and waste disposal. Special service district - not technically a manufacturing district - intended to protect the city's industrial base.";
+      zone_class_link = "PMD";
+      project_link = ''
     } else {
       title = ZoningTable[zone_class].district_title
       description = ZoningTable[zone_class].juan_description
