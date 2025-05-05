@@ -39,6 +39,8 @@ var MapLibreLib = {
   defaultZoom: 10,
   locationScope: 'chicago',
   lastClickedFeatureId: null,
+  selectedId: $.address.parameter('id'),
+  selectedFeatureLoaded: false,
 
   baseMaplayers: {
     "Streets": "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json",
@@ -87,13 +89,43 @@ var MapLibreLib = {
             )
   
             zoningStyles.forEach((s) => MapLibreLib.map.addLayer({ ...s }))
-  
-            MapLibreLib.map.on('click', 'zoning', MapLibreLib.onClick)
+
+            MapLibreLib.map.on('click', `zoning`, (e) => {
+              const feat = e.features[0]
+              $.address.parameter('id', feat.id)
+              MapLibreLib.onClick(feat)
+            })
           }
         )
 
-        // search if there is an address saved in the URL
-        MapLibreLib.doSearch()
+        // load initial map state. address first, fall back to clicked feature
+        if ($.address.parameter('address')){
+          // search if there is an address saved in the URL
+          MapLibreLib.doSearch()
+        } else {
+          // if an ID is in the URL, load it
+          MapLibreLib.map.on('sourcedata', function (e) {
+            if (
+              !MapLibreLib.selectedFeatureLoaded &&
+              MapLibreLib.selectedId &&
+              e.isSourceLoaded
+            ) {
+              MapLibreLib.selectedId = Number(MapLibreLib.selectedId)
+              const features = MapLibreLib.map.querySourceFeatures('zoning-data')
+              const feat = features.find(f => f.id === MapLibreLib.selectedId)
+
+              // highlight the feature
+              MapLibreLib.map.setFeatureState(
+                { source: 'zoning-data', id: feat.id },
+                { clicked: true }
+              )
+              MapLibreLib.onClick(feat)
+
+              // ensure this is only done once. sourcedata events are fired often
+              MapLibreLib.selectedFeatureLoaded = true
+            }
+          })
+        }
       })
     }
 
@@ -121,35 +153,30 @@ var MapLibreLib = {
     }
   },
   
-  onClick: function(e) {
-    if (e.features.length > 0) {
-      // Clear old selected feature state
-      if (MapLibreLib.lastClickedFeatureId !== null) {
-        MapLibreLib.map.setFeatureState(
-          {
-            source: 'zoning-data',
-            id: MapLibreLib.lastClickedFeatureId,
-          },
-          { clicked: false }
-        )
-      }
+  onClick: function(feat) {
 
-      // Set feature state of clicked feature
+    // Clear old selected feature state
+    if (MapLibreLib.lastClickedFeatureId !== null) {
       MapLibreLib.map.setFeatureState(
-        { source: 'zoning-data', id: e.features[0].id },
-        { clicked: true }
+        {
+          source: 'zoning-data',
+          id: MapLibreLib.lastClickedFeatureId,
+        },
+        { clicked: false }
       )
-      MapLibreLib.lastClickedFeatureId = e.features[0].id
     }
 
-    const centroid = turf.centroid(e.features[0].geometry)
-    const zoneClass = e.features[0].properties.zone_class
+    // Set feature state of clicked feature
+    MapLibreLib.map.setFeatureState(
+      { source: 'zoning-data', id: feat.id },
+      { clicked: true }
+    )
+    MapLibreLib.lastClickedFeatureId = feat.id
+
+    const centroid = turf.centroid(feat.geometry)
+    const zoneClass = feat.properties.zone_class
     const coordinates = centroid.geometry.coordinates
     const popupContent = MapLibreLib.getPopupContent(zoneClass)
-
-    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-      coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
-    }
 
     // Center the map on the clicked feature
     MapLibreLib.map.flyTo({
@@ -357,6 +384,12 @@ var MapLibreLib = {
                     break
                   }
                 }
+
+                // highlight the feature
+                MapLibreLib.map.setFeatureState(
+                  { source: 'zoning-data', id: found_match.id },
+                  { clicked: true }
+                )
 
                 const zoneClass = found_match.properties.zone_class
                 const popupContent = MapLibreLib.getPopupContent(zoneClass)
